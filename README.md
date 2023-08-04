@@ -1,4 +1,4 @@
-# cyberpark_adminka
+# BACKEND
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/azamat.aliqulov/cyberpark_adminka.git
+git remote add origin https://gitlab.com/automation-systems-for-business/backend.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/azamat.aliqulov/cyberpark_adminka/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/automation-systems-for-business/backend/-/settings/integrations)
 
 ## Collaborate with your team
 

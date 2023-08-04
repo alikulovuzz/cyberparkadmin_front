@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This project is the space of Asutomation Systems for Business.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/automation-systems-for-business/backend.git"
+  },
+  "keywords": [
+    "ABS"
+  ],
+  "author": "Shohruz Ochilov, Mirjalol Norqobilov, Azamat Aliqulov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/automation-systems-for-business/backend/issues"
+  },
+  "homepage": "https://gitlab.com/automation-systems-for-business/backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.8.1",
+    "helmet": "4.6.0",
+    "http": "0.0.1-security",
+    "joi": "17.4.2",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.7.0",
+    "path": "^0.12.7",
+    "swagger-autogen": "^2.12.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
+    "winston": "^3.3.3"
+  }
+}
