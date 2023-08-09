@@ -9,7 +9,7 @@ const {verifyToken,isAdmin}=require('../middleware/auth')
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
 const Company = require("../db/models/company");
-const Token = require("../db/models/token");
+// const Token = require("../db/models/token");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
@@ -20,7 +20,7 @@ router.post("/signup", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { company_name,email, stir, img_link, phone, password } = req.body;
+    const { company_name, email, stir, img_link, phone, password } = req.body;
     // Validate user input
     if (!(email && password && company_name && stir)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
@@ -28,9 +28,9 @@ router.post("/signup", async (req, res) => {
 
     // check if user already exist
     // Validate if user exist in our database
-    const oldUser = await Company.findOne({ stir });
+    const oldCompany = await Company.findOne({ stir });
 
-    if (oldUser) {
+    if (oldCompany) {
       return res.status(400).json({ code: 400, message: 'Company Already Exist. Please Login' });
       // return res.status(409).send("User Already Exist. Please Login");
     }

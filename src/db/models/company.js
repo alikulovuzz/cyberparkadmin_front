@@ -62,11 +62,11 @@ const companySchema = new mongoose.Schema({
   ],
   status: {
     type: String,
+    default: 'noResident',
     enum: {
       values: ['resident', 'noResident'],
       message: '{VALUE} is not supported'
-    },
-    default: ['noResident']
+    }
   },
 }, { timestamps: true });
 

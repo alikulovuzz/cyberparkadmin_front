@@ -1,53 +1,55 @@
-const express = require('express');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const { userLogger } = require('../helpers/logger');
-const Order = require("../db/models/orders");
+const express = require('express')
+const router = express.Router()
+const mongoose = require('mongoose')
+const { userLogger } = require('../helpers/logger')
+const Reports = require("../db/models/reports")
+const Company=require("../db/models/company")
 const sendMail = require("../helpers/sendemail")
 
 
-//( /order/create) in order to create order
-router.post("/create", async (req, res) => {
+//( /reports) in reports to create reports
+router.post("/", async (req, res) => {
   // Our create logic starts here
   try {
     // Get user input
-    const { name, img_id, tasker_id, user_id, payment_uz, status, location } = req.body;
+    const { name_of_report, file_link, company_id, year, quarterly} = req.body;
     // Validate user input
-    if (!(user_id && location && name)) {
+    if (!(name_of_report && company_id && year && file_link && quarterly)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
+    }
+        // check if user already exist
+    // Validate if user exist in our database
+    const checkCompany = await Company.findById(company_id);
+
+    if (!checkCompany) {
+      return res.status(400).json({ code: 400, message: 'Company is not in DataBase. Incorrect Company' });
+      // return res.status(409).send("User Already Exist. Please Login");
     }
     //order validation
     const value = {
-      name: name,
-      img_id: img_id,
-      tasker_id: tasker_id,
-      user_id: user_id,
-      payment_uz: payment_uz,
-      status: status,
-      location: location
+      name_of_report: name_of_report,
+      file_link: file_link,
+      company_id: company_id,
+      year: year,
+      quarterly: quarterly
     };
-    const baseOrder = new Order(value);
+    const validateReports = new Reports(value);
     // validation
-    var error = baseOrder.validateSync();
+    var error = validateReports.validateSync();
     if (error) {
       return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
-      // return res.status(409).send("Validatioan error");
     }
-    const order = await baseOrder.save();
+    const report = await validateReports.save();
 
-    const text = 'Hello ' + user.first_name + ',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/user/confirmation\/' + user.email + '\/' + tekennn.token + '\n\nThank You!\n';
-    // console.log(text);
-    const emaile = sendMail(email, text);
-
-    return res.status(201).json(order);
+    return res.status(201).json(report);
   } catch (err) {
     userLogger.error(err);
+    console.log(err)
+    return res.status(500).json({ code: 500, message: 'Internal server error', err: err });
   }
   // Our register logic ends here
 });
-
-//( /order/update/:id) in order to update specific user
+//( /reports/update/:id) in reports to update specific user
 router.post("/update/:id", async (req, res) => {
 
   const id = req.params.id;
@@ -62,7 +64,7 @@ router.post("/update/:id", async (req, res) => {
   const { name, img_id, tasker_id, user_id, payment_uz, status, location } = req.body;
 
   // const value = authorSchema.validate(req.body);
-  const oldOrder = await Order.findById(id);
+  const oldOrder = await Reports.findById(id);
 
   if (!oldOrder) {
     return res.status(400).json({ code: 404, message: 'User not found' });
@@ -78,7 +80,7 @@ router.post("/update/:id", async (req, res) => {
     location: location
   };
 
-  const baseOrder = new Order(newValues);
+  const baseOrder = new Reports(newValues);
   // validation
   const error = baseOrder.validateSync();
   if (error) {
@@ -87,7 +89,7 @@ router.post("/update/:id", async (req, res) => {
   }
   
   // this only needed for development, in deployment is not real function
-  const order = await Order.findOneAndUpdate({ _id: id }, newValues);
+  const order = await Reports.findOneAndUpdate({ _id: id }, newValues);
 
   if (order.err) {
     return res.status(500).json({ code: 500, message: 'There as not any orders yet', error: err })
@@ -96,7 +98,7 @@ router.post("/update/:id", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'order exist and updated', oldOrder: order })
   };
 });
-//( /user/delete/:id) in order to delete specific user
+//( /reports/delete/:id) in reports to delete specific user
 router.delete("/delete/:id", async (req, res) => {
 
   const id = req.params.id;
@@ -121,7 +123,7 @@ router.delete("/delete/:id", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'user exist and deleted', deleted_user: user })
   };
 });
-//( /getone/:id) in order to get specific client
+//( /reports/getone/:id) in reports to get specific client
 router.get("/getone/:id", async (req, res) => {
 
   const id = req.params.id;
@@ -144,7 +146,7 @@ router.get("/getone/:id", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'user exist', user: user })
   };
 });
-//( /auth/:id) in order to get specific user
+//( /auth/:id) in reports to get specific user
 router.patch("/auth/:id", async (req, res) => {
 
   const id = req.params.id;

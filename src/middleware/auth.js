@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
 // const db = require("../db");
 const User = require("../db/models/user");
+const Company = require("../db/models/company");
 // const Role = db.role;
 
 const { TokenExpiredError } = jwt;
@@ -32,6 +33,29 @@ const verifyToken = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   User.find(
+    {
+      _id: { $in: req.userId }
+    },
+    (err, user) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      console.log(user[0].role.length)
+      for (let i = 0; i < user[0].role.length; i++) {
+        if (user[i].role == "admin") {
+          next();
+          return;
+        }
+      }
+      res.status(403).send({ message: "Require Admin Role!" });
+      return;
+    }
+  );
+};
+
+const isCompany = (req, res, next) => {
+  Company.find(
     {
       _id: { $in: req.userId }
     },
@@ -87,6 +111,7 @@ const isModerator = (req, res, next) => {
 const authJwt = {
   verifyToken,
   isAdmin,
+  isCompany,
   isModerator
 };
 module.exports = authJwt;

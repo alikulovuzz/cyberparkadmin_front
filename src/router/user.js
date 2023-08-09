@@ -14,7 +14,7 @@ const { userLogger, paymentLogger } = require('../helpers/logger');
 // const {logger} = require('../helpers/logger');
 // const multer=require('multer')
 const User = require("../db/models/user");
-const Token = require("../db/models/token");
+// const Token = require("../db/models/token");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
@@ -74,10 +74,9 @@ router.post("/signup", async (req, res) => {
     //   user.img = { name: name, url: url }
     // }
     // return new user
-    res.status(201).json(saved_user);
+    return res.status(201).json(saved_user);
   } catch (err) {
-    userLogger.error(err);
-    console.log(err);
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: error });
   }
   // Our register logic ends here
 });
