@@ -4,14 +4,14 @@ module.exports = function (app) {
     // #swagger.description = 'client services'
 
     const {
-      first_name = "string",
-      last_name = "string",
-      father_name = "string",
-      email,
-      img_id,
-      phone,
-      password,
-      role,
+      first_name = "first_name",
+      last_name = "last_name",
+      father_name = "father_name",
+      email="first_name.last_name@gmail.com",
+      img_link="img_link",
+      phone="998917970304",
+      password="4AT138a#1@%&#",
+      role="Admin",
     } = req.body;
 
     if (false) return res.status(404).send(false);

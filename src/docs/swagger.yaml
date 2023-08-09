@@ -9,7 +9,7 @@ info:
   version: 1.0.0
   title: Labour Migration API Documentation 
   license: {}
-host: 'http://localhost:5000/api'
+host: 'http://localhost:3000/api/v1'
 basePath: '/'
 schemes:
   - /api

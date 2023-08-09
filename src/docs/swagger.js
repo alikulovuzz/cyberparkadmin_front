@@ -1,7 +1,7 @@
 const swaggerAutogen = require('swagger-autogen')()
 const dotenv = require("dotenv");
 dotenv.config();
-const PORT = process.env.NODE_PORT || 8081;
+const PORT = process.env.NODE_PORT || 3000;
 
 
 const outputFile = './swagger_output.json'

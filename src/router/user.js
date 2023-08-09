@@ -159,7 +159,7 @@ router.get("/refreshToken", async (req, res) => {
   }
 });
 //( /user/list) in order to get list of users
-router.get("/list",verifyToken,isAdmin, async (req, res) => {
+router.post("/list",verifyToken,isAdmin, async (req, res) => {
   let { pageNumber, pageSize } = req.body;
   pageNumber = parseInt(pageNumber);
   pageSize = parseInt(pageSize);
