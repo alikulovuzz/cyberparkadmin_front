@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const reportSchema = new mongoose.Schema({
   name_of_report: {
     type: String,
-    required: [true, 'Please, write your name_of_report at least'],
+    // required: [true, 'Please, write your name_of_report at least'],
     trim: true,
     min: 4
   },
@@ -26,7 +26,6 @@ const reportSchema = new mongoose.Schema({
   },
   quarterly: {
     type: String,
-    default: null,
     enum: {
       values: ['first', 'second', 'third', 'fourth'],
       message: '{VALUE} is not supported'

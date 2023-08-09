@@ -3,6 +3,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const morgan = require('morgan')
+const path = require('path');
 const router = require('./router/index')
 const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express');
@@ -23,7 +24,7 @@ app.use('/status', (req, res) => {
 })
 
 app.use('/api/v1', router)
-app.use('/uploads', express.static(__dirname + '../uploads'));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

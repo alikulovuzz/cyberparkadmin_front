@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 const { userLogger } = require('../helpers/logger')
 const Reports = require("../db/models/reports")
 const Company=require("../db/models/company")
-const sendMail = require("../helpers/sendemail")
 
 
 //( /reports) in reports to create reports
@@ -50,52 +49,61 @@ router.post("/", async (req, res) => {
   // Our register logic ends here
 });
 //( /reports/update/:id) in reports to update specific user
-router.post("/update/:id", async (req, res) => {
-
-  const id = req.params.id;
+router.post("/status_change", async (req, res) => {
+  const { report_id, status} = req.body;
   //id check
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(report_id)) {
     return res.status(422).json({
       message: 'Id is not valid',
-      error: id,
+      error: report_id,
     });
   }
-
-  const { name, img_id, tasker_id, user_id, payment_uz, status, location } = req.body;
-
   // const value = authorSchema.validate(req.body);
-  const oldOrder = await Reports.findById(id);
+  const reportCheck = await Reports.findById(report_id);
 
-  if (!oldOrder) {
-    return res.status(400).json({ code: 404, message: 'User not found' });
-    // return res.status(409).send("User Already Exist. Please Login");
+  if (!reportCheck) {
+    return res.status(400).json({ code: 404, message: 'Report not found' });
   }
   const newValues = {
-    name: name,
-    img_id: img_id,
-    tasker_id: tasker_id,
-    user_id: user_id,
-    payment_uz: payment_uz,
-    status: status,
-    location: location
+    status: status
   };
 
-  const baseOrder = new Reports(newValues);
+  const validateReport = new Reports(newValues);
   // validation
-  const error = baseOrder.validateSync();
+  const error = validateReport.validateSync();
   if (error) {
     return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
     // return res.status(409).send("Validatioan error");
   }
   
   // this only needed for development, in deployment is not real function
-  const order = await Reports.findOneAndUpdate({ _id: id }, newValues);
+  const report = await Reports.findOneAndUpdate({ _id: report_id }, newValues);
 
-  if (order.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any orders yet', error: err })
+  if (report.err) {
+    return res.status(500).json({ code: 500, message: 'There as not any reports yet', error: err })
   }
   else {
-    return res.status(200).json({ code: 200, message: 'order exist and updated', oldOrder: order })
+    report.status=status
+    return res.status(200).json({ code: 200, message: 'report exist and updated', oldreport: report })
+  };
+});
+//( /reports/getone/:id) in reports to get specific client
+router.get("/getlist", async (req, res) => {
+  const { quarterly, status} = req.body;
+  // console.log(req)
+  // userLogger.info(req.header)
+  // this only needed for development, in deployment is not real function
+  const query = {
+    quarterly: quarterly, // Assuming 'quarterly' is a field in your reports
+    status: status // Assuming 'status' is a field in your reports
+  };
+  const reports = await Reports.find(query);
+  console.log(reports)
+  if (reports.err||reports<=0) {
+    return res.status(500).json({ code: 500, message: 'There as not any reports yet', error: reports.err })
+  }
+  else {
+    return res.status(200).json({ code: 200, message: 'reports exist', reports: reports })
   };
 });
 //( /reports/delete/:id) in reports to delete specific user
@@ -111,62 +119,16 @@ router.delete("/delete/:id", async (req, res) => {
   }
 
   // this only needed for development, in deployment is not real function
-  const user = await User.findOneAndDelete({ _id: id });
+  const reports = await Reports.findOneAndDelete({ _id: id });
   // console.log(user) 
-  if (!user) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: user })
+  if (!reports) {
+    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: reports })
   };
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: user })
+  if (reports.err) {
+    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: reports })
   }
   else {
-    return res.status(200).json({ code: 200, message: 'user exist and deleted', deleted_user: user })
-  };
-});
-//( /reports/getone/:id) in reports to get specific client
-router.get("/getone/:id", async (req, res) => {
-
-  const id = req.params.id;
-  // id valid chech
-  if (!checkForHexRegExp.test(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
-  }
-  // console.log(req)
-  // userLogger.info(req.header)
-  // this only needed for development, in deployment is not real function
-  const user = await User.find({ _id: id });
-
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-  }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist', user: user })
-  };
-});
-//( /auth/:id) in reports to get specific user
-router.patch("/auth/:id", async (req, res) => {
-
-  const id = req.params.id;
-  // id valid chech
-  if (!checkForHexRegExp.test(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
-  }
-  // console.log(req)
-  // userLogger.info(req.header)
-  // this only needed for development, in deployment is not real function
-  const user = await User.findOneAndUpdate({ _id: id }, { status: "verified" });
-
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-  }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    return res.status(200).json({ code: 200, message: 'user exist and deleted', deleted_user: reports })
   };
 });
 module.exports = router;

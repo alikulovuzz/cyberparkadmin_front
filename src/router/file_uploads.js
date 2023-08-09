@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const uploads=require('../db/models/uploads')
+const dotenv = require('dotenv')
 const uuid = require('uuid');
+
+dotenv.config()
+const HOST = process.env.HOST || '0.0.0.0'
+const PORT = process.env.PORT || '3000'
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -40,7 +45,7 @@ router.post('/', upload.single('file'), async (req, res, next) => {
       });
   
       const savedFile = await fileSave.save();
-      res.status(201).json({ code: 201, data: savedFile });
+      res.status(201).json({ code: 201, data: savedFile, link:`http://${HOST}:3000/uploads/${savedFile.file_link}` });
     } catch (err) {
       if (!err.httpStatusCode) {
         err.httpStatusCode = 500;

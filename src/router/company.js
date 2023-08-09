@@ -5,11 +5,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose =require('mongoose');
-const {verifyToken,isAdmin}=require('../middleware/auth')
+const {verifyToken,isCompany}=require('../middleware/auth')
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
 const Company = require("../db/models/company");
-// const Token = require("../db/models/token");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
@@ -80,30 +79,31 @@ router.post("/login", async (req, res) => {
       return res.status(400).send("All input is required");
     }
     // Validate if user exist in our database
-    const user = await Company.findOne({ email:email });
+    const company = await Company.findOne({ email:email });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (company && (await bcrypt.compare(password, company.password))) {
       // Create token
-      const token = jwt.sign({ id: user._id }, config.secret, {
+      const token = jwt.sign({ id: company._id }, config.secret, {
         expiresIn: config.jwtExpiration,
       });
-      let refreshToken = await RefreshToken.createToken(user);
-      let authorities = [];
-      for (let i = 0; i < user.role.length; i++) {
-        authorities.push("ROLE_" + user.role[i].toUpperCase());
-      }
+      let refreshToken = await RefreshToken.createToken(company);
+      // let authorities = [];
+      // for (let i = 0; i < user.role.length; i++) {
+      //   authorities.push("ROLE_" + user.role[i].toUpperCase());
+      // }
       // save user token
-      user.token = token;
-      user.refreshToken = refreshToken;
-      user.authorities = authorities;
+      company.token = token;
+      company.refreshToken = refreshToken;
+      // user.authorities = authorities;
 
       // user
-      return res.status(200).json({data:user,token:token,refreshToken:refreshToken,authorities:authorities});
+      return res.status(200).json({data:company,token:token,refreshToken:refreshToken});
     }
-    return res.status(200).json({ code: 200, message: 'user does not exist and not verified' });
+    return res.status(200).json({ code: 200, message: 'Company does not exist and not verified' });
   } catch (err) {
     userLogger.error(err);
     console.log(err);
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
   // Our register logic ends here
 });
@@ -145,24 +145,66 @@ router.get("/refreshToken", async (req, res) => {
   }
 });
 //( /user/list) in order to get list of users
-router.post("/list",verifyToken,isAdmin, async (req, res) => {
+router.post("/list",verifyToken,isCompany, async (req, res) => {
   let { pageNumber, pageSize } = req.body;
   pageNumber = parseInt(pageNumber);
   pageSize = parseInt(pageSize);
   // this only needed for development, in deployment is not real function
   try {
 
-    const user = await Company.find()
+    const company = await Company.find()
     .skip((pageNumber - 1) * pageSize) 
     .limit(pageSize)           
     .sort({ first_name: 1 });
     // console.log(user)
-    return res.status(202).json({ code: 202, list_of_users: user });
+    return res.status(202).json({ code: 202, list_of_companies: company });
 
   } catch (err) {
     userLogger.error(err);
-    // console.log(err);
+    console.log(err);
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
+});
+//( /user/update/:id) in order to update specific user
+router.post("/update/:id", async (req, res) => {
+  const id = req.params.id;
+  //id check
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(422).json({
+      message: 'Id is not valid',
+      error: id,
+    });
+  }
+  const { company_name, email, stir, img_link, phone } = req.body;
+  // const value = authorSchema.validate(req.body);
+  const updateCompany = await Company.findById(id);
+
+    if (!updateCompany) {
+      return res.status(400).json({ code: 404, message: 'User not found' });
+      // return res.status(409).send("User Already Exist. Please Login");
+    }
+  const newValues = {
+    company_name: company_name,
+    email: email,
+    stir: stir,
+    img_link: email.toLowerCase(), // sanitize: convert email to lowercase
+    phone: phone
+  };
+
+  const validateCompany = new Company(newValues);
+  // validation
+  const error = validateCompany.validateSync();
+  if (error) {
+    return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
+  }
+  const user = await Company.findOneAndUpdate({ _id: id }, newValues);
+
+  if (user.err) {
+    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+  }
+  else {
+    return res.status(200).json({ code: 200, message: 'user exist and updated', olduser: user })
+  };
 });
 //( /user/resetpassworduser) in order to get list of users
 router.post('/resetpassworduser', async (req, res) => {
@@ -183,72 +225,6 @@ router.post('/resetpassworduser', async (req, res) => {
   // console.log(text);
   const emaile = sendMail(email, text);
   return res.status(200).json({ code: 200, message: 'We sent e resent link your ', user: user,text:text });
-});
-//( /user/update/:id) in order to update specific user
-router.post("/update/:id", async (req, res) => {
-
-  const id = req.params.id;
-  //id check
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
-  }
-  const { first_name, last_name, father_name, email, img_id, name, url, phone, password, role } = req.body;
-  // const value = authorSchema.validate(req.body);
-  const oldUser = await Company.findById(id);
-
-    if (!oldUser) {
-      return res.status(400).json({ code: 404, message: 'User not found' });
-      // return res.status(409).send("User Already Exist. Please Login");
-    }
-  const newValues = {
-    first_name: first_name,
-    last_name: last_name,
-    father_name: father_name,
-    email: email.toLowerCase(), // sanitize: convert email to lowercase
-    phone: phone,
-    img_id: img_id,
-    role: role
-  };
-
-  const baseuser = new Company(newValues);
-  // validation
-  const error = baseuser.validateSync();
-  if (error) {
-    return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
-    // return res.status(409).send("Validatioan error");
-  }
-  // img update logic starts here 
-
-  // img update logic ends here 
-
-  // if (value.error) {
-  //   return res.status(422).json({
-  //     message: 'Validation error.',
-  //     error: value.error,
-  //   });
-  // }
-  // const user = await user.findOne({ _id: id }, (err, user) => {
-  //   user.img.name(name);
-  // });
-  // const img = await user.find({ _id: id });
-
-  // console.log(img.img[0]);
-  // if (img.img[0].name != name) {
-  //   newValues.img = { name: name, url: url }
-  // }
-
-  // this only needed for development, in deployment is not real function
-  const user = await Company.findOneAndUpdate({ _id: id }, newValues);
-
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-  }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist and updated', olduser: user })
-  };
 });
 //( /user/delete/:id) in order to delete specific user
 router.delete("/delete/:id", async (req, res) => {
