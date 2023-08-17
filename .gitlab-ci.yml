@@ -31,7 +31,7 @@ build:
     - docker tag "$DOCKER_IMAGE" "$DOCKER_CACHE_IMAGE"
     - docker push "$DOCKER_CACHE_IMAGE"
   only:
-    - master
+    - main
 
 
 deploy:
@@ -56,4 +56,4 @@ deploy:
       -v "/app/storage:/src/storage"
       -d $DOCKER_IMAGE
   only:
-    - master
+    - main
