@@ -17,7 +17,7 @@ build:
   services:
     - docker:dind
   stage: build
-  when: manual
+  when: always
   script:
     # Login to Container registry
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
@@ -38,7 +38,7 @@ deploy:
   # Lightweight image with ssh
   image: kroniak/ssh-client
   stage: deploy
-  when: manual
+  when: always
   script:
     # Set right chmod on SSH key file
     - chmod 400 $MASTER_SSH_KEY
