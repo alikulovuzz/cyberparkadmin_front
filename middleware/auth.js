@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
 // const db = require("../db");
-const User = require("../src/db/models/user");
-const Company = require("../src/db/models/company");
+const User = require("../db/models/user");
+const Company = require("../db/models/company");
 // const Role = db.role;
 
 const { TokenExpiredError } = jwt;
