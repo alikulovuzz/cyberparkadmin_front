@@ -7,23 +7,17 @@ services:
       - 27017:27017
     volumes:
       - db:/data/db
-  # app:
-  #   depends_on:
-  #     - mongodb
-  #   build: ./
-  #   restart: unless-stopped
-  #   env_file: ./.env
-  #   ports:
-  #     - 81:81
-  #   environment:
-  #     - DB_HOST=mongodb
-  #     - DB_NAME=$MONGODB_DATABASE
-  #     - DB_PORT=27017
-  # nginx:
-  #       restart: always
-  #       build:
-  #           context: ./nginx
-  #       ports:
-  #           - "80:80"
+  app:
+    depends_on:
+      - mongodb
+    build: ./
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - 8081:8081
+    environment:
+      - DB_HOST=mongodb
+      - DB_NAME=$MONGODB_DATABASE
+      - DB_PORT=27017
 volumes:
   db:
