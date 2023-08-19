@@ -19,14 +19,14 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/status', (req, res) => {
+app.use('/api/v1/status', (req, res) => {
     res.json({ Hello: "World!" })
 })
 
 app.use('/api/v1', router)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, (err) => {
     if (err) { console.log(`Error:${err}`) }
