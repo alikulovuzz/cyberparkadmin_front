@@ -8,6 +8,7 @@ const {
     DB_HOST,
     DB_PORT,
     DB_NAME,
+    MONGODB_TEST_DATABASE
   } = process.env;
 
 mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`, {

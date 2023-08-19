@@ -24,7 +24,7 @@ app.use('/api/v1/status', (req, res) => {
 })
 
 app.use('/api/v1', router)
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
