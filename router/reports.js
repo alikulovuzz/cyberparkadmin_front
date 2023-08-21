@@ -8,7 +8,7 @@ const Company=require("../db/models/company")
 
 /**
  * @swagger
- * /api/v1/report:
+ * /api/v1/reports:
  *   post:
  *     description: Reports of Company!
  *     tags:
@@ -120,7 +120,7 @@ router.post("/", async (req, res) => {
 
 /**
  * @swagger
- * /api/v1/report/status_change:
+ * /api/v1/reports/status_change:
  *   post:
  *     description: Status of Company!
  *     tags:
