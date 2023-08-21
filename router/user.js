@@ -161,7 +161,65 @@ router.post("/signup", async (req, res) => {
   }
   // Our register logic ends here
 });
-//( /user/login) in order to login user
+
+/**
+ * @swagger
+ * /api/v1/user/signin:
+ *   post:
+ *     description: Sign in User to Server!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties: 
+ *             email:
+ *               description: Email of user
+ *               example: anavar.narwer@gmail.com
+ *               type: string
+ *             password:
+ *               description: Passwrod of user
+ *               example: 94Wqdw56qa#jsd
+ *               type: string  
+ *     responses:
+ *       201:
+ *         description: Successful log in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/signin", async (req, res) => {
 
   // Our login logic starts here
@@ -201,7 +259,61 @@ router.post("/signin", async (req, res) => {
   }
   // Our register logic ends here
 });
-//( /user/login) in order to login user
+
+/**
+ * @swagger
+ * /api/v1/user/refreshToken:
+ *   get:
+ *     description: refreshToken of User!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             refreshToken:
+ *               description: Token of User
+ *               example: "FN20LbaF2EWC6MPMWdemBwwnP4ZmX8"
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.get("/refreshToken", async (req, res) => {
   const { refreshToken: requestToken } = req.body;
 
@@ -317,7 +429,61 @@ router.post("/list",async (req, res) => {
     return res.status(400).json({err:err});
   }
 });
-//( /user/resetpassworduser) in order to get list of users
+
+/**
+ * @swagger
+ * /api/v1/user/resetpassworduser:
+ *   post:
+ *     description: Reset password of User to Log in Server!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             email:
+ *               description: Email of user
+ *               example: anavar.narwer@gmail.com
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post('/resetpassworduser', async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email: email });
@@ -337,7 +503,89 @@ router.post('/resetpassworduser', async (req, res) => {
   const emaile = sendMail(email, text);
   return res.status(200).json({ code: 200, message: 'We sent e resent link your ', user: user,text:text });
 });
-//( /user/resetpassword/confirmation/:email/:token) in order to get list of users
+
+/**
+ * @swagger
+ * /api/v1/user/signup:
+ *   post:
+ *     description: Sing up new User to Server!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             first_name:
+ *               description: First Name
+ *               type: string
+ *               example: Anvar
+ *             last_name:
+ *               description: Last Name
+ *               type: string
+ *               example: Narzullayev
+ *             father_name:
+ *               description: father name
+ *               example: Narzullayevich
+ *               type: string
+ *             email:
+ *               description: Email of user
+ *               example: anavar.narwer@gmail.com
+ *               type: string
+ *             img:
+ *               description: Images link
+ *               example: http://localhost:8081/api/v1/api-docs/#/User/post_api_v1_user_list
+ *               type: string
+ *             phone:
+ *               description: Phone number of user
+ *               example: 9895632663
+ *               type: string
+ *             password:
+ *               description: Passwrod of user
+ *               example: 94Wqdw56qa#jsd
+ *               type: string
+ *             role:
+ *               description: Role of user
+ *               example: admin
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post('/resetpassword/confirmationp/:email/:token', async (req, res) => {
   const token = req.params.token;
   // const password = req.params.password;

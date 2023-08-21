@@ -6,7 +6,76 @@ const Reports = require("../db/models/reports")
 const Company=require("../db/models/company")
 
 
-//( /reports) in reports to create reports
+/**
+ * @swagger
+ * /api/v1/report:
+ *   post:
+ *     description: Reports of Company!
+ *     tags:
+ *       - Report
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name_of_report:
+ *               description: Name of report
+ *               example: Name of report
+ *               type: string
+ *             file_link:
+ *               description: File
+ *               example: Name of report
+ *               type: string
+ *             company_id:
+ *               description: Company Id
+ *               example: Id company
+ *               type: int
+ *             year:
+ *               description: Year of report
+ *               example: Year of report
+ *               type: string
+ *             quarterly:
+ *               description: Quarterly report of company
+ *               example: quarterly
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/", async (req, res) => {
   // Our create logic starts here
   try {
@@ -48,7 +117,65 @@ router.post("/", async (req, res) => {
   }
   // Our register logic ends here
 });
-//( /reports/update/:id) in reports to update specific user
+
+/**
+ * @swagger
+ * /api/v1/report/status_change:
+ *   post:
+ *     description: Status of Company!
+ *     tags:
+ *       - Report
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             report_id:
+ *               description: ReportId of company
+ *               example: Reoprt id of report
+ *               type: int
+ *             status:
+ *               description: Status
+ *               example: Sttatus of report
+ *               type: boolen
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/status_change", async (req, res) => {
   const { report_id, status} = req.body;
   //id check
@@ -87,6 +214,7 @@ router.post("/status_change", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'report exist and updated', oldreport: report })
   };
 });
+
 //( /reports/getone/:id) in reports to get specific client
 router.get("/getlist", async (req, res) => {
   const { quarterly, status} = req.body;
