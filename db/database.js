@@ -8,8 +8,11 @@ const {
     DB_HOST,
     DB_PORT,
     DB_NAME,
-    MONGODB_TEST_DATABASE
+    MONGODB_TEST_DATABASE,
+    NODE_ENV
   } = process.env;
+console.log("DB_HOST")
+console.log(DB_HOST)
 
 mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
     useNewUrlParser: true,
