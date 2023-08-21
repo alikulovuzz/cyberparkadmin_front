@@ -417,7 +417,6 @@ router.post("/list",async (req, res) => {
     if (!pageNumber||!pageSize) {
       return res.status(400).send("pageNumber or pageSize is to defined");
     }
-    pageSize=pageSize/0
     const user = await User.find()
     .skip((pageNumber - 1) * pageSize) 
     .limit(pageSize)           
