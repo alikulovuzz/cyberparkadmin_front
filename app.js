@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const swaggerOptions = {
     swaggerDefinition: {
       info: {
-        title: "Library API",
+        title: "Cyber park Adminka API",
         version: '1.0.0',
       },
     },
