@@ -13,13 +13,86 @@ const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
 
-//( /user/register) in order to register user
+/**
+ * @swagger
+ * /api/v1/company/signup:
+ *   post:
+ *     description: Sing up new Company to Server!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             company_name:
+ *               description: Company Name
+ *               type: string
+ *               example: Cyber Park LLC
+ *             email:
+ *               description: Email of company
+ *               example: cyberpark@gmail.com
+ *               type: string
+ *             stir:
+ *               description: STIR number of company
+ *               example: 489652
+ *               type: string
+ *             img:
+ *               description: Images link
+ *               example: http://localhost:8081/api/v1/api-docs/#/Company/post_api_v1_user_list
+ *               type: string
+ *             phone:
+ *               description: Phone number of company
+ *               example: 9895632663
+ *               type: string
+ *             password:
+ *               description: Password of company
+ *               example: 94Wqdw56qa#jsd
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/signup", async (req, res) => {
 
   // Our register logic starts here
   try {
     // Get user input
-    const { company_name, email, stir, img_link, phone, password } = req.body;
+    const { company_name, email, stir, img_link: img, phone, password } = req.body;
     // Validate user input
     if (!(email && password && company_name && stir)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
@@ -43,7 +116,7 @@ router.post("/signup", async (req, res) => {
       stir: stir,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       phone: phone,
-      img_link: img_link,
+      img_link: img,
       password: encryptedPassword
     };
     const company = new Company(value);
@@ -66,7 +139,65 @@ router.post("/signup", async (req, res) => {
   }
   // Our register logic ends here
 });
-//( /user/login) in order to login user
+
+/**
+ * @swagger
+ * /api/v1/company/signin:
+ *   post:
+ *     description: Sing in Company to Server!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             stir:
+ *               description: STIR number of company
+ *               example: 489652
+ *               type: string
+ *             password:
+ *               description: Password of company
+ *               example: 94Wqdw56qa#jsd
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/signin", async (req, res) => {
 
   // Our login logic starts here
@@ -107,7 +238,61 @@ router.post("/signin", async (req, res) => {
   }
   // Our register logic ends here
 });
-//( /user/login) in order to login user
+
+/**
+ * @swagger
+ * /api/v1/company/refreshToken:
+ *   get:
+ *     description: refreshToken of Company!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             refreshToken:
+ *               description: Token of Company
+ *               example: "FN20LbaF2EWC6MPMWdemBwwnP4ZmX8"
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.get("/refreshToken", async (req, res) => {
   const { refreshToken: requestToken } = req.body;
 
@@ -144,7 +329,65 @@ router.get("/refreshToken", async (req, res) => {
     return res.status(500).send({ message: err });
   }
 });
-//( /user/list) in order to get list of users
+
+/**
+ * @swagger
+ * /api/v1/company/list:
+ *   post:
+ *     description: Get all company's data!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             pageNumber:
+ *               description: Page number
+ *               type: string
+ *               example: 1
+ *             pageSize:
+ *               description: Page size
+ *               type: string
+ *               example: 10
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/list",verifyToken,isCompany, async (req, res) => {
   let { pageNumber, pageSize } = req.body;
   pageNumber = parseInt(pageNumber);
