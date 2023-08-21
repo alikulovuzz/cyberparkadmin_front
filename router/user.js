@@ -19,13 +19,94 @@ const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
 
-//( /user/register) in order to register user
+/**
+ * @swagger
+ * /api/v1/user/signup:
+ *   post:
+ *     description: Sing up new User to Server!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             first_name:
+ *               description: First Name
+ *               type: string
+ *               example: Anvar
+ *             last_name:
+ *               description: Last Name
+ *               type: string
+ *               example: Narzullayev
+ *             father_name:
+ *               description: father name
+ *               example: Narzullayevich
+ *               type: string
+ *             email:
+ *               description: Email of user
+ *               example: anavar.narwer@gmail.com
+ *               type: string
+ *             img:
+ *               description: Images link
+ *               example: http://localhost:8081/api/v1/api-docs/#/User/post_api_v1_user_list
+ *               type: string
+ *             phone:
+ *               description: Phone number of user
+ *               example: 9895632663
+ *               type: string
+ *             password:
+ *               description: Passwrod of user
+ *               example: 94Wqdw56qa#jsd
+ *               type: string
+ *             role:
+ *               description: Role of user
+ *               example: admin
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/signup", async (req, res) => {
 
   // Our register logic starts here
   try {
     // Get user input
-    const { first_name, last_name, father_name, email, img_link, phone, password, role } = req.body;
+    const { first_name, last_name, father_name, email, img_link: img, phone, password, role } = req.body;
     // Validate user input
     if (!(email && password && first_name && last_name)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
@@ -57,7 +138,7 @@ router.post("/signup", async (req, res) => {
       father_name: father_name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       phone: phone,
-      img_link: img_link,
+      img_link: img,
       password: encryptedPassword,
       status: 'nagteive',
       role: role
@@ -81,7 +162,7 @@ router.post("/signup", async (req, res) => {
   // Our register logic ends here
 });
 //( /user/login) in order to login user
-router.post("/login", async (req, res) => {
+router.post("/signin", async (req, res) => {
 
   // Our login logic starts here
   try {
@@ -157,14 +238,74 @@ router.get("/refreshToken", async (req, res) => {
     return res.status(500).send({ message: err });
   }
 });
-//( /user/list) in order to get list of users
-router.post("/list",verifyToken,isAdmin, async (req, res) => {
-  let { pageNumber, pageSize } = req.body;
-  pageNumber = parseInt(pageNumber);
-  pageSize = parseInt(pageSize);
-  // this only needed for development, in deployment is not real function
-  try {
 
+/**
+ * @swagger
+ * /api/v1/user/list:
+ *   post:
+ *     description: Get all users's data!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             pageNumber:
+ *               description: Page number
+ *               type: string
+ *               example: 1
+ *             pageSize:
+ *               description: Page size
+ *               type: string
+ *               example: 10
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
+router.post("/list",async (req, res) => {
+  try {
+    let { pageNumber, pageSize } = req.body;
+    pageNumber = parseInt(pageNumber);
+    pageSize = parseInt(pageSize);
+    if (!pageNumber||!pageSize) {
+      return res.status(400).send("pageNumber or pageSize is to defined");
+    }
+    pageSize=pageSize/0
     const user = await User.find()
     .skip((pageNumber - 1) * pageSize) 
     .limit(pageSize)           
@@ -173,8 +314,7 @@ router.post("/list",verifyToken,isAdmin, async (req, res) => {
     return res.status(202).json({ code: 202, list_of_users: user });
 
   } catch (err) {
-    userLogger.error(err);
-    // console.log(err);
+    return res.status(400).json({err:err});
   }
 });
 //( /user/resetpassworduser) in order to get list of users

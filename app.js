@@ -6,8 +6,8 @@ const morgan = require('morgan')
 const path = require('path');
 const router = require('./router/index')
 const bodyParser = require('body-parser')
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./docs/swagger_output.json');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 
 const app = express()
 dotenv.config()
@@ -19,14 +19,35 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const swaggerOptions = {
+    swaggerDefinition: {
+      info: {
+        title: "Library API",
+        version: '1.0.0',
+      },
+    },
+    apis: ["app.js","./router/user.js"],
+  };
+  
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+/**
+ * @swagger
+ * /api/v1/status:
+ *   get:
+ *     description: Helath Check!
+ *     responses:
+ *       200:
+ *         description: Success
+ * 
+ */
 app.use('/api/v1/status', (req, res) => {
     res.json({ Hello: "World!" })
 })
 
 app.use('/api/v1', router)
 app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads')));
-
-app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, (err) => {
     if (err) { console.log(`Error:${err}`) }
