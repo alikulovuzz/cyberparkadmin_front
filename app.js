@@ -26,7 +26,7 @@ const swaggerOptions = {
         version: '1.0.0',
       },
     },
-    apis: ["app.js","./router/user.js"],
+    apis: ["app.js","./router/*.js"],
   };
   
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
