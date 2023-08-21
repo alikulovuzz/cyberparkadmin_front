@@ -23,23 +23,23 @@ const Company=require("../db/models/company")
  *           properties:
  *             name_of_report:
  *               description: Name of report
- *               example: Name of report
+ *               example: Oylik
  *               type: string
  *             file_link:
  *               description: File
- *               example: Name of report
+ *               example: file.pdf
  *               type: string
  *             company_id:
  *               description: Company Id
- *               example: Id company
- *               type: int
+ *               example: 64e339fe0c953d151cfb82dc
+ *               type: string
  *             year:
  *               description: Year of report
- *               example: Year of report
+ *               example: 2023
  *               type: string
  *             quarterly:
  *               description: Quarterly report of company
- *               example: quarterly
+ *               example: first
  *               type: string
  *     responses:
  *       201:
@@ -135,11 +135,11 @@ router.post("/", async (req, res) => {
  *           properties:
  *             report_id:
  *               description: ReportId of company
- *               example: Reoprt id of report
- *               type: int
+ *               example: 64e33a200c953d151cfb82e1
+ *               type: string
  *             status:
  *               description: Status
- *               example: Sttatus of report
+ *               example: progress
  *               type: boolen
  *     responses:
  *       201:
@@ -215,7 +215,64 @@ router.post("/status_change", async (req, res) => {
   };
 });
 
-//( /reports/getone/:id) in reports to get specific client
+/**
+ * @swagger
+ * /api/v1/reports/getlist:
+ *   post:
+ *     description: List of Reports!
+ *     tags:
+ *       - Report
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             quarterly:
+ *               description: Quarterly report of company
+ *               example: first
+ *               type: string
+ *             status:
+ *               description: Status of report
+ *               example: progress
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.get("/getlist", async (req, res) => {
   const { quarterly, status} = req.body;
   // console.log(req)
