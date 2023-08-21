@@ -263,7 +263,7 @@ router.post("/signin", async (req, res) => {
 /**
  * @swagger
  * /api/v1/user/refreshToken:
- *   get:
+ *   post:
  *     description: refreshToken of User!
  *     tags:
  *       - User
@@ -314,7 +314,7 @@ router.post("/signin", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.get("/refreshToken", async (req, res) => {
+router.post("/refreshToken", async (req, res) => {
   const { refreshToken: requestToken } = req.body;
 
   if (requestToken == null) {
