@@ -36,7 +36,9 @@ app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  * @swagger
  * /api/v1/status:
  *   get:
- *     description: Helath Check!
+ *     description: Health Check!
+ *     tags:
+ *       - Check server
  *     responses:
  *       200:
  *         description: Success

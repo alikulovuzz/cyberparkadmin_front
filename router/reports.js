@@ -273,7 +273,7 @@ router.post("/status_change", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.get("/getlist", async (req, res) => {
+router.post("/getlist", async (req, res) => {
   const { quarterly, status} = req.body;
   // console.log(req)
   // userLogger.info(req.header)
