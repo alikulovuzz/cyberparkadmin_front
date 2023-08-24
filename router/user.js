@@ -754,7 +754,7 @@ router.post("/update/:id", async (req, res) => {
  *   delete:
  *     description: Delete a user based on the provided ID!
  *     tags:
- *       - Report
+ *       - User
  *     parameters:
  *       - name: id
  *         description: JSON object containing pageNumber and pageSize
