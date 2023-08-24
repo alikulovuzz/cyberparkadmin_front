@@ -13,6 +13,7 @@ const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 
 
+
 /**
  * @swagger
  * /api/v1/company/signup:
@@ -92,32 +93,33 @@ router.post("/signup", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { company_name, email, stir, img_link: img, phone, password } = req.body;
+    const { pcks7,cn, o, pinfl, t, tin, uid,alias,name,serialNumber,validFrom,validTo } = req.body;
     // Validate user input
-    if (!(email && password && company_name && stir)) {
+    if (!(pcks7 && tin && pinfl && cn)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
     }
-
     // check if user already exist
     // Validate if user exist in our database
-    const oldCompany = await Company.findOne({ stir });
+    const oldCompany = await Company.findOne({ pinfl });
 
     if (oldCompany) {
-      return res.status(400).json({ code: 400, message: 'Company Already Exist. Please Login' });
+      return res.status(409).json({ code: 400, message: 'Company Already Exist. Please Login' });
       // return res.status(409).send("User Already Exist. Please Login");
     }
 
-    //Encrypt user password
-    encryptedPassword = await bcrypt.hash(password, 10);
-
     //user validated
     const value = {
-      company_name: company_name,
-      stir: stir,
-      email: email.toLowerCase(), // sanitize: convert email to lowercase
-      phone: phone,
-      img_link: img,
-      password: encryptedPassword
+      cn: cn,
+      organization_name: o,
+      pinfl: pinfl,
+      position: t,
+      tin: tin,
+      uid: uid,
+      alias:alias,
+      name: name,
+      serialNumber:serialNumber,
+      validFrom: validFrom,
+      validTo:validTo
     };
     const company = new Company(value);
     // validation
@@ -139,7 +141,33 @@ router.post("/signup", async (req, res) => {
   }
   // Our register logic ends here
 });
+router.post("/checkCompany", async (req, res) => {
 
+  // Our register logic starts here
+  try {
+    // Get user input
+    const { pcks7,cn, o, pinfl, t, tin, uid,alias,disk,name,path,serialNumber,validFrom,validTo } = req.body;
+    // Validate user input
+    if (!(pcks7 && tin && pinfl )) {
+      return res.status(400).json({ code: 400, message: 'All input is required' });
+    }
+
+    // check if user already exist
+    // Validate if user exist in our database
+    const oldCompany = await Company.findOne({ pinfl });
+
+    if (!oldCompany) {
+      return res.status(409).json({ code: 400, message: 'Company is not exist' });
+      // return res.status(409).send("User Already Exist. Please Login");
+    }
+    return res.status(200).json({
+      status:200,
+      message: 'Company is exist'});
+  } catch (err) {
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
+  }
+  // Our register logic ends here
+});
 /**
  * @swagger
  * /api/v1/company/signin:
@@ -203,34 +231,27 @@ router.post("/signin", async (req, res) => {
   // Our login logic starts here
   try {
     // Get user input
-    const { stir, password } = req.body;
+    const { pcks7,cn, o, pinfl, t, tin, uid,alias,disk,name,path,serialNumber,validFrom,validTo } = req.body;
 
     // Validate user input
-    if (!(stir && password)) {
-      return res.status(400).send("All input is required");
+    if (!(true)) {
+      return res.status(400).json({result:"Key is not valid"})
+    }
+    // Validate user input
+    if (!(pinfl && cn)) {
+      return res.status(400).json({result:"pinfl or cn missed"})
     }
     // Validate if user exist in our database
-    const company = await Company.findOne({ stir:stir });
-    console.log(company)
-    if (company && (await bcrypt.compare(password, company.password))) {
-      // Create token
-      const token = jwt.sign({ id: company._id }, config.secret, {
-        expiresIn: config.jwtExpiration,
-      });
-      let refreshToken = await RefreshToken.createToken(company);
-      // let authorities = [];
-      // for (let i = 0; i < user.role.length; i++) {
-      //   authorities.push("ROLE_" + user.role[i].toUpperCase());
-      // }
-      // save user token
-      company.token = token;
-      company.refreshToken = refreshToken;
-      // user.authorities = authorities;
-
-      // user
-      return res.status(200).json({data:company,token:token,refreshToken:refreshToken});
+    const company = await Company.findOne({ pinfl });
+    if (!company) {
+      return res.status(409).json({ code: 400, message: 'Company is not exist' });
+      // return res.status(409).send("User Already Exist. Please Login");
     }
-    return res.status(200).json({ code: 200, message: 'Company does not exist and not verified' });
+    const token = jwt.sign({ id: company._id }, config.secret, {
+      expiresIn: config.jwtExpiration,
+    });
+    let refreshToken = await RefreshToken.createToken(company);
+    return res.status(200).json({result:"success",data:company,token:token,refreshToken:refreshToken});
   } catch (err) {
     userLogger.error(err);
     console.log(err);

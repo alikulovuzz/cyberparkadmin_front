@@ -1,13 +1,79 @@
 const mongoose = require("mongoose");
 
 const companySchema = new mongoose.Schema({
-  company_name: {
+  cn: {
     type: String,
     required: [true, 'Please, write your company_name at least'],
     trim: true,
     min: 4,
   },
-  stir: {
+  organization_name: {
+    type: String,
+    required: [true, 'Please, write your organization_name at least'],
+    trim: true,
+    min: 4,
+  },
+  location: {
+    type: String,
+    // required: [true, 'Please, write your location at least'],
+    trim: true,
+    min: 4,
+  },
+  uid: {
+    type: String,
+    required: [true, 'Please, write your uid at least'],
+    trim: true,
+    min: 4,
+  },
+  businessCategory: {
+    type: String,
+    // required: [true, 'Please, write your businessCategory at least'],
+    trim: true,
+    min: 4,
+  },
+  serialNumber: {
+    type: String,
+    required: [true, 'Please, write your serialNumber at least'],
+    trim: true,
+    min: 4,
+  },
+  validFrom: {
+    type: String,
+    required: [true, 'Please, write your validFrom at least'],
+    trim: true,
+    min: 4,
+  },
+  validTo: {
+    type: String,
+    required: [true, 'Please, write your validTo at least'],
+    trim: true,
+    min: 4,
+  },
+  commonName: {
+    type: String,
+    // required: [true, 'Please, write your commonName at least'],
+    trim: true,
+    min: 4,
+  },
+  organizationFull: {
+    type: String,
+    // required: [true, 'Please, write your organizationFull at least'],
+    trim: true,
+    min: 4,
+  },
+  position: {
+    type: String,
+    required: [true, 'Please, write your position at least'],
+    trim: true,
+    min: 4,
+  },
+  pinfl: {
+    type: String,
+    required: [true],
+    trim: true,
+    min: 4,
+  },
+  tin: {
     type: String,
     required: [true],
     trim: true,
@@ -44,22 +110,6 @@ const companySchema = new mongoose.Schema({
     // required: [true, 'Admin phone number required'],
     min: 7
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    min: 4
-  },
-  role: [
-    {
-      type: String,
-      enum: {
-        values: ['admin', 'superAdmin'],
-        message: '{VALUE} is not supported'
-      },
-      default: ['admin']
-    }
-  ],
   status: {
     type: String,
     default: 'noResident',
@@ -70,6 +120,6 @@ const companySchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-companySchema.index({ stir:1,email: 1 }); // schema level
+companySchema.index({ pinfl:1}); // schema level
 
 module.exports = mongoose.model("Company", companySchema);

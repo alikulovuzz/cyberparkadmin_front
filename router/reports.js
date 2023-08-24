@@ -283,7 +283,6 @@ router.post("/getlist", async (req, res) => {
     status: status // Assuming 'status' is a field in your reports
   };
   const reports = await Reports.find(query);
-  console.log(reports)
   if (reports.err||reports<=0) {
     return res.status(500).json({ code: 500, message: 'There as not any reports yet', error: reports.err })
   }
