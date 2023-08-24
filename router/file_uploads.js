@@ -32,6 +32,57 @@ var upload = multer({ storage: storage })
 //     const savedFile = await fileSave.save()
 //     res.json(savedFile)
 // })
+
+/**
+ * @swagger
+ * /api/v1/uploads:
+ *   post:
+ *     description: Upload a file and save its link in the database
+ *     tags:
+ *       - Files
+ *     parameters:
+ *       - name: file
+ *         description: Upload a file
+ *         in: formData
+ *         required: true
+ *         type: file
+ *     responses:
+ *       200:
+ *         description: Successfully uploaded and saved the file
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_user:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post('/', upload.single('file'), async (req, res, next) => {
     try {
       const file = req.file;
