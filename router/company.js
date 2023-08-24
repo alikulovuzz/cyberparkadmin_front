@@ -33,7 +33,7 @@ const RefreshToken=require("../db/models/refreshToken.model")
  *               description: Director's name of company
  *               type: string
  *               example: XAMZIN ALBERT ALMAZOVICH
- *             organization_name:
+ *             o:
  *               description: Full name of company
  *               example: KIBERNETIKADA INNOVATSIYALAR IT-PARKI MCHJ
  *               type: string
@@ -41,7 +41,7 @@ const RefreshToken=require("../db/models/refreshToken.model")
  *               description: PINFL of company
  *               example: 32808810170066
  *               type: string
- *             position:
+ *             t:
  *               description: Position
  *               example: ДИРЕКТОР
  *               type: string
