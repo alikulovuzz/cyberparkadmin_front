@@ -113,9 +113,9 @@ router.post("/signup", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { pcks7,cn, o, pinfl, t, tin, uid,alias,name,serialNumber,validFrom,validTo } = req.body;
+    const { cn, o, pinfl, t, tin, uid,alias,name,serialNumber,validFrom,validTo } = req.body;
     // Validate user input
-    if (!(pcks7 && tin && pinfl && cn)) {
+    if (!(tin && pinfl && cn)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
     }
     // check if user already exist
