@@ -290,7 +290,57 @@ router.post("/getlist", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'reports exist', reports: reports })
   };
 });
-//( /reports/delete/:id) in reports to delete specific user
+
+/**
+ * @swagger
+ * /api/v1/reports/delete/{id}:
+ *   delete:
+ *     description: Delete a report based on the provided ID!
+ *     tags:
+ *       - Report
+ *     parameters:
+ *       - name: id
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Report deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_report:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.delete("/delete/:id", async (req, res) => {
 
   const id = req.params.id;

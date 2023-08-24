@@ -573,7 +573,57 @@ router.post('/resetpassworduser', async (req, res) => {
   const emaile = sendMail(email, text);
   return res.status(200).json({ code: 200, message: 'We sent e resent link your ', user: user,text:text });
 });
-//( /user/delete/:id) in order to delete specific user
+
+/**
+ * @swagger
+ * /api/v1/company/delete/{id}:
+ *   delete:
+ *     description: Deletes a company based on the provided ID!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: id
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Company deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_company:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.delete("/delete/:id", async (req, res) => {
 
   const id = req.params.id;
