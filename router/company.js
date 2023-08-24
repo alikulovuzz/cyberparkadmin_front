@@ -576,7 +576,7 @@ router.post('/resetpassworduser', async (req, res) => {
 
 /**
  * @swagger
- * /api/v1/company/delete/{id}:
+ * /api/v1/company/delete:
  *   delete:
  *     description: Deletes a company based on the provided ID!
  *     tags:
@@ -584,7 +584,7 @@ router.post('/resetpassworduser', async (req, res) => {
  *     parameters:
  *       - name: id
  *         description: JSON object containing pageNumber and pageSize
- *         in: path
+ *         in: query
  *         required: true
  *         type: string
  *     responses:
@@ -648,7 +648,57 @@ router.delete("/delete", async (req, res) => {
     return res.status(200).json({ code: 200, message: 'user exist and deleted', deleted_user: user })
   };
 });
-//( /getone/:id) in order to get specific client
+
+/**
+ * @swagger
+ * /api/v1/company/getone:
+ *   get:
+ *     description: Delete a user based on the provided ID!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: id
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: query
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Company get successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_user:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.get("/getone", async (req, res) => {
 
   const id = req.query.id;

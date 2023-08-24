@@ -293,7 +293,7 @@ router.post("/getlist", async (req, res) => {
 
 /**
  * @swagger
- * /api/v1/reports/delete/{id}:
+ * /api/v1/reports/delete:
  *   delete:
  *     description: Delete a report based on the provided ID!
  *     tags:
@@ -301,7 +301,7 @@ router.post("/getlist", async (req, res) => {
  *     parameters:
  *       - name: id
  *         description: JSON object containing pageNumber and pageSize
- *         in: path
+ *         in: query
  *         required: true
  *         type: string
  *     responses:
