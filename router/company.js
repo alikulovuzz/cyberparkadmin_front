@@ -29,29 +29,49 @@ const RefreshToken=require("../db/models/refreshToken.model")
  *         schema:
  *           type: object
  *           properties:
- *             company_name:
- *               description: Company Name
+ *             cn:
+ *               description: Director's name of company
  *               type: string
- *               example: Cyber Park LLC
- *             email:
- *               description: Email of company
- *               example: cyberpark@gmail.com
+ *               example: XAMZIN ALBERT ALMAZOVICH
+ *             organization_name:
+ *               description: Full name of company
+ *               example: KIBERNETIKADA INNOVATSIYALAR IT-PARKI MCHJ
  *               type: string
- *             stir:
- *               description: STIR number of company
- *               example: 489652
+ *             pinfl:
+ *               description: PINFL of company
+ *               example: 32808810170066
  *               type: string
- *             img:
- *               description: Images link
- *               example: http://localhost:8081/api/v1/api-docs/#/Company/post_api_v1_user_list
+ *             position:
+ *               description: Position
+ *               example: ДИРЕКТОР
  *               type: string
- *             phone:
- *               description: Phone number of company
- *               example: 9895632663
+ *             tin:
+ *               description: tin
+ *               example: 308121587
  *               type: string
- *             password:
- *               description: Password of company
- *               example: 94Wqdw56qa#jsd
+ *             uid:
+ *               description: uid
+ *               example: 575975561
+ *               type: string
+ *             alias:
+ *               description: alias
+ *               example: cn=DS3081215870002 albert almazovich,name=albert,surname=xamzin,o=kibernetikada innovatsiyalar it-parki mchj,l=mirzo ulug'bek tumani,st=toshkent shahri,c=uz,uid=575975561,1.2.860.3.16.1.2=32808810170066,t=директор,1.2.860.3.16.1.1=308121587,businesscategory=masʼuliyati cheklangan jamiyat,serialnumber=77ebb2ed,validfrom=2023.02.16 17:09:57,validto=2025.02.16 23:59:59
+ *               type: string
+ *             name:
+ *               description: DS name
+ *               example: DS3081215870002
+ *               type: string
+ *             serialNumber:
+ *               description: serialNumber
+ *               example: 77EBB2ED
+ *               type: string
+ *             validFrom:
+ *               description: validFrom
+ *               example: Thu Feb 16 2023 17:09:57 GMT+0500 (Узбекистан, стандартное время)
+ *               type: string
+ *             validTo:
+ *               description: validTo
+ *               example: Sun Feb 16 2025 23:59:59 GMT+0500 (Узбекистан, стандартное время)
  *               type: string
  *     responses:
  *       201:
@@ -141,12 +161,75 @@ router.post("/signup", async (req, res) => {
   }
   // Our register logic ends here
 });
+
+/**
+ * @swagger
+ * /api/v1/company/checkCompany:
+ *   post:
+ *     description: Sing up new Company to Server!
+ *     tags:
+ *       - Company
+ *     parameters:
+ *       - name: data
+ *         description: JSON object containing pageNumber and pageSize
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             pcks7:
+ *               description: pcks7
+ *               example: DS3081215870002DS3081215870002ERNETIKADAINNOVATSIY
+ *               type: string
+ *             pinfl:
+ *               description: PINFL of company
+ *               example: 32808810170066
+ *               type: string
+ *             tin:
+ *               description: tin
+ *               example: 308121587
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
 router.post("/checkCompany", async (req, res) => {
 
   // Our register logic starts here
   try {
     // Get user input
-    const { pcks7,cn, o, pinfl, t, tin, uid,alias,disk,name,path,serialNumber,validFrom,validTo } = req.body;
+    const { pcks7, pinfl, tin } = req.body;
     // Validate user input
     if (!(pcks7 && tin && pinfl )) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
@@ -183,13 +266,13 @@ router.post("/checkCompany", async (req, res) => {
  *         schema:
  *           type: object
  *           properties:
- *             stir:
- *               description: STIR number of company
- *               example: 489652
+ *             cn:
+ *               description: Director's name of company
+ *               example: XAMZIN ALBERT ALMAZOVICH
  *               type: string
- *             password:
- *               description: Password of company
- *               example: 94Wqdw56qa#jsd
+ *             pinfl:
+ *               description: PINFL of company
+ *               example: 32808810170066
  *               type: string
  *     responses:
  *       201:
@@ -231,7 +314,7 @@ router.post("/signin", async (req, res) => {
   // Our login logic starts here
   try {
     // Get user input
-    const { pcks7,cn, o, pinfl, t, tin, uid,alias,disk,name,path,serialNumber,validFrom,validTo } = req.body;
+    const { cn, pinfl } = req.body;
 
     // Validate user input
     if (!(true)) {
