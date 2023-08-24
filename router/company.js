@@ -624,9 +624,9 @@ router.post('/resetpassworduser', async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete", async (req, res) => {
 
-  const id = req.params.id;
+  const id = req.query.id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(422).json({
@@ -649,9 +649,9 @@ router.delete("/delete/:id", async (req, res) => {
   };
 });
 //( /getone/:id) in order to get specific client
-router.get("/getone/:id", async (req, res) => {
+router.get("/getone", async (req, res) => {
 
-  const id = req.params.id;
+  const id = req.query.id;
   // id valid chech
   if (!checkForHexRegExp.test(id)) {
     return res.status(422).json({

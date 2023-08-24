@@ -341,9 +341,9 @@ router.post("/getlist", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete", async (req, res) => {
 
-  const id = req.params.id;
+  const id = req.query.id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(422).json({
