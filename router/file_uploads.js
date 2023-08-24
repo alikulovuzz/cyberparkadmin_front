@@ -35,7 +35,7 @@ var upload = multer({ storage: storage })
 
 /**
  * @swagger
- * /api/v1/uploads:
+ * /api/v1/upload:
  *   post:
  *     description: Upload a file and save its link in the database
  *     tags:
