@@ -4,6 +4,8 @@ const multer = require('multer');
 const uploads=require('../db/models/uploads')
 const dotenv = require('dotenv')
 const uuid = require('uuid');
+var os = require("os");
+
 
 dotenv.config()
 const HOST = process.env.HOST || '0.0.0.0'
@@ -96,7 +98,7 @@ router.post('/', upload.single('file'), async (req, res, next) => {
       });
   
       const savedFile = await fileSave.save();
-      res.status(201).json({ code: 201, data: savedFile, link:`http://${HOST}:3000/uploads/${savedFile.file_link}` });
+      res.status(201).json({ code: 201, data: savedFile, link:`http://${os.hostname()}/api/v1/uploads/${savedFile.file_link}` });
     } catch (err) {
       if (!err.httpStatusCode) {
         err.httpStatusCode = 500;
