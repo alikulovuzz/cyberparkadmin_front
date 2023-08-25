@@ -351,9 +351,9 @@ router.post("/signin", async (req, res) => {
  *     tags:
  *       - Company
  *     parameters:
- *       - name: data
- *         description: JSON object containing pageNumber and pageSize
- *         in: body
+ *       - name: refreshToken
+ *         description: refreshToken
+ *         in: query
  *         required: true
  *         schema:
  *           type: object
@@ -398,7 +398,7 @@ router.post("/signin", async (req, res) => {
  *                   description: An error message
  */
 router.get("/refreshToken", async (req, res) => {
-  const { refreshToken: requestToken } = req.body;
+  const { refreshToken: requestToken } = req.query;
 
   if (requestToken == null) {
     return res.status(403).json({ message: "Refresh Token is required!" });
