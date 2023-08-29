@@ -11,7 +11,7 @@ const { userLogger, paymentLogger } = require('../helpers/logger');
 const Company = require("../db/models/company");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
-
+const getCurrentIndianDateTime=require("../helpers/time")
 
 
 /**
@@ -126,7 +126,6 @@ router.post("/signup", async (req, res) => {
       return res.status(409).json({ code: 400, message: 'Company Already Exist. Please Login' });
       // return res.status(409).send("User Already Exist. Please Login");
     }
-
     //user validated
     const value = {
       cn: cn,
@@ -139,7 +138,9 @@ router.post("/signup", async (req, res) => {
       name: name,
       serialNumber:serialNumber,
       validFrom: validFrom,
-      validTo:validTo
+      validTo:validTo,
+      created_at:getCurrentIndianDateTime(),
+      updated_at:getCurrentIndianDateTime()
     };
     const company = new Company(value);
     // validation

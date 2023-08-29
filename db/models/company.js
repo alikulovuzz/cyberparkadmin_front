@@ -1,125 +1,146 @@
 const mongoose = require("mongoose");
+const moment = require("moment-timezone");
 
-const companySchema = new mongoose.Schema({
-  cn: {
-    type: String,
-    required: [true, 'Please, write your company_name at least'],
-    trim: true,
-    min: 4,
+const companySchema = new mongoose.Schema(
+  {
+    cn: {
+      type: String,
+      required: [true, "Please, write your company_name at least"],
+      trim: true,
+      min: 4,
+    },
+    organization_name: {
+      type: String,
+      required: [true, "Please, write your organization_name at least"],
+      trim: true,
+      min: 4,
+    },
+    location: {
+      type: String,
+      // required: [true, 'Please, write your location at least'],
+      trim: true,
+      min: 4,
+    },
+    uid: {
+      type: String,
+      required: [true, "Please, write your uid at least"],
+      trim: true,
+      min: 4,
+    },
+    businessCategory: {
+      type: String,
+      // required: [true, 'Please, write your businessCategory at least'],
+      trim: true,
+      min: 4,
+    },
+    serialNumber: {
+      type: String,
+      required: [true, "Please, write your serialNumber at least"],
+      trim: true,
+      min: 4,
+    },
+    validFrom: {
+      type: String,
+      required: [true, "Please, write your validFrom at least"],
+      trim: true,
+      min: 4,
+    },
+    validTo: {
+      type: String,
+      required: [true, "Please, write your validTo at least"],
+      trim: true,
+      min: 4,
+    },
+    commonName: {
+      type: String,
+      // required: [true, 'Please, write your commonName at least'],
+      trim: true,
+      min: 4,
+    },
+    organizationFull: {
+      type: String,
+      // required: [true, 'Please, write your organizationFull at least'],
+      trim: true,
+      min: 4,
+    },
+    position: {
+      type: String,
+      required: [true, "Please, write your position at least"],
+      trim: true,
+      min: 4,
+    },
+    pinfl: {
+      type: String,
+      required: [true],
+      trim: true,
+      min: 4,
+    },
+    tin: {
+      type: String,
+      required: [true],
+      trim: true,
+      min: 4,
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      // unique: true,
+      // required: 'Email address is required',
+      // validate: [validateEmail, 'Please fill a valid email address'],
+      // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
+    img_link: {
+      type: String,
+      default: null,
+      trim: true,
+      min: 4,
+    },
+    phone: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      // Validation succeeds! Phone number is defined
+      // and fits `DDD-DDD-DDDD`
+      // validate: {
+      //   validator: function (v) {
+      //     return /\d{2}-\d{3}-\d{4}/.test(v);
+      //   },
+      //   message: props => `${props.value} is not a valid phone number!`
+      // },
+      // required: [true, 'Admin phone number required'],
+      min: 7,
+    },
+    status: {
+      type: String,
+      default: "noResident",
+      enum: {
+        values: ["resident", "noResident"],
+        message: "{VALUE} is not supported",
+      },
+    },
+    created_at: {
+      type: Date,
+      // default: Date.now, // Use the current date and time
+    },
+    updated_at: {
+      type: Date,
+      // default: Date.now, // Use the current date and time
+    },
   },
-  organization_name: {
-    type: String,
-    required: [true, 'Please, write your organization_name at least'],
-    trim: true,
-    min: 4,
-  },
-  location: {
-    type: String,
-    // required: [true, 'Please, write your location at least'],
-    trim: true,
-    min: 4,
-  },
-  uid: {
-    type: String,
-    required: [true, 'Please, write your uid at least'],
-    trim: true,
-    min: 4,
-  },
-  businessCategory: {
-    type: String,
-    // required: [true, 'Please, write your businessCategory at least'],
-    trim: true,
-    min: 4,
-  },
-  serialNumber: {
-    type: String,
-    required: [true, 'Please, write your serialNumber at least'],
-    trim: true,
-    min: 4,
-  },
-  validFrom: {
-    type: String,
-    required: [true, 'Please, write your validFrom at least'],
-    trim: true,
-    min: 4,
-  },
-  validTo: {
-    type: String,
-    required: [true, 'Please, write your validTo at least'],
-    trim: true,
-    min: 4,
-  },
-  commonName: {
-    type: String,
-    // required: [true, 'Please, write your commonName at least'],
-    trim: true,
-    min: 4,
-  },
-  organizationFull: {
-    type: String,
-    // required: [true, 'Please, write your organizationFull at least'],
-    trim: true,
-    min: 4,
-  },
-  position: {
-    type: String,
-    required: [true, 'Please, write your position at least'],
-    trim: true,
-    min: 4,
-  },
-  pinfl: {
-    type: String,
-    required: [true],
-    trim: true,
-    min: 4,
-  },
-  tin: {
-    type: String,
-    required: [true],
-    trim: true,
-    min: 4,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    // unique: true,
-    // required: 'Email address is required',
-    // validate: [validateEmail, 'Please fill a valid email address'],
-    // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-  },
-  img_link: {
-    type: String,
-    default: null,
-    trim: true,
-    min: 4
-  },
-  phone: {
-    type: String,
-    trim: true,
-    lowercase: true,
-    unique: true,
-    // Validation succeeds! Phone number is defined
-    // and fits `DDD-DDD-DDDD`
-    // validate: {
-    //   validator: function (v) {
-    //     return /\d{2}-\d{3}-\d{4}/.test(v);
-    //   },
-    //   message: props => `${props.value} is not a valid phone number!`
-    // },
-    // required: [true, 'Admin phone number required'],
-    min: 7
-  },
-  status: {
-    type: String,
-    default: 'noResident',
-    enum: {
-      values: ['resident', 'noResident'],
-      message: '{VALUE} is not supported'
-    }
-  },
-}, { timestamps: true });
+  {
+    timestamps: false,
+    underscored: true,
+    // freezeTableName: true,
+  }
+);
 
-companySchema.index({ pinfl:1}); // schema level
+companySchema.index({ pinfl: 1 }); // schema level
+
+companySchema.virtual("formatted_created_at").get(function () {
+  // Use moment-timezone to format the date in the desired time zone
+  return moment(this.created_at).tz("Etc/GMT+5").format("DD.MM.YYYY").add(4, 'hours');
+});
 
 module.exports = mongoose.model("Company", companySchema);

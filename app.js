@@ -27,6 +27,14 @@ const swaggerOptions = {
       },
     },
     apis: ["app.js","./router/*.js"],
+    securityDefinitions: {
+      auth: {
+        type: 'basic'
+      }
+    },
+    security: [
+      { auth: [] }
+    ]
   };  
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
@@ -46,6 +54,7 @@ app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use('/api/v1/status', (req, res) => {
     res.json({ Hello: "World!" })
 })
+
 
 app.use('/api/v1', router)
 app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads')));
