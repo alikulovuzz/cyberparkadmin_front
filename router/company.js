@@ -654,15 +654,14 @@ router.delete("/delete", async (req, res) => {
  * @swagger
  * /api/v1/company/getone:
  *   get:
- *     description: Delete a user based on the provided ID!
+ *     description: get organization by id!
  *     tags:
- *       - User
+ *       - Company
  *     parameters:
  *       - name: id
- *         description: JSON object containing pageNumber and pageSize
+ *         description: _id
  *         in: query
  *         required: true
- *         type: string
  *     responses:
  *       200:
  *         description: Company get successfully
@@ -701,25 +700,27 @@ router.delete("/delete", async (req, res) => {
  *                   description: An error message
  */
 router.get("/getone", async (req, res) => {
+  
+  try {
+    const id = req.query.id;
+    // id valid chech
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(422).json({
+        message: 'Id is not valid',
+        error: id,
+      });
+    }
+    // this only needed for development, in deployment is not real function
+    const user = await Company.find({ _id: id });
 
-  const id = req.query.id;
-  // id valid chech
-  if (!checkForHexRegExp.test(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
+    if (user.err) {
+      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+    }
+    else {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    };
+  } catch (err) {
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
-  // console.log(req)
-  // userLogger.info(req.header)
-  // this only needed for development, in deployment is not real function
-  const user = await Company.find({ _id: id });
-
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-  }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist', user: user })
-  };
 });
 module.exports = router;
