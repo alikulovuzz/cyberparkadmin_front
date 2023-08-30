@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment-timezone");
 
 const companySchema = new mongoose.Schema(
   {
@@ -137,10 +136,5 @@ const companySchema = new mongoose.Schema(
 );
 
 companySchema.index({ pinfl: 1 }); // schema level
-
-companySchema.virtual("formatted_created_at").get(function () {
-  // Use moment-timezone to format the date in the desired time zone
-  return moment(this.created_at).tz("Etc/GMT+5").format("DD.MM.YYYY").add(4, 'hours');
-});
 
 module.exports = mongoose.model("Company", companySchema);

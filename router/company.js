@@ -493,7 +493,7 @@ router.get("/refreshToken", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.post("/list",verifyToken,isCompany, async (req, res) => {
+router.post("/list", async (req, res) => {
   let { pageNumber, pageSize } = req.body;
   pageNumber = parseInt(pageNumber);
   pageSize = parseInt(pageSize);
