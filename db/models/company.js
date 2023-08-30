@@ -99,7 +99,6 @@ const companySchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
       // Validation succeeds! Phone number is defined
       // and fits `DDD-DDD-DDDD`
       // validate: {
@@ -108,8 +107,7 @@ const companySchema = new mongoose.Schema(
       //   },
       //   message: props => `${props.value} is not a valid phone number!`
       // },
-      // required: [true, 'Admin phone number required'],
-      min: 7,
+      // min: 7,
     },
     status: {
       type: String,
