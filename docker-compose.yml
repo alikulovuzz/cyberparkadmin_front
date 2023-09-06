@@ -1,24 +1,28 @@
-version: "3"
+version: "3.7"
 services:
-  mongodb:
-    image: mongo:4.4.6
-    restart: always
+  mongo:
+    container_name: container-mongodb
+    image: mongo:4.4.5
+    restart: unless-stopped
     ports:
       - 27017:27017
-    volumes:
-      - db:/data/db
-  app:
-    depends_on:
-      - mongodb
-    build: ./
-    restart: always
-    env_file: ./.env
-    ports:
-      - 8081:8081
     environment:
-      - DB_HOST=mongodb
-      - DB_NAME=$MONGODB_DATABASE
-      - DB_PORT=27017
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: root-db
+    volumes:
+      - db_store:/data/db
+  # app:
+  #   depends_on:
+  #     - mongodb
+  #   build: ./
+  #   restart: always
+  #   env_file: ./.env
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     - DB_HOST=mongodb
+  #     - DB_NAME=$MONGODB_DATABASE
+  #     - DB_PORT=27017
 volumes:
-  db:
-    external: true
+  db_store:

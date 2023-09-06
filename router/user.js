@@ -353,6 +353,81 @@ router.post("/refreshToken", async (req, res) => {
 
 /**
  * @swagger
+ * /api/v1/user/signout:
+ *   get:
+ *     description: refreshToken of Company!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: refreshToken
+ *         description: refreshToken
+ *         in: query
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             refreshToken:
+ *               description: Token of Company
+ *               example: "FN20LbaF2EWC6MPMWdemBwwnP4ZmX8"
+ *               type: string
+ *     responses:
+ *       201:
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
+router.get("/signout", async (req, res) => {
+  const { refreshToken: requestToken } = req.query;
+
+  if (requestToken == null) {
+    return res.status(403).json({ message: "Refresh Token is required!" });
+  }
+
+  try {
+    let refreshToken = await RefreshToken.findOneAndDelete({ token: requestToken });
+    if (!refreshToken) {
+      res.status(403).json({ message: "Refresh token is not in database!" });
+      return;
+    }
+    return res.status(200).json({
+      status: "ok"
+    });
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+});
+
+/**
+ * @swagger
  * /api/v1/user/list:
  *   post:
  *     description: Get all users's data!
