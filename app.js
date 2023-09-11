@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path');
+const basicAuth = require('express-basic-auth');
 const bodyParser = require('body-parser')
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
@@ -37,7 +38,10 @@ const swaggerOptions = {
     ]
   };  
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use('/api/v1/api-docs',basicAuth({
+  users: {'admin': '8723'},
+  challenge: true,
+}), swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 /**
  * @swagger

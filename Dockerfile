@@ -12,4 +12,7 @@ FROM node:16.3.0-alpine
 COPY --from=builder /app/ /app/
 WORKDIR app 
 ENV HOST=0.0.0.0
+
+EXPOSE 8081
+
 CMD ["npm","run","start"]
