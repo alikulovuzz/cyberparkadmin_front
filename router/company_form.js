@@ -737,6 +737,7 @@ router.get("/getone", async (req, res) => {
  *         description: token
  *         in: header
  *         required: true
+ *         type: string
  *     responses:
  *       200:
  *         description: Company get successfully
@@ -774,8 +775,7 @@ router.get("/getone", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.get("/me",verifyToken, async (req, res) => {
-  
+router.get("/me",verifyToken, async (req, res) => {  
   try {
     const id = req.userId;
     // id valid chech
