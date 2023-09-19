@@ -32,10 +32,7 @@ const swaggerOptions = {
       auth: {
         type: 'basic'
       }
-    },
-    security: [
-      { auth: [] }
-    ]
+    }
   };  
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api/v1/api-docs',basicAuth({
@@ -58,7 +55,6 @@ app.use('/api/v1/api-docs',basicAuth({
 app.use('/api/v1/status', (req, res) => {
     res.json({ Hello: "World!" })
 })
-
 
 app.use('/api/v1', router)
 app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads')));

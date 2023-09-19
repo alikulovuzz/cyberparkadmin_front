@@ -256,6 +256,7 @@ router.post("/signin", async (req, res) => {
   } catch (err) {
     userLogger.error(err);
     console.log(err);
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
   // Our register logic ends here
 });
