@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const config =require('../config/auth.config')
+const config = require('../config/auth.config')
 // const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const mongoose =require('mongoose');
-const {verifyToken,isAdmin}=require('../middleware/auth')
+const mongoose = require('mongoose');
+const { verifyToken, isAdmin } = require('../middleware/auth')
 const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
@@ -16,7 +16,7 @@ const { userLogger, paymentLogger } = require('../helpers/logger');
 const User = require("../db/models/user");
 // const Token = require("../db/models/token");
 const sendMail = require("../helpers/sendemail")
-const RefreshToken=require("../db/models/refreshToken.model")
+const RefreshToken = require("../db/models/refreshToken.model")
 
 
 /**
@@ -232,7 +232,7 @@ router.post("/signin", async (req, res) => {
       return res.status(400).send("All input is required");
     }
     // Validate if user exist in our database
-    const user = await User.findOne({ email:email });
+    const user = await User.findOne({ email: email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -250,7 +250,7 @@ router.post("/signin", async (req, res) => {
       user.authorities = authorities;
 
       // user
-      return res.status(200).json({data:user,token:token,refreshToken:refreshToken,authorities:authorities});
+      return res.status(200).json({ data: user, token: token, refreshToken: refreshToken, authorities: authorities });
     }
     return res.status(200).json({ code: 200, message: 'user does not exist and not verified' });
   } catch (err) {
@@ -332,7 +332,7 @@ router.post("/refreshToken", async (req, res) => {
 
     if (RefreshToken.verifyExpiration(refreshToken)) {
       RefreshToken.findByIdAndRemove(refreshToken._id, { useFindAndModify: false }).exec();
-      
+
       res.status(403).json({
         message: "Refresh token was expired. Please make a new signin request",
       });
@@ -485,23 +485,23 @@ router.get("/signout", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.post("/list",async (req, res) => {
+router.post("/list", async (req, res) => {
   try {
     let { pageNumber, pageSize } = req.body;
     pageNumber = parseInt(pageNumber);
     pageSize = parseInt(pageSize);
-    if (!pageNumber||!pageSize) {
+    if (!pageNumber || !pageSize) {
       return res.status(400).send("pageNumber or pageSize is to defined");
     }
     const user = await User.find()
-    .skip((pageNumber - 1) * pageSize) 
-    .limit(pageSize)           
-    .sort({ first_name: 1 });
+      .skip((pageNumber - 1) * pageSize)
+      .limit(pageSize)
+      .sort({ first_name: 1 });
     // console.log(user)
     return res.status(202).json({ code: 202, list_of_users: user });
 
   } catch (err) {
-    return res.status(400).json({err:err});
+    return res.status(400).json({ err: err });
   }
 });
 
@@ -576,7 +576,7 @@ router.post('/resetpassworduser', async (req, res) => {
   const text = 'Hello ' + user.first_name + ',\n\n' + 'Please verify your account again by clicking the link: \nhttp:\/\/' + req.headers.host + '\/user/resetpassword/confirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n';
   // console.log(text);
   const emaile = sendMail(email, text);
-  return res.status(200).json({ code: 200, message: 'We sent e resent link your ', user: user,text:text });
+  return res.status(200).json({ code: 200, message: 'We sent e resent link your ', user: user, text: text });
 });
 
 /**
@@ -664,7 +664,7 @@ router.post('/resetpassworduser', async (req, res) => {
 router.post('/resetpassword/confirmationp/:email/:token', async (req, res) => {
   const token = req.params.token;
   // const password = req.params.password;
-  const  password  = req.body.password;
+  const password = req.body.password;
   // Validate user input
   if (!token) {
     return res.status(400).json({ code: 400, message: 'Input is required' });
@@ -700,8 +700,8 @@ router.post('/resetpassword/confirmationp/:email/:token', async (req, res) => {
   return res.status(200).json({ code: 200, message: 'confirmation success', client: client });
 });
 //( /user/confirmation/:email/:token) in order to get list of users
-router.get('/confirmation/:email/:token',async (req, res) => {
-  const  token  = req.params.token;
+router.get('/confirmation/:email/:token', async (req, res) => {
+  const token = req.params.token;
   // const { email } = req.params.email;
   // Validate user input
   if (!token) {
@@ -735,7 +735,7 @@ router.get('/confirmation/:email/:token',async (req, res) => {
 });
 //( /user/resendlink) in order to get list of users
 router.post('/resendlink', async (req, res) => {
-  const  {email}  = req.body;
+  const { email } = req.body;
   const user = await User.findOne({ email: email });
   if (!user) {
     return res.status(400).json({ code: 400, message: 'Your verification link may have expired. Please click on resend for verify your Email.' });
@@ -747,15 +747,15 @@ router.post('/resendlink', async (req, res) => {
   }
   var token = new Token({ _clientId: user._id, token: crypto.randomBytes(16).toString('hex') });
   var error = token.validateSync();
-    if (error) {
-      return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
-      // return res.status(409).send("Validatioan error");
-    }
-    const teken_save = await token.save();
-    const text = 'Hello ' + user.first_name + ',\n\n' + 'Please verify your account again by clicking the link: \nhttp:\/\/' + req.headers.host + '\/user/confirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n';
-    // console.log(text);
-    const emaile = sendMail(email, text);
-    return res.status(200).json({ code: 200, message: 'resend success', user: user });
+  if (error) {
+    return res.status(409).json({ code: 409, message: 'Validatioan error', error: error });
+    // return res.status(409).send("Validatioan error");
+  }
+  const teken_save = await token.save();
+  const text = 'Hello ' + user.first_name + ',\n\n' + 'Please verify your account again by clicking the link: \nhttp:\/\/' + req.headers.host + '\/user/confirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n';
+  // console.log(text);
+  const emaile = sendMail(email, text);
+  return res.status(200).json({ code: 200, message: 'resend success', user: user });
 });
 //( /user/update/:id) in order to update specific user
 router.post("/update/:id", async (req, res) => {
@@ -772,10 +772,10 @@ router.post("/update/:id", async (req, res) => {
   // const value = authorSchema.validate(req.body);
   const oldUser = await User.findById(id);
 
-    if (!oldUser) {
-      return res.status(400).json({ code: 404, message: 'User not found' });
-      // return res.status(409).send("User Already Exist. Please Login");
-    }
+  if (!oldUser) {
+    return res.status(400).json({ code: 404, message: 'User not found' });
+    // return res.status(409).send("User Already Exist. Please Login");
+  }
   const newValues = {
     first_name: first_name,
     last_name: last_name,
@@ -951,25 +951,30 @@ router.delete("/delete", async (req, res) => {
  */
 router.get("/getone", async (req, res) => {
 
-  const id = req.query.id;
-  // id valid chech
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
+  try {
+    const id = req.query.id;;
+    // id valid chech
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(422).json({
+        message: 'Id is not valid',
+        error: id,
+      });
+    }
+    // console.log(req)
+    // userLogger.info(req.header)
+    // this only needed for development, in deployment is not real function
+    const user = await User.find({ _id: id });
+    console.log(user)
+    if (user.err) {
+      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+    }
+    else {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    };
   }
-  // console.log(req)
-  // userLogger.info(req.header)
-  // this only needed for development, in deployment is not real function
-  const user = await User.find({ _id: id });
-
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+  catch {
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist', user: user })
-  };
 });
 /**
  * @swagger
@@ -1021,27 +1026,33 @@ router.get("/getone", async (req, res) => {
  *                   type: string
  *                   description: An error message
  */
-router.get("/me",verifyToken, async (req, res) => {
+router.get("/me", verifyToken, async (req, res) => {
 
-  const id = req.userId;
-  // id valid chech
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(422).json({
-      message: 'Id is not valid',
-      error: id,
-    });
+  try {
+    const id = req.userId;
+    // id valid chech
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(422).json({
+        message: 'Id is not valid',
+        error: id,
+      });
+    }
+    // console.log(req)
+    // userLogger.info(req.header)
+    // this only needed for development, in deployment is not real function
+    const user = await User.find({ _id: id });
+    console.log(user)
+    if (user.err) {
+      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+    }
+    else {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    };
   }
-  // console.log(req)
-  // userLogger.info(req.header)
-  // this only needed for development, in deployment is not real function
-  const user = await User.find({ _id: id });
-  console.log(user)
-  if (user.err) {
-    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+  catch {
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
-  else {
-    return res.status(200).json({ code: 200, message: 'user exist', user: user })
-  };
+
 });
 //( /auth/:id) in order to get specific user
 router.patch("/auth/:id", async (req, res) => {
