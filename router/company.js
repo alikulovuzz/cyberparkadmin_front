@@ -735,6 +735,7 @@ router.get("/getone", async (req, res) => {
  *         description: token
  *         in: header
  *         required: true
+ *         type: string
  *     responses:
  *       200:
  *         description: Company get successfully
