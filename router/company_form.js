@@ -725,4 +725,77 @@ router.get("/getone", async (req, res) => {
     return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
   }
 });
+/**
+ * @swagger
+ * /api/v1/company_form/me:
+ *   get:
+ *     description: get organization by token!
+ *     tags:
+ *       - V2 Company
+ *     parameters:
+ *       - name: x-access-token
+ *         description: token
+ *         in: header
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Company get successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_user:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
+router.get("/me",verifyToken, async (req, res) => {
+  
+  try {
+    const id = req.userId;
+    // id valid chech
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(422).json({
+        message: 'Id is not valid',
+        error: id,
+      });
+    }
+    // this only needed for development, in deployment is not real function
+    const user = await Company_form.find({ _id: id });
+
+    if (user.err) {
+      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+    }
+    else {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    };
+  } catch (err) {
+    return res.status(500).json({ code: 500, message: 'Internal server error', error: err });
+  }
+});
 module.exports = router;

@@ -21,12 +21,13 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
-
+  
   jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return catchError(err, res);
     }
     req.userId = decoded.id;
+    console.log(req.userId)
     next();
   });
 };

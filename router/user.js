@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose =require('mongoose');
 const {verifyToken,isAdmin}=require('../middleware/auth')
-// const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
 // const {logger} = require('../helpers/logger');
@@ -953,7 +953,7 @@ router.get("/getone", async (req, res) => {
 
   const id = req.query.id;
   // id valid chech
-  if (!checkForHexRegExp.test(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(422).json({
       message: 'Id is not valid',
       error: id,
@@ -964,6 +964,78 @@ router.get("/getone", async (req, res) => {
   // this only needed for development, in deployment is not real function
   const user = await User.find({ _id: id });
 
+  if (user.err) {
+    return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
+  }
+  else {
+    return res.status(200).json({ code: 200, message: 'user exist', user: user })
+  };
+});
+/**
+ * @swagger
+ * /api/v1/user/me:
+ *   get:
+ *     description: Delete a user based on the provided ID!
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - name: x-access-token
+ *         description: Token
+ *         in: header
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: User get successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: string
+ *                   description: A success message
+ *                 data:
+ *                   type: object
+ *                   description: Response data
+ *                 delete_user:
+ *                   type: object
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ *       500:
+ *         description: Internal Server Error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: An error message
+ */
+router.get("/me",verifyToken, async (req, res) => {
+
+  const id = req.userId;
+  // id valid chech
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(422).json({
+      message: 'Id is not valid',
+      error: id,
+    });
+  }
+  // console.log(req)
+  // userLogger.info(req.header)
+  // this only needed for development, in deployment is not real function
+  const user = await User.find({ _id: id });
+  console.log(user)
   if (user.err) {
     return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
   }
