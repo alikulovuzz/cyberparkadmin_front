@@ -115,6 +115,14 @@ const companySchema = new mongoose.Schema(
       // },
       // min: 7,
     },
+    role: {
+        type: String,
+        default: "company",
+        enum: {
+          values: ['company', 'resident'],
+          message: '{VALUE} is not supported'
+        }
+      },
     status: {
       type: String,
       default: "noResident",

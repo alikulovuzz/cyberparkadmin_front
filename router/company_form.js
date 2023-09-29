@@ -9,6 +9,7 @@ const {verifyToken,isCompany}=require('../middleware/auth')
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
 const Company_form = require("../db/models/company_form");
+const User = require("../db/models/user");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 const getCurrentIndianDateTime=require("../helpers/time")
@@ -731,7 +732,7 @@ router.get("/getone", async (req, res) => {
  *   get:
  *     description: get organization by token!
  *     tags:
- *       - V2 Company
+ *       - V2 Get User By ID
  *     parameters:
  *       - name: x-access-token
  *         description: token
@@ -786,13 +787,17 @@ router.get("/me",verifyToken, async (req, res) => {
       });
     }
     // this only needed for development, in deployment is not real function
-    const user = await Company_form.find({ _id: id });
-
-    if (user.err) {
-      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-    }
-    else {
+    var user = await Company_form.find({ _id: id });
+    console.log(user.length>0)
+    console.log(id)
+    if (user.length>0) {
       return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    }
+    user = await User.find({ _id: id });
+    if (user.length>0) {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    }else {
+      return res.status(200).json({ code: 200, message: 'Internal server error'})
     };
   } catch (err) {
     return res.status(500).json({ code: 500, message: 'Internal server error', error: err });

@@ -4,6 +4,7 @@
   "description": "This project is the space of Asutomation Systems for Business.",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon src/app.js",
     "start": "nodemon src/app.js",
     "test": "node src/app.js"
   },

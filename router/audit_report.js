@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const { userLogger } = require('../helpers/logger')
-const Reports = require("../db/models/reports")
+const Audit = require("../db/models/audit")
 const Company = require("../db/models/company")
 
 
@@ -80,9 +80,9 @@ router.post("/", async (req, res) => {
   // Our create logic starts here
   try {
     // Get user input
-    const { name_of_report, file_link, company_id, year, quarterly } = req.body;
+    const { name_of_report, file_link, company_id, year, quarterly,release_product,release_republic,invesment,residental_payroll,import_funds } = req.body;
     // Validate user input
-    if (!(name_of_report && company_id && year && file_link && quarterly)) {
+    if (!(name_of_report && company_id && year && quarterly)) {
       return res.status(400).json({ code: 400, message: 'All input is required' });
     }
     // check if user already exist
@@ -99,9 +99,14 @@ router.post("/", async (req, res) => {
       file_link: file_link,
       company_id: company_id,
       year: year,
-      quarterly: quarterly
+      quarterly: quarterly,
+      release_product:release_product,
+      release_republic:release_republic,
+      invesment:invesment,
+      residental_payroll:residental_payroll,
+      import_funds:import_funds
     };
-    const validateReports = new Reports(value);
+    const validateReports = new Audit(value);
     // validation
     var error = validateReports.validateSync();
     if (error) {
@@ -186,7 +191,7 @@ router.post("/status_change", async (req, res) => {
     });
   }
   // const value = authorSchema.validate(req.body);
-  const reportCheck = await Reports.findById(report_id);
+  const reportCheck = await Audit.findById(report_id);
 
   if (!reportCheck) {
     return res.status(400).json({ code: 404, message: 'Report not found' });
@@ -195,7 +200,7 @@ router.post("/status_change", async (req, res) => {
     status: status
   };
 
-  const validateReport = new Reports(newValues);
+  const validateReport = new Audit(newValues);
   // validation
   const error = validateReport.validateSync();
   if (error) {
@@ -204,7 +209,7 @@ router.post("/status_change", async (req, res) => {
   }
 
   // this only needed for development, in deployment is not real function
-  const report = await Reports.findOneAndUpdate({ _id: report_id }, newValues);
+  const report = await Audit.findOneAndUpdate({ _id: report_id }, newValues);
 
   if (report.err) {
     return res.status(500).json({ code: 500, message: 'There as not any reports yet', error: err })
@@ -275,14 +280,19 @@ router.post("/status_change", async (req, res) => {
  */
 router.post("/getlist", async (req, res) => {
   const { quarterly, status } = req.body;
-  const reports = await Reports.find(
-    {
-      "$and": [
-        { quarterly: quarterly },
-        { status: status }
-      ]
-    }
-  ).populate('company_id', 'organization_name _id').exec();
+  // console.log(req)
+  // userLogger.info(req.header)
+  // this only needed for development, in deployment is not real function
+  let query = {
+    quarterly, // Assuming 'quarterly' is a field in your reports
+    status // Assuming 'status' is a field in your reports
+  };
+  if (!quarterly && status) {
+    query = { status };
+  } else if (quarterly && !status) {
+    query = { quarterly };
+  }
+  const reports = await Audit.find(query).populate('company_id', 'organization_name _id').exec();
   if (reports.err || reports <= 0) {
     return res.status(500).json({ code: 500, message: 'There as not any reports yet', error: reports.err })
   }
@@ -353,7 +363,7 @@ router.delete("/delete", async (req, res) => {
   }
 
   // this only needed for development, in deployment is not real function
-  const reports = await Reports.findOneAndDelete({ _id: id });
+  const reports = await Audit.findOneAndDelete({ _id: id });
   // console.log(user) 
   if (!reports) {
     return res.status(500).json({ code: 500, message: 'There as not any users yet', error: reports })

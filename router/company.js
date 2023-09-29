@@ -9,6 +9,7 @@ const {verifyToken,isCompany}=require('../middleware/auth')
 const rateLimit = require('../helpers/request_limitter');
 const { userLogger, paymentLogger } = require('../helpers/logger');
 const Company = require("../db/models/company");
+const User = require("../db/models/user");
 const sendMail = require("../helpers/sendemail")
 const RefreshToken=require("../db/models/refreshToken.model")
 const getCurrentIndianDateTime=require("../helpers/time")
@@ -327,6 +328,7 @@ router.post("/signin", async (req, res) => {
     }
     // Validate if user exist in our database
     const company = await Company.findOne({ pinfl });
+    console.log(company)
     if (!company) {
       return res.status(409).json({ code: 400, message: 'Company is not exist' });
       // return res.status(409).send("User Already Exist. Please Login");
@@ -776,7 +778,7 @@ router.get("/getone", async (req, res) => {
 router.get("/me",verifyToken, async (req, res) => {
   
   try {
-    const id = req.userId;
+    const id = req.body.company;
     // id valid chech
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(422).json({
@@ -785,13 +787,17 @@ router.get("/me",verifyToken, async (req, res) => {
       });
     }
     // this only needed for development, in deployment is not real function
-    const user = await Company.find({ _id: id });
-
-    if (user.err) {
-      return res.status(500).json({ code: 500, message: 'There as not any users yet', error: err })
-    }
-    else {
+    var user = await Company.find({ _id: id });
+    console.log(user.length>0)
+    console.log(id)
+    if (user.length>0) {
       return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    }
+    user = await User.find({ _id: id });
+    if (user.length>0) {
+      return res.status(200).json({ code: 200, message: 'user exist', user: user })
+    }else {
+      return res.status(200).json({ code: 200, message: 'Internal server error'})
     };
   } catch (err) {
     return res.status(500).json({ code: 500, message: 'Internal server error', error: err });

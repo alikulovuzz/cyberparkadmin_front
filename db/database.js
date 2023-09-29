@@ -9,7 +9,8 @@ const {
     DB_PORT,
     DB_NAME,
   } = process.env;
-
+//mongodb://localhost:27017/test_db
+//mongodb://myuser:mypassword@localhost:27017/mydatabase
 mongoose.connect(`mongodb://myuser:mypassword@localhost:27017/mydatabase`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
