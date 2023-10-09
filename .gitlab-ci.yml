@@ -40,7 +40,7 @@ deploy:
   stage: deploy
   when: always
   script:
-    # Set right chmod on SSH key file
+    # Set right chmod on SSH key filee
     - chmod 400 $MASTER_SSH_KEY
     # Remove old containers and images if exists
     - ssh -o StrictHostKeyChecking=no -i $MASTER_SSH_KEY "${MASTER_SSH_USER}@${MASTER_HOST}" "docker rm -f ${CI_PROJECT_NAME} || true"
