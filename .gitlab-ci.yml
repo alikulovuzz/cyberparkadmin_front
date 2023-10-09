@@ -33,4 +33,4 @@ deploy:
     name: production
     url: http://your_MASTER_HOST
   only:
-    - master
+    - main
