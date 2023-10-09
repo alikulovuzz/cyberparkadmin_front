@@ -32,6 +32,7 @@ export default function MonthlyReport() {
                                             <td>1</td>
                                             <td>John Doe</td>
                                             <td>1000000</td>
+                                            <td>24.05.2023</td>
                                             <td><button className="custom-btn-error">Approved</button></td>
                                             <td><a href="test_file.zip" download>Yuklab olish</a></td>
                                         </tr>

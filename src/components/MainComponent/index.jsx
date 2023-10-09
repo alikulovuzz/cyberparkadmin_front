@@ -13,7 +13,7 @@ export default function MainComponent() {
 
     const navigator = useNavigate()
     useEffect(() => {
-      if(user){
+      if(!user){
         getRequest(company_me).then((response) =>{
           setUser(response.data.user[0])
           console.log(response.data.user[0])
