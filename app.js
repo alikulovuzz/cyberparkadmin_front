@@ -13,7 +13,7 @@ const router = require('./router/index')
 dotenv.config()
 
 const HOST = process.env.HOST || '0.0.0.0'
-const PORT = process.env.PORT || '8081'
+const PORT = process.env.PORT || '3001'
 
 app.use(morgan('dev'))
 app.use(cors())
