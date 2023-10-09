@@ -13,6 +13,6 @@ COPY --from=builder /app/ /app/
 WORKDIR app 
 ENV HOST=0.0.0.0
 
-EXPOSE 8081
+EXPOSE 3001
 
 CMD ["npm","run","start"]
