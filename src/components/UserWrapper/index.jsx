@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css'
+import './custom.css'
 import './themify-icons.css'
 import CompanySidebar from '../CompanySidebar'
 import CompanyHeader from '../CompanyHeader'

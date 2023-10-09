@@ -19,7 +19,8 @@ export default function Auditing() {
                             <form action="#" className="mt-30">
                                 <div className="box-body table-responsive no-padding">
                                     <table className="table table-hover custom-table-report">
-                                        <tr>
+                                       <tbody>
+                                       <tr>
                                             <th>№</th>
                                             <th>Hisobot davri</th>
                                             <th>Berilgan sana</th>
@@ -33,6 +34,7 @@ export default function Auditing() {
                                             <td><button className="custom-btn-error">Approved</button></td>
                                             <td><a href="test_file.zip" download>Yuklab olish</a></td>
                                         </tr>
+                                       </tbody>
                                     </table>
                                 </div>
                             </form>

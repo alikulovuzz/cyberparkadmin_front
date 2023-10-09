@@ -8,14 +8,14 @@ import { postRequest } from '../../utils/resquests';
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-export default function SignInSide({admin}) {
+export default function SignInSide({ admin }) {
 
     const [openLanguages, setOpenLanguages] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
-    
+
     const { user, setUser } = useContext(UserContext)
 
     const navigate = useNavigate()
@@ -44,11 +44,7 @@ export default function SignInSide({admin}) {
             pinfl: username,
             password: password,
         }).then(response => {
-            if(response.data.message=="user does not exist and not verified"){
-                handleCloseBackdrop()
-                setError(true)
-            }
-            if(response.data.token){
+            if (response.data.token) {
                 sessionStorage.setItem('x-access-token', response.data.token)
                 setUser(response.data.data)
                 navigate("/user");
@@ -81,36 +77,36 @@ export default function SignInSide({admin}) {
                     </div>
                 </div>
             </div>
-            <div className="contents">
-                <div className="container">
-                    <div className="right-top col-md-12">
-                        {
-                            (!admin)?
-                                <button
-                                    onClick={gotoAdmin}
-                                >
-                                    <i className="fas fa-user-circle"></i>
-                                    <span>Adminlar uchun</span>
-                                </button>
+            <div className="contents custom-res">
+                <div className="right-top col-md-12">
+                    {
+                        (!admin) ?
+                            <button
+                                onClick={gotoAdmin}
+                            >
+                                <i className="fas fa-user-circle"></i>
+                                <span>Adminlar uchun</span>
+                            </button>
                             :
-                                <button
-                                    onClick={gotoUser}
-                                >
-                                    <i className="fas fa-user-circle"></i>
-                                    <span>Userlar uchun</span>
-                                </button>
-                        }
-                        <div className="dropdown">
-                            <button onClick={handleOpenDropDown} className="dropbtn">Uz</button>
-                            <div id="myDropdown" className={`dropdown-content ${openLanguages ? "show" : ""}`}>
-                                <a>Uz</a>
-                                <a>Ru</a>
-                                <a>En</a>
-                            </div>
+                            <button
+                                onClick={gotoUser}
+                            >
+                                <i className="fas fa-user-circle"></i>
+                                <span>Userlar uchun</span>
+                            </button>
+                    }
+                    <div className="dropdown">
+                        <button onClick={handleOpenDropDown} className="dropbtn">Uz</button>
+                        <div id="myDropdown" className={`dropdown-content ${openLanguages ? "show" : ""}`}>
+                            <a>Uz</a>
+                            <a>Ru</a>
+                            <a>En</a>
                         </div>
                     </div>
-                    <div className="right-block">
-                        <div className="align-items-center justify-content-center col-md-8 right-form">
+                </div>
+                <div className="container custom-res">
+                    <div className="right-block custom-res">
+                        <div className="align-items-center justify-content-center col-md-12 right-form">
                             <div className="col-md-12">
                                 <div>
                                     <h3>Kabinetga kirish</h3>
@@ -147,7 +143,7 @@ export default function SignInSide({admin}) {
             <Snackbar
                 open={error}
                 autoHideDuration={6000}
-                onClose={() => {setError(false)}}
+                onClose={() => { setError(false) }}
                 message="Login yoki password xato"
                 severity="error"
             />

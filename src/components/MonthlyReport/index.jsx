@@ -19,7 +19,8 @@ export default function MonthlyReport() {
                             <form action="#" className="mt-30">
                                 <div className="box-body table-responsive no-padding">
                                     <table className="table table-hover custom-table-report">
-                                        <tr>
+                                       <tbody>
+                                       <tr>
                                             <th>№</th>
                                             <th>Hisobot davri</th>
                                             <th>Daromad miqdori</th>
@@ -41,6 +42,7 @@ export default function MonthlyReport() {
                                             <td><button className="custom-btn-accept">Approved</button></td>
                                             <td><a href="test_file.zip" download>Yuklab olish</a></td>
                                         </tr>
+                                       </tbody>
                                     </table>
                                 </div>
                             </form>

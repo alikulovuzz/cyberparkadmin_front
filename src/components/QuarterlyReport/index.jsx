@@ -1,4 +1,6 @@
 import React from 'react'
+import './custom.css'
+
 
 export default function QuarterlyReport() {
     return (
@@ -19,6 +21,7 @@ export default function QuarterlyReport() {
                             <form action="#" className="mt-30">
                                 <div className="box-body table-responsive no-padding">
                                     <table className="table table-hover custom-table-report">
+                                        <tbody>
                                         <tr>
                                             <th>№</th>
                                             <th>Hisobot davri</th>
@@ -30,7 +33,7 @@ export default function QuarterlyReport() {
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>John Doe</td>
+                                            <td>John Doe1</td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
                                                 doner.</td>
                                             <td>11-7-2014</td>
@@ -38,6 +41,7 @@ export default function QuarterlyReport() {
                                             <td>Harakat</td>
                                             <td><a href="test_file.zip" download>Yuklab olish</a></td>
                                         </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </form>

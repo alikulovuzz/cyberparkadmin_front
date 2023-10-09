@@ -1,0 +1,106 @@
+.content-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-btn-success {
+    background-color: #00A65A;
+    padding: 8px;
+    outline: none;
+    border: 1px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    
+}
+
+.custom-btn-error {
+    background-color: #DD4B39;
+    padding: 8px;
+    outline: none;
+    border: 1px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    
+}
+
+.custom-btn-accept {
+    background-color: #00C0EF;
+    padding: 8px;
+    outline: none;
+    border: 1px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    
+}
+
+.custom-btn-wait {
+    background-color: #F39C12;
+    padding: 8px;
+    outline: none;
+    border: 1px;
+    color: #FFFFFF;
+    border-radius: 4px;
+    
+}
+
+.custom-modal {
+    display: flex;
+    margin: 2px 20px;
+    align-items: center;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.custom-modal p {
+    font-size: 16px;
+    padding: 10px;
+    color: #000;
+}
+
+.info-company p {
+    margin-bottom: 0px;
+}
+
+.line-div {
+    border: 0px;
+    border-bottom: 2px solid black;
+    border-style: dashed;
+    margin: 20px 0px;
+}
+
+.custom-button {
+    border: 1px solid black;
+    outline: none;
+    background-color: transparent;
+    padding: 10px;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.custom-button:hover {
+    background-color: #7BC24D;
+    color: #FFFFFF;
+}
+
+.info-company h3 {
+    font-size: 24px;
+}
+
+.info-company label {
+    font-size: 18px;
+}
+
+.info-company span {
+    font-size: 16px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.info-checkbox {
+    margin-bottom: 10px;
+}
+
+.custom-label {
+    font-size: 14px !important;
+}
