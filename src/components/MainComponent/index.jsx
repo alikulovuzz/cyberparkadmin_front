@@ -23,7 +23,7 @@ export default function MainComponent() {
             } else if(response.data.user[0].role == 'admin'){
               navigator('admin')
             } else {
-              navigator('login')
+              navigator('login') 
             }
           }).catch((error) => {
             console.log(error)
