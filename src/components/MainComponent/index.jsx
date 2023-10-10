@@ -14,28 +14,34 @@ export default function MainComponent() {
     const navigator = useNavigate()
     useEffect(() => {
       if(!user){
-        getRequest(company_me).then((response) =>{
-          setUser(response.data.user[0])
-          console.log(response.data.user[0])
+        if(sessionStorage.getItem('x-access-token')){
+          getRequest(company_me).then((response) => {
+            setUser(response.data.user[0])
+            setLoader(false)
+            if(response.data.user[0].role == 'company'){
+              navigator('user')
+            } else if(response.data.user[0].role == 'admin'){
+              navigator('admin')
+            } else {
+              navigator('login')
+            }
+          }).catch((error) => {
+            console.log(error)
+            setLoader(false)
+          })
+        }else{
+          navigator('login')
           setLoader(false)
-          if(response.data.user[0].role == 'company'){
-            navigator('user')
-          } else if(response.data.user[0].role == 'admin'){
-            navigator('admin')
-          } else {
-            navigator('login')
-          }
-        }).catch((error) => {
-          console.log(error)
-          setLoader(false)
-        })
+        }
+      } else {
+        if(user.role == 'company'){
+          navigator('user')
+        }else{
+          navigator('admin')
+        }
+        setLoader(false)
       }
     },[])
-
-    if(sessionStorage.getItem('x-access-token')){
-      return !loader?<Outlet/>:<Spinner/>
-    }else{
-      return <Navigate to="/login"/>
-    }
-
+   
+    return (!loader)?<Outlet/>:<Spinner/>
 }
