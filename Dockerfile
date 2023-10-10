@@ -14,4 +14,8 @@ ENV HOST=0.0.0.0
 
 EXPOSE 3000
 
-CMD ["npm","run","build"]
+RUN npm run build
+
+RUN npm install -g serve
+
+CMD ["serve","-s","build"]
