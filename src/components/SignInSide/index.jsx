@@ -47,7 +47,7 @@ export default function SignInSide({ admin }) {
             if (response.data.token) {
                 sessionStorage.setItem('x-access-token', response.data.token)
                 setUser(response.data.data)
-                navigate("/user");
+                navigate("/user")
             }
             handleCloseBackdrop()
         }).catch(error => {
