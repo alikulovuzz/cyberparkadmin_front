@@ -1,21 +1,20 @@
-FROM node:16.3.0 as builder
-RUN mkdir app
-WORKDIR /app
+FROM oven/bun:latest as build-stage
 
-COPY package*.json ./
-RUN npm install
+WORKDIR /build
 
 COPY . ./
 
-FROM node:16.3.0-alpine
-COPY --from=builder /app/ /app/
-WORKDIR /app 
-ENV HOST=0.0.0.0
+RUN bun install
+
+RUN bun build ./src/index.js --outdir ./build
+
+# Reduce image size
+FROM  --platform=linux/amd64 oven/bun:latest
+
+WORKDIR /app
+
+COPY . ./
 
 EXPOSE 3000
 
-RUN npm run build
-
-RUN npm install -g serve
-
-CMD ["serve","-s","build"]
+CMD ["bun","serve","-s","build"]
