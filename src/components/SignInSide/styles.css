@@ -221,6 +221,7 @@ h2 {
   display: flex;
   justify-content: end;
   padding: 30px 10px;
+  margin-top: -280px;
 }
 
 .right-top button {
@@ -1445,5 +1446,88 @@ hr {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
-  /* justify-content: center; */
+  justify-content: center;
+}
+
+.left-side {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 500px;
+}
+.left-title {
+  padding-top: 50px;
+}
+
+
+.left-side p {
+  color: #000;
+  margin-bottom: 0rem;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+  padding: 10px 5px;
+  font-weight: 400;
+}
+
+.info-left {
+  padding: 0px 10px;
+  background-color: #45B5AA;
+  border-left: 2px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info-left h5 {
+  color: #FFFFFF;
+  font-weight: 400;
+}
+
+.info-left h6 {
+  text-align: center;
+}
+
+.left-span {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  color: #000;
+  margin-bottom: 0rem;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.left-span img {
+  width: 40px;
+  padding-left: 10px;
+}
+
+.send-img {
+  width: 150px;
+  border-radius: 10%;
+  margin-bottom: 20px;
+}
+
+.phone-img {
+  width: 50px;
+  border-radius: 10%;
+  padding: 10px;
+  color: #FFFFFF;
+}
+
+.phone-block {
+  margin-top: 20px;
+  background-color: transparent;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  border-radius: 10px;
+  font-size: 20px;
 }

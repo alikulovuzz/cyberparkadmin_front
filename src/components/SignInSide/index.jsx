@@ -67,13 +67,33 @@ export default function SignInSide({ admin }) {
 
     return (
         <div className="d-lg-flex half" onClick={closeOpenDropDown}>
-            <div className="bg">
-                <div>
-                    <div>
-                        <div className="image-container">
-                            <img src={require("./images/logo2.png")} alt="" />
+            <div className="bg cl-md-12">
+                <div className="left-side">
+                    <div className="image-container">
+                        <img src={require("./images/logo2.png")} alt="" />
+                    </div>
+                    <div className="left-title">
+                        <h3>CYBER PARK BILAN BIZNESINGIZNI RIVOJLANTIRING</h3>
+                    </div>
+                    <div className="info-left">
+                        <h5>CYBER PARK rezidenti maqomiga ega bo'ling va kompaniya rivojlanish uchun imtiyozlar va afzalliklardan
+                            foydalaning!</h5>
+                        <br />
+                        <h5>CYBER PARK rezidentligi maqomini olish bo'yicha talab qilinuvchi hujjatlar:</h5>
+                        <br />
+                        <img className="send-img" src={require("./images/smartparcel-mail.gif")} alt="" />
+                        <div className="left-span">
+                            <img src={require("./images/office-building.png")} alt="" />
+                            <p>O'zbekistonda kompaniya ochish</p>
                         </div>
-
+                        <div className="left-span">
+                        <img src={require("./images/clipboard.png")} alt="" />
+                            <p>Shaxsiy kabinet orqali biznes-reja bilan ariza yuborish</p>
+                        </div>
+                    </div>
+                    <div className="phone-block">
+                         <img className='phone-img' src={require("./images/icon-call.png")} alt="" />
+                        <span>(90) 028-89-02</span>
                     </div>
                 </div>
             </div>
