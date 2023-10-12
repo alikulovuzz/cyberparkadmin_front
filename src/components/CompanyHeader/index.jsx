@@ -8,6 +8,12 @@ export default function CompanyHeader() {
     setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
   };
 
+  const handleOpenBackdrop = () => {
+    sessionStorage.clear();
+    
+    window.location.reload(false);
+  };
+
   const toggleProfileDropdown = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
@@ -39,10 +45,10 @@ export default function CompanyHeader() {
               </a>
               {isProfileDropdownOpen && (
                 <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} aria-labelledby="profileDropdown">
-                  <a className="dropdown-item">
+                  <p className="dropdown-item" onClick={handleOpenBackdrop} >
                     <i className="ti-power-off text-primary"></i>
                     Chiqish
-                  </a>
+                  </p>
                 </div>
               )}
             </li>

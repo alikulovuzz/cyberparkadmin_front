@@ -14941,3 +14941,7 @@ dl li {
     height: 100vh;
   }
 }
+
+.display_sidebar{
+  display: none;
+}
