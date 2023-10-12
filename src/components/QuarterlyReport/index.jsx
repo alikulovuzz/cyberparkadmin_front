@@ -1,5 +1,6 @@
 import React from 'react'
 import './custom.css'
+import { Link } from 'react-router-dom'
 
 
 export default function QuarterlyReport() {
@@ -14,8 +15,12 @@ export default function QuarterlyReport() {
                                     Choraklik hisobot
                                 </h3>
                                 <ol className="breadcrumb">
-                                    <button className="btn btn-block"><i className="ti-plus"></i>
-                                        Qo'shish</button>
+                                    <Link to="new-quarterly">
+                                        <button className="btn btn-block"><i className="ti-plus"></i>
+                                            Qo'shish
+                                        </button>
+                                    </Link>
+                                    
                                 </ol>
                             </section>
                             <form action="#" className="mt-30">

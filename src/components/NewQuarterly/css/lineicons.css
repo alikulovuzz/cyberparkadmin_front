@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'lineicons';
+  src: url('../fonts/lineicons.eot');
+  src: url('../fonts/lineicons.eot') format('embedded-opentype'),
+    url('../fonts/lineicons.woff2') format('woff2'),
+    url('../fonts/lineicons.woff') format('woff'),
+    url('../fonts/lineicons.ttf') format('truetype'),
+    url('../fonts/lineicons.svg') format('svg');
+}
+
+/* base class */
+.lni {
+  display: inline-block;
+  font: normal normal normal 1em/1 'lineicons';
+  color: inherit;
+  flex-shrink: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* size examples - relative units */
+.lni-sm {
+  font-size: 0.8em;
+}
+
+.lni-lg {
+  font-size: 1.2em;
+}
+
+/* size examples - absolute units */
+.lni-16 {
+  font-size: 16px;
+}
+
+.lni-32 {
+  font-size: 32px;
+}
+
+/* rotate the icon infinitely */
+.lni-is-spinning {
+  animation: lni-spin 1s infinite linear;
+}
+
+@keyframes lni-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.lni-trash-can::before {
+  content: "\ea0b";
+}
+
+.lni-plus::before {
+  content: "\eab8";
+}
+
+.lni-save::before {
+  content: "\ea19";
+}
