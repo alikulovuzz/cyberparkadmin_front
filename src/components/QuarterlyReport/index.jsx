@@ -34,7 +34,7 @@ export default function QuarterlyReport() {
                                         <tr>
                                             <td>1</td>
                                             <td>John Doe1</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback
+                                            <td>Bacon ipsum
                                                 doner.</td>
                                             <td>11-7-2014</td>
                                             <td><button className="custom-btn-success">Approved</button></td>
