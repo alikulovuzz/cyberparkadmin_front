@@ -3203,8 +3203,6 @@ textarea.form-control.is-invalid {
   position: absolute;
   z-index: 1000;
   display: none;
-  min-width: 10rem;
-  padding: 0.5rem 0;
   margin: 0;
   font-size: 1rem;
   color: #212529;
@@ -3213,7 +3211,7 @@ textarea.form-control.is-invalid {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #c9ccd7;
-  border-radius: 0.25rem;
+  border-radius: 10px;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -3647,9 +3645,22 @@ textarea.form-control.is-invalid {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #0d6efd;
+  color: #656565;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.nav-link i {
+  font-size: 1.5rem;
+}
+
+.nav-link span {
+  color: inherit;
+  display: inline-block;
+  font-size: 0.875rem;
+  line-height: 1;
+  vertical-align: middle;
+  margin-top: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3660,7 +3671,7 @@ textarea.form-control.is-invalid {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #0a58ca;
+  color: #454545;
 }
 
 .nav-link.disabled {
@@ -4629,6 +4640,14 @@ textarea.form-control.is-invalid {
 
 .breadcrumb-item+.breadcrumb-item {
   padding-left: 0.5rem;
+}
+
+.breadcrumb:hover i {
+  color: #FFFFFF;
+}
+
+.btn-block:hover {
+  color: #FFFFFF;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
@@ -11942,6 +11961,7 @@ html {
 
 .container-scroller {
   overflow: hidden;
+  margin: 0 300px;
 }
 
 pre {
@@ -13503,7 +13523,6 @@ code {
 
 .dropdown .dropdown-menu .dropdown-item {
   font-size: .875rem;
-  padding: .25rem 1.5rem;
 }
 
 .dropdown .dropdown-menu .dropdown-item:active {
@@ -14087,11 +14106,44 @@ dl li {
   transition-property: color;
 }
 
+
+.sidebar .nav .nav-link {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.75rem 1.937rem 0.75rem 1rem;
+  color: #787878;
+  transition-property: color;
+}
+
+.sidebar .nav:not(.sub-menu)>.nav-link {
+  margin-top: 0.2rem;
+}
+
+.sidebar .nav .nav-link {
+  transition-duration: 0.25s;
+  transition-property: background;
+  -webkit-transition-property: background;
+}
+
 .sidebar .nav .nav-item .nav-link i {
   color: inherit;
 }
 
 .sidebar .nav .nav-item .nav-link i.menu-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-right: 1rem;
+  color: #787878;
+}
+
+.sidebar .nav .nav-item.active>.nav-link i,
+.sidebar .nav .nav-link.active>.menu-title,
+.sidebar .nav .nav-link.active>.menu-arrow {
+  color: #656565;
+}
+
+.sidebar .nav .nav-link i.menu-icon {
   font-size: 1.5rem;
   line-height: 1;
   margin-right: 1rem;
@@ -14156,6 +14208,37 @@ dl li {
 .sidebar .nav .nav-item.active>.nav-link {
   background: #45B5AA;
   position: relative;
+  border-radius: 10px;
+}
+
+/* Style the active nav-link */
+.sidebar .nav .nav-link.active {
+  background: #45B5AA;
+  position: relative;
+  border-radius: 10px;
+}
+
+/* Style the hovered nav-link with expanded submenu */
+.sidebar .nav:not(.sub-menu)>.nav-link:hover[aria-expanded="true"] {
+  background: #45B5AA;
+  color: #FFFFFF;
+  border-radius: 10px;
+}
+
+/* Style the hovered nav-link without an expanded submenu */
+.sidebar .nav:not(.sub-menu)>.nav-link:hover {
+  color: #FFFFFF;
+  background-color: #45B5AA;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sidebar .nav .nav-link.active> i {
+  color: #FFFFFF;
+}
+
+.sidebar .nav:not(.sub-menu)>.nav-link:hover i {
+  color: #FFFFFF;
 }
 
 .sidebar .nav .nav-item.active>.nav-link i,
@@ -14169,7 +14252,6 @@ dl li {
 }
 
 .sidebar .nav:not(.sub-menu) {
-  margin-top: 1.45rem;
   margin-left: 0.375rem;
   margin-right: 0.375rem;
 }
@@ -14182,6 +14264,7 @@ dl li {
 .sidebar .nav:not(.sub-menu)>.nav-item:hover[aria-expanded="true"] {
   background: #45B5AA;
   color: #FFFFFF;
+  border-radius: 10px;
 }
 
 .sidebar .nav:not(.sub-menu)>.nav-item:hover>.nav-link i {
@@ -14482,10 +14565,12 @@ dl li {
   position: absolute;
   font-size: 0.9rem;
   margin-top: 0;
-  right: 0;
+  right: 0px;
   left: auto;
-  top: 70px;
+  top: 54px;
+  border-radius: 5px;
 }
+
 
 .rtl .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown {
   right: auto;
@@ -14494,8 +14579,13 @@ dl li {
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item {
   margin-bottom: 0;
-  padding: 0.687rem 1.562rem;
   cursor: pointer;
+}
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item:hover {
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  color: #000;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item .item-thumbnail img {
@@ -14851,4 +14941,8 @@ dl li {
   .half .contents {
     height: 100vh;
   }
+}
+
+.display_sidebar{
+  display: none;
 }
