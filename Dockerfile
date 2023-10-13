@@ -1,19 +1,19 @@
-FROM node:16.3.0 as builder
-RUN mkdir app
+# ==== CONFIGURE =====
+# Use a Node 16 base image
+FROM node:16-alpine 
+# Set the working directory to /app inside the container
 WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . ./
-
-FROM node:16.3.0-alpine
-COPY --from=builder /app/ /app
-WORKDIR /app 
-ENV HOST=0.0.0.0
-
-RUN npm install -g serve
-
+# Copy app files
+COPY . .
+# ==== BUILD =====
+# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
+RUN NODE_ENV=production npm i
+# Build the app
+RUN npm run build
+# ==== RUN =======
+# Set the env to "production"
+ENV NODE_ENV production
+# Expose the port on which the app will be running (3000 is the default that `serve` uses)
 EXPOSE 3000
-
-CMD ["serve","-s","build"]
+# Start the app
+CMD [ "npx", "serve","-s", "build" ]
