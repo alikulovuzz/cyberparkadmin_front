@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-// import './css/main.css'
-// import './css/lineicons.css'
+import './css/main.css'
+import './css/lineicons.css'
 import PartOne from './PartOne'
 import PartTwo from './PartTwo'
 import PartThree from './PartThree'
