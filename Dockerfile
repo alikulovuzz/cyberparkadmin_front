@@ -8,14 +8,12 @@ RUN npm install
 COPY . ./
 
 FROM node:16.3.0-alpine
-COPY --from=builder /app/ /app/
+COPY --from=builder /app/ /app
 WORKDIR /app 
 ENV HOST=0.0.0.0
 
 RUN npm install -g serve
 
 EXPOSE 3000
-
-RUN npm run build
 
 CMD ["serve","-s","build"]
