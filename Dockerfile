@@ -12,10 +12,10 @@ COPY --from=builder /app/ /app/
 WORKDIR /app 
 ENV HOST=0.0.0.0
 
+RUN npm install -g serve
+
 EXPOSE 3000
 
 RUN npm run build
-
-RUN npm install -g serve
 
 CMD ["serve","-s","build"]
