@@ -3385,8 +3385,6 @@ only screen and (min-width: 768px) and (max-width: 991px),
 .bg-purple-900 {
   background: rgba(155, 81, 224, 0.9);
 }
-
-/
 /* ======== Text Colors ========== */
 .text-primary {
   color: #365CF5 !important;
@@ -3463,8 +3461,6 @@ only screen and (min-width: 768px) and (max-width: 991px),
 .text-photo {
   color: #93cfe2 !important;
 }
-
-/* ========= Font Weight =========== */
 .fw-300 {
   font-weight: 300;
 }
@@ -3533,9 +3529,6 @@ only screen and (min-width: 768px) and (max-width: 991px),
     transform: rotate(360deg);
   }
 }
-
-
-/* Custom style */
 
 .select-div {
   width: 200px;
