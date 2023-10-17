@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './styles.css'
+// import './custom.css'
 import { company_signin, user_signin } from '../../utils/API_urls'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -46,6 +47,7 @@ export default function SignInSide({ admin }) {
         }).then(response => {
             if (response.data.token) {
                 sessionStorage.setItem('x-access-token', response.data.token)
+                // console.log(response.data.token)
                 setUser(response.data.data)
                 navigate("/user")
             }

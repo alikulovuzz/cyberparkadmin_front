@@ -3462,8 +3462,6 @@ only screen and (min-width: 768px) and (max-width: 991px),
 .text-photo {
   color: #93cfe2 !important;
 }
-
-/* ========= Font Weight =========== */
 .fw-300 {
   font-weight: 300;
 }
@@ -3532,9 +3530,6 @@ only screen and (min-width: 768px) and (max-width: 991px),
     transform: rotate(360deg);
   }
 }
-
-
-/* Custom style */
 
 .select-div {
   width: 200px;

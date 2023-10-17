@@ -14065,12 +14065,12 @@ dl li {
   font-weight: 500;
   padding: 0;
   width: 300px;
-  height: auto;
+  height: fit-content;
   z-index: 11;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  -ms-transition: width 0.25s ease, background 0.25s ease;
+  transition: max-height 0.5s ease, background 0.25s ease, width 0.25s ease;
+  -webkit-transition: max-height 0.5s ease, background 0.25s ease, width 0.25s ease;
+  -moz-transition: max-height 0.5s ease, background 0.25s ease, width 0.25s ease;
+  -ms-transition: max-height 0.5s ease, background 0.25s ease, width 0.25s ease;
   margin: 10px;
   border-radius: 10px;
 }
@@ -14079,7 +14079,7 @@ dl li {
   overflow: hidden;
   flex-wrap: nowrap;
   flex-direction: column;
-  margin-bottom: 60px;
+  margin-bottom: 0.375rem;
 }
 
 .sidebar .nav .nav-item {

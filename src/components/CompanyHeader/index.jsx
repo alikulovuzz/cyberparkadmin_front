@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 export default function CompanyHeader() {
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function CompanyHeader() {
             <li className={`nav-item dropdown ${isNotificationDropdownOpen ? 'show' : ''}`}>
               <a className={`nav-link count-indicator dropdown-toggle`} onClick={toggleNotificationDropdown} id="notificationDropdown" href="#">
                 <i className="ti-bell mx-0"></i>
+                
                 <span className="count"></span>
               </a>
               {isNotificationDropdownOpen && (
