@@ -8,7 +8,7 @@ import { Suspense } from "react";
 
 export default function QuarterlyReport() {
   const [reports, setReports] = useState([]);
-  const [companyId, setCompanyId] = useState("6527b8374fe1b03e875fd5fb");
+  const [companyId, setCompanyId] = useState("");
   const [auditType, setAuditType] = useState("Choraklik");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -52,7 +52,7 @@ export default function QuarterlyReport() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [companyId]);
   return (
     <>
       <div className="main-panel">

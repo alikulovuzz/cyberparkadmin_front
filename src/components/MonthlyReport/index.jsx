@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getReports } from "../../utils/resquests";
+import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
 
 export default function MonthlyReport() {
     const [reports, setReports] = useState([]);
-    const [companyId, setCompanyId] = useState("6527b8374fe1b03e875fd5fb");
+    const [companyId, setCompanyId] = useState("");
     const [auditType, setAuditType] = useState("Audit");
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(1);
+    const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    setCompanyId(user["_id"]);
+  }, []);
   
     const formatReports = (data) => {
       switch (data) {
@@ -46,7 +52,7 @@ export default function MonthlyReport() {
         .catch((error) => {
           console.log(error);
         });
-    }, []);
+    }, [companyId]);
     return (
       <>
         <div className="main-panel">
