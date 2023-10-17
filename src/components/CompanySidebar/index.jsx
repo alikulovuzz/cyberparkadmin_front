@@ -21,7 +21,7 @@ export default function CompanySidebar() {
                         }
                     >
                         <span className="nav-link">
-                            <i className="ti-shield menu-icon"></i>
+                            <i className="ti-home menu-icon"></i>
                             <span className="menu-title">Mening kompaniyam</span>
                         </span>
                     </NavLink>
