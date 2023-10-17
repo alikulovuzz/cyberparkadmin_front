@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./custom.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getReports } from "../../utils/resquests";
+import { UserContext } from '../../context/UserContext'
 import { Suspense } from "react";
 
 export default function QuarterlyReport() {
@@ -10,7 +11,11 @@ export default function QuarterlyReport() {
   const [companyId, setCompanyId] = useState("6527b8374fe1b03e875fd5fb");
   const [auditType, setAuditType] = useState("Choraklik");
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const { user } = useContext(UserContext)
+  useEffect(()=>{
+    setCompanyId(user['_id'])
+  },[])
 
   const formatReports = (data) => {
     switch (data) {

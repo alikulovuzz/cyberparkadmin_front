@@ -996,7 +996,7 @@ h6,
 }
 
 .table> :not(caption)>*>* {
-  padding: 15px 0;
+  padding: 15px;
   border-bottom-color: #efefef;
   vertical-align: middle;
 }
@@ -1009,7 +1009,7 @@ h6,
   padding-top: 20px;
 }
 
-.table tbody tr:last-child>* {
+.report .table tbody tr:last-child>* {
   border-bottom-color: transparent;
   padding-bottom: 0px;
 }
@@ -3385,6 +3385,7 @@ only screen and (min-width: 768px) and (max-width: 991px),
 .bg-purple-900 {
   background: rgba(155, 81, 224, 0.9);
 }
+
 /* ======== Text Colors ========== */
 .text-primary {
   color: #365CF5 !important;
@@ -3541,8 +3542,8 @@ table {
   width: 100%;
 }
 
-th,
-td {
+.report th,
+.report td {
   text-align: center;
   background: transparent;
   border: 1px solid #e5e5e5;
