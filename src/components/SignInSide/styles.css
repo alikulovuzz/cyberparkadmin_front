@@ -67,7 +67,7 @@ h2 {
 .half .contents,
 .half .bg {
   width: 50%;
-  background-color: #F7F8FA;
+  background-color: #F7F8FE;
 }
 
 @media (max-width: 1199.98px) {
@@ -1469,6 +1469,7 @@ hr {
   border-radius: 5px;
   padding: 10px 5px;
   font-weight: 400;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
 
 .info-left {
@@ -1530,8 +1531,10 @@ hr {
   color: #FFFFFF;
   border-radius: 10px;
   font-size: 20px;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
 
-.phone-block.pointer:hover {
+.phone-img:hover,
+.phone-block span:hover {
   cursor: pointer;
 }

@@ -93,7 +93,7 @@ export default function SignInSide({ admin }) {
                             <p>Shaxsiy kabinet orqali biznes-reja bilan ariza yuborish</p>
                         </div>
                     </div>
-                    <div className="phone-block pointer" onClick={() => window.location.href = 'tel:900288902'}>
+                    <div className="phone-block" onClick={() => window.location.href = 'tel:900288902'}>
                         <img className='phone-img' src={require("./images/icon-call.png")} alt="" />
                         <span>(90) 028-89-02</span>
                     </div>
