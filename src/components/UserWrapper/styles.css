@@ -3660,7 +3660,7 @@ textarea.form-control.is-invalid {
   line-height: 1;
   vertical-align: middle;
   margin-top: 2px;
-  font-family: 'Saira Semi Condensed', sans-serif;;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -14080,7 +14080,7 @@ dl li {
   flex-wrap: nowrap;
   flex-direction: column;
   margin-bottom: 0.375rem;
-  font-family: 'Saira Semi Condensed', sans-serif;;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
 
 .sidebar .nav .nav-item {
@@ -14401,10 +14401,10 @@ dl li {
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand img {
-  width: 300px;
+  width: 320px;
   margin: auto;
   vertical-align: middle;
-  padding-left: 80px;
+  padding-left: 70px;
 }
 
 .navbar .navbar-brand-wrapper .brand-logo-mini {
@@ -14581,6 +14581,7 @@ dl li {
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item {
   margin-bottom: 0;
   cursor: pointer;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item:hover {
