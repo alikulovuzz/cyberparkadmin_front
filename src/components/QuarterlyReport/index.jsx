@@ -1,9 +1,50 @@
 import React from 'react'
 import './custom.css'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 
 export default function QuarterlyReport() {
+const companyId = '652d21468cf46aaaae2a6ee1';
+const auditType = 'Choraklik';
+const pageNumber = 1;
+const pageSize = 1;
+
+// Construct the URL without query parameters
+const url = 'http://localhost:8081/api/v1/audit/getByCompany';
+
+// Define the POST request body with the dynamic parameters
+const data = new URLSearchParams();
+data.append('id', );
+data.append('type', auditType);
+data.append('pageNumber', pageNumber);
+data.append('pageSize', pageSize);
+
+
+
+    useEffect(()=>{
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json', // Set the content type of the request body
+            },
+            body: data, // Convert the request body to JSON
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(data => {
+              // Handle the response data here
+              console.log(data);
+            })
+            .catch(error => {
+              // Handle any errors that occurred during the fetch
+              console.error('Fetch error:', error);
+            });
+    },[])
     return (
         <>
             <div className="main-panel">
