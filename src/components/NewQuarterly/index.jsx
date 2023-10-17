@@ -19,7 +19,7 @@ export default function NewQuarterly() {
     })
 
   return (
-    <div className="main-panel">
+    <div className="main-panel report">
         <div className="content-wrapper">
         <div class="container-fluid">
         <div class="title-wrapper">
