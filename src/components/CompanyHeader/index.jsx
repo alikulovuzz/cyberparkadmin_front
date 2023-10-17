@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../context/UserContext'
+
 
 
 export default function CompanyHeader() {
+  console.log("CompanyHeader is rendered")
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-
+  const [companyName, setCompanyName] = useState("");
+  const { user } = useContext(UserContext)
+  useEffect(()=>{
+    setCompanyName(user['organization_name'])
+  },[])
+  
   const toggleNotificationDropdown = () => {
     setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
   };
+
 
   const handleOpenBackdrop = () => {
     sessionStorage.clear();
@@ -43,7 +52,7 @@ export default function CompanyHeader() {
             </li>
             <li className={`nav-item nav-profile dropdown ${isProfileDropdownOpen ? 'show' : ''}`}>
               <a className={`nav-link dropdown-toggle`} onClick={toggleProfileDropdown} href="#" id="profileDropdown">
-                <span>Kibernetikada Innovatsiyalar IT parki</span>
+                <span>{companyName}</span>
               </a>
               {isProfileDropdownOpen && (
                 <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} aria-labelledby="profileDropdown">
