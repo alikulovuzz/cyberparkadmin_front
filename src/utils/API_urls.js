@@ -1,4 +1,4 @@
-export const host = "https://my.cyberpark.uz/api/v1"
+export const host = "https://my.cyberpark.uz"
 
 // admin 
 export const user_signin = "/user/signin"
