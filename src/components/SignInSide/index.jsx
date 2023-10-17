@@ -47,6 +47,7 @@ export default function SignInSide({ admin }) {
         }).then(response => {
             if (response.data.token) {
                 sessionStorage.setItem('x-access-token', response.data.token)
+                // console.log(response.data.token)
                 setUser(response.data.data)
                 navigate("/user")
             }

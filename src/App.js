@@ -1,6 +1,6 @@
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 // import { MyProSidebarProvider } from "./pages/global/sidebar/sidebarContext";
 
 // import Topbar from "./pages/global/Topbar";
@@ -32,6 +32,7 @@ import Reports from "./components/Reports";
 import QuarterlyReport from "./components/QuarterlyReport";
 import Auditing from "./components/Auditing";
 import MonthlyReport from "./components/MonthlyReport";
+import NewQuarterly from "./components/NewQuarterly";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -63,7 +64,10 @@ const App = () => {
                       <Route path="application" element={<Application />} />
                       <Route path="reports" element={<Reports />} >
                         <Route index element={<Navigate to="quarterly" replace={true} />} />
-                        <Route path="quarterly" element={<QuarterlyReport />} />
+                        <Route path="quarterly" element={<Outlet />} >
+                          <Route index element={<QuarterlyReport />} />
+                          <Route path="new-quarterly" element={<NewQuarterly />} />
+                        </Route>
                         <Route path="auditing" element={<Auditing />} />
                         <Route path="monthly" element={<MonthlyReport />} />
                       </Route>

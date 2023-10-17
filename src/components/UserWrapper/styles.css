@@ -11961,7 +11961,7 @@ html {
 
 .container-scroller {
   overflow: hidden;
-  margin: 0 300px;
+  /* margin: 0 300px; */
 }
 
 pre {

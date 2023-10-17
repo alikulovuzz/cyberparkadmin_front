@@ -23,8 +23,25 @@ export const postRequest = (url, data) => {
         ).then((response) => {
             resolve(response)
         })
-        .catch((error) => {
-            reject(error)
-        });
+            .catch((error) => {
+                reject(error)
+            });
     })
 }
+
+export const getReports = (url, data) => {
+    return new Promise((resolve, reject) => {
+        axios.post(
+            url,
+            data,
+            {
+                headers: headerConfig(),
+            }
+        ).then((response) => {
+                        resolve(response)
+                    })
+                    .catch((error) => {
+                        reject(error)
+                    });
+            })
+    }
