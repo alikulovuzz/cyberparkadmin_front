@@ -89,12 +89,12 @@ export default function SignInSide({ admin }) {
                             <p>O'zbekistonda kompaniya ochish</p>
                         </div>
                         <div className="left-span">
-                        <img src={require("./images/clipboard.png")} alt="" />
+                            <img src={require("./images/clipboard.png")} alt="" />
                             <p>Shaxsiy kabinet orqali biznes-reja bilan ariza yuborish</p>
                         </div>
                     </div>
-                    <div className="phone-block">
-                         <img className='phone-img' src={require("./images/icon-call.png")} alt="" />
+                    <div className="phone-block pointer" onClick={() => window.location.href = 'tel:900288902'}>
+                        <img className='phone-img' src={require("./images/icon-call.png")} alt="" />
                         <span>(90) 028-89-02</span>
                     </div>
                 </div>

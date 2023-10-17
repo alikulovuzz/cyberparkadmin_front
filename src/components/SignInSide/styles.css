@@ -1531,3 +1531,7 @@ hr {
   border-radius: 10px;
   font-size: 20px;
 }
+
+.phone-block.pointer:hover {
+  cursor: pointer;
+}
