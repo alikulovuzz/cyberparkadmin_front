@@ -10,7 +10,7 @@ export default function Auditing() {
   const [companyId, setCompanyId] = useState("");
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
