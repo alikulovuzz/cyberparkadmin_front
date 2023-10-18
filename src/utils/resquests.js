@@ -29,6 +29,26 @@ export const postRequest = (url, data) => {
     })
 }
 
+export const uploadFile = (url, data) => {
+    return new Promise((resolve, reject) => {
+        axios.post(
+            url,
+            data,
+            {
+                headers: {
+                    "x-access-token": sessionStorage.getItem("x-access-token"),
+                    "Content-Type": "multipart/form-data"
+                },
+            }
+        ).then((response) => {
+            resolve(response)
+        })
+            .catch((error) => {
+                reject(error)
+            });
+    })
+}
+
 export const getReports = (url, data) => {
     return new Promise((resolve, reject) => {
         axios.post(

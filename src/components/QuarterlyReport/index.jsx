@@ -13,9 +13,10 @@ export default function QuarterlyReport() {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const { user } = useContext(UserContext)
-  useEffect(()=>{
-    setCompanyId(user['_id'])
-  },[])
+
+  // useEffect(()=>{
+  //   setCompanyId(user['_id'])
+  // },[])
 
   const formatReports = (data) => {
     switch (data) {
@@ -43,16 +44,18 @@ export default function QuarterlyReport() {
   };
 
   useEffect(() => {
-    getReports(
-      `audit/getByCompany?id=${companyId}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-    )
-      .then((response) => {
-        setReports((current) => [...response.data.reports]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [companyId]);
+    if(user){
+      getReports(
+        `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      )
+        .then((response) => {
+          setReports(response.data.reports);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
   return (
     <>
       <div className="main-panel">
@@ -73,8 +76,8 @@ export default function QuarterlyReport() {
               <form action="#" className="mt-30">
                 <div className="box-body table-responsive no-padding">
                   <table className="table table-hover custom-table-report">
-                    <tbody>
-                      <tr>
+                    <thead>
+                    <tr>
                         <th>№</th>
                         <th>Hisobot davri</th>
                         <th>Yil</th>
@@ -98,6 +101,8 @@ export default function QuarterlyReport() {
                           </a>
                         </td>
                       </tr>
+                    </thead>
+                    <tbody>
                       {reports.map((data, index) => {
                         return (
                           <Suspense fallback={<p>Loading...</p>}>
