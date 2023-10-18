@@ -73,6 +73,13 @@ export default function SignInSide({ admin }) {
           handleCloseBackdrop();
           toast.error("Serverda xatolik");
         }
+        if (error.response.status == "400") {
+          handleCloseBackdrop();
+          toast.error("Xato so'rov");
+        }else{
+          handleCloseBackdrop();
+          toast.error("Serverda xatolik");
+        }
       });
   };
 
