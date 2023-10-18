@@ -7,15 +7,10 @@ import { Suspense } from "react";
 
 export default function MonthlyReport() {
     const [reports, setReports] = useState([]);
-    const [companyId, setCompanyId] = useState("");
     const [auditType, setAuditType] = useState("Audit");
     const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(1);
     const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    setCompanyId(user["_id"]);
-  }, []);
   
     const formatReports = (data) => {
       switch (data) {
@@ -43,16 +38,18 @@ export default function MonthlyReport() {
     };
   
     useEffect(() => {
-      getReports(
-        `audit/getByCompany?id=${companyId}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-      )
-        .then((response) => {
-          setReports((current) => [...response.data.reports]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, [companyId]);
+      if(user){
+        getReports(
+          `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+        )
+          .then((response) => {
+            setReports((current) => [...response.data.reports]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }, [user]);
     return (
       <>
         <div className="main-panel">

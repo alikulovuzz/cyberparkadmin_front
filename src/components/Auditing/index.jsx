@@ -4,18 +4,14 @@ import { useEffect } from "react";
 import { getReports } from "../../utils/resquests";
 import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
+import AddReportDialog from "../AddReportDialog";
 
 export default function Auditing() {
   const [reports, setReports] = useState([]);
-  const [companyId, setCompanyId] = useState("");
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    setCompanyId(user["_id"]);
-  }, []);
 
   const formatReports = (data) => {
     switch (data) {
@@ -43,16 +39,18 @@ export default function Auditing() {
   };
 
   useEffect(() => {
-    getReports(
-      `audit/getByCompany?id=${companyId}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-    )
-      .then((response) => {
-        setReports((current) => [...response.data.reports]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [companyId]);
+    if(user){
+      getReports(
+        `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      )
+        .then((response) => {
+          setReports(response.data.reports);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
   return (
     <>
       <div className="main-panel">
@@ -62,12 +60,10 @@ export default function Auditing() {
               <section className="content-header custom-header">
                 <h3>Auditorlik hisobot</h3>
                 <ol className="breadcrumb">
-                  <Link to="new-quarterly">
-                    <button className="btn btn-block">
-                      <i className="ti-plus"></i>
-                      Qo'shish
-                    </button>
-                  </Link>
+                  {/* <Link to="new-quarterly"> */}
+                    
+                    <AddReportDialog/>
+                  {/* </Link> */}
                 </ol>
               </section>
               <form action="#" className="mt-30">
@@ -98,9 +94,9 @@ export default function Auditing() {
                           </a>
                         </td>
                       </tr>
-                      {reports.map((data, index) => {
+                      {reports?.map((data, index) => {
                         return (
-                          <Suspense fallback={<p>Loading...</p>}>
+                          <Suspense key={index} fallback={<p>Loading...</p>}>
                             <>
                               <tr>
                                 <td>{index + 1}</td>
