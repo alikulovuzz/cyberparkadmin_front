@@ -7,15 +7,11 @@ import { Suspense } from "react";
 
 export default function Auditing() {
   const [reports, setReports] = useState([]);
-  const [companyId, setCompanyId] = useState("");
+  const [companyId, setCompanyId] = useState(setCompanyId(user["_id"]));
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    setCompanyId(user["_id"]);
-  }, []);
 
   const formatReports = (data) => {
     switch (data) {
