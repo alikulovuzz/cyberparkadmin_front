@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import { NavLink } from "react-router-dom"
 
 export default function CompanySidebar() {
-    console.log("Company sidebar componenet is rendered")
     const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
         setActive(!isActive);
+    };
+    const closeToggle = () => {
+        setActive(false);
     };
 
     return (
@@ -19,6 +21,7 @@ export default function CompanySidebar() {
                         className={({ isActive }) =>
                             isActive ? "nav-item active" : "nav-item"
                         }
+                        onClick={closeToggle}
                     >
                         <span className="nav-link">
                             <i className="ti-home menu-icon"></i>
@@ -30,6 +33,7 @@ export default function CompanySidebar() {
                         className={({ isActive }) =>
                             isActive ? "nav-item active" : "nav-item"
                         }
+                        onClick={closeToggle}
                     >
                         <span className="nav-link">
                             <i className="ti-file menu-icon"></i>

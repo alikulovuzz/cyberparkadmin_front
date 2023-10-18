@@ -1,11 +1,10 @@
-export const host = "https://my.cyberpark.uz"
-
+export const host =process.env.NODE_ENV=="production"?"https://my.cyberpark.uz":"http://localhost:8081";
 // admin 
 export const user_signin = "/user/signin"
 export const admin_me = "/user/me"
 
 export const company_signin = "company_form/signin"
 
-
+//docker run -p 3000:3000 -d azamat/reactfront:test1
 // me 
 export const company_me = "company_form/me"

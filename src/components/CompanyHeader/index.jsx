@@ -8,7 +8,8 @@ export default function CompanyHeader() {
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [companyName, setCompanyName] = useState("");
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
+
   useEffect(()=>{
     setCompanyName(user['organization_name'])
   },[])
@@ -20,7 +21,7 @@ export default function CompanyHeader() {
 
   const handleOpenBackdrop = () => {
     sessionStorage.clear();
-    
+    setUser("")
     window.location.reload(false);
   };
 
@@ -55,8 +56,8 @@ export default function CompanyHeader() {
                 <span>{companyName}</span>
               </a>
               {isProfileDropdownOpen && (
-                <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} aria-labelledby="profileDropdown">
-                  <p className="dropdown-item" onClick={handleOpenBackdrop} >
+                <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} onClick={handleOpenBackdrop} aria-labelledby="profileDropdown">
+                  <p className="dropdown-item"  >
                     <i className="ti-power-off text-primary"></i>
                     Chiqish
                   </p>
