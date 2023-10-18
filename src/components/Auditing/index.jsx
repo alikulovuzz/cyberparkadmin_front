@@ -7,11 +7,15 @@ import { Suspense } from "react";
 
 export default function Auditing() {
   const [reports, setReports] = useState([]);
-  const [companyId, setCompanyId] = useState(setCompanyId(user["_id"]));
+  const [companyId, setCompanyId] = useState("");
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    setCompanyId(user["_id"]);
+  }, []);
 
   const formatReports = (data) => {
     switch (data) {
@@ -43,10 +47,12 @@ export default function Auditing() {
       `audit/getByCompany?id=${companyId}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
       .then((response) => {
+        console.log("response")
+        console.log(response)
         setReports((current) => [...response.data.reports]);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, [companyId]);
   return (
@@ -94,7 +100,7 @@ export default function Auditing() {
                           </a>
                         </td>
                       </tr>
-                      {reports.map((data, index) => {
+                      {reports?.map((data, index) => {
                         return (
                           <Suspense fallback={<p>Loading...</p>}>
                             <>
