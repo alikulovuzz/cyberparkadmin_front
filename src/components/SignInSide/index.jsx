@@ -93,6 +93,32 @@ export default function SignInSide({ admin }) {
 
   return (
     <div className="d-lg-flex half" onClick={closeOpenDropDown}>
+      <div className="right-top col-md-12">
+          {!admin ? (
+            <button onClick={gotoAdmin}>
+              <i className="fas fa-user-circle"></i>
+              <span>Adminlar uchun</span>
+            </button>
+          ) : (
+            <button onClick={gotoUser}>
+              <i className="fas fa-user-circle"></i>
+              <span>Userlar uchun</span>
+            </button>
+          )}
+          <div className="dropdown">
+            <button onClick={handleOpenDropDown} className="dropbtn">
+              Uz
+            </button>
+            <div
+              id="myDropdown"
+              className={`dropdown-content ${openLanguages ? "show" : ""}`}
+            >
+              <a>Uz</a>
+              <a>Ru</a>
+              <a>En</a>
+            </div>
+          </div>
+        </div>
       <div className="bg cl-md-12">
         <div className="left-side">
           <div className="image-container">
@@ -140,32 +166,7 @@ export default function SignInSide({ admin }) {
         </div>
       </div>
       <div className="contents custom-res">
-        <div className="right-top col-md-12">
-          {!admin ? (
-            <button onClick={gotoAdmin}>
-              <i className="fas fa-user-circle"></i>
-              <span>Adminlar uchun</span>
-            </button>
-          ) : (
-            <button onClick={gotoUser}>
-              <i className="fas fa-user-circle"></i>
-              <span>Userlar uchun</span>
-            </button>
-          )}
-          <div className="dropdown">
-            <button onClick={handleOpenDropDown} className="dropbtn">
-              Uz
-            </button>
-            <div
-              id="myDropdown"
-              className={`dropdown-content ${openLanguages ? "show" : ""}`}
-            >
-              <a>Uz</a>
-              <a>Ru</a>
-              <a>En</a>
-            </div>
-          </div>
-        </div>
+        
         <div className="container custom-res">
           <div className="right-block custom-res">
             <div className="align-items-center justify-content-center col-md-12 right-form">
