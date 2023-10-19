@@ -77,6 +77,7 @@ export default function PartOne() {
       </table>
       <div class="button-add">
         <button class="add-btn" onClick={addRowHandler}><i class="lni lni-plus"></i>Qo'shish</button>
+        <button class="save-btn" onClick={addRowHandler}><i class="lni lni-save"></i>Saqlash</button>
       </div>
     </div>
   )
