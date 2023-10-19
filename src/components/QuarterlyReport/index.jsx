@@ -105,7 +105,7 @@ export default function QuarterlyReport() {
                     <tbody>
                       {reports.map((data, index) => {
                         return (
-                          <Suspense fallback={<p>Loading...</p>}>
+                          <Suspense key={index} fallback={<p>Loading...</p>}>
                             <>
                               <tr>
                                 <td>{index + 1}</td>

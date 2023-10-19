@@ -56,15 +56,16 @@ export default function AddReportDialog() {
                     quarterly,
                     year,
                     name_of_report: name,
-                    file_link: response.data.file_link,
+                    file_link: response.data.link,
                     company_id: user?._id
                 }).then((response) => {
-                    console.log(response);
+                    console.log("success")
                 }).catch((error) => {
                     console.error(error);
                 })
             }
-        }).catch(error => {
+        })
+        .catch(error => {
             console.log(error)
         })
     }

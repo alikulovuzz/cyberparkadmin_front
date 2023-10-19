@@ -51,7 +51,7 @@ export const uploadFile = (url, data) => {
 
 export const getReports = (url, data) => {
     return new Promise((resolve, reject) => {
-        axios.post(
+        axios.get(
             url,
             data,
             {

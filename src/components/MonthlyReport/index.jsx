@@ -97,7 +97,7 @@ export default function MonthlyReport() {
                         </tr>
                         {reports.map((data, index) => {
                           return (
-                            <Suspense fallback={<p>Loading...</p>}>
+                            <Suspense key={index} fallback={<p>Loading...</p>}>
                               <>
                                 <tr>
                                   <td>{index + 1}</td>

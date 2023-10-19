@@ -10,7 +10,7 @@ export default function Auditing() {
   const [reports, setReports] = useState([]);
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(40);
   const { user } = useContext(UserContext);
 
   const formatReports = (data) => {
