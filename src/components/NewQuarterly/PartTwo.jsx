@@ -70,6 +70,7 @@ export default function PartTwo() {
                 </table>
                 <div class="button-add">
                   <button class="add-btn"><i class="lni lni-plus"></i>Qo'shish</button>
+                  <button class="save-btn"><i class="lni lni-save"></i>Saqlash</button>
                 </div>
               </div>
   )

@@ -11730,7 +11730,7 @@ h1,
 h2,
 .h2,
 .h2 {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
 }
 
 h3,
@@ -14667,10 +14667,10 @@ dl li {
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .count-indicator .count {
   position: absolute;
   left: 55%;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 100%;
-  background: #248afd;
+  background: #45B5AA;
   top: 1px;
   border: 1px solid #ffffff;
 }

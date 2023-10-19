@@ -119,6 +119,7 @@ p {
   position: relative;
   box-shadow: 0px 12px 24px -4px rgba(145, 158, 171, 0.12), 0px 0px 2px 0px rgba(145, 158, 171, 0.2);
   border-radius: 7px;
+  overflow: auto;
 }
 
 @media (max-width: 767px) {
@@ -248,87 +249,7 @@ p {
   text-decoration: underline;
 }
 
-/* ============= typography css ============= */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  color: #1A2142;
-  margin: 0;
-}
 
-h1,
-.h1 {
-  font-size: 32px;
-  font-weight: 700;
-}
-
-h2,
-.h2 {
-  font-size: 28px;
-  font-weight: 600;
-}
-
-h3,
-.h3 {
-  font-size: 24px;
-  font-weight: 500;
-}
-
-h4,
-.h4 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-h5,
-.h5 {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-h6,
-.h6 {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.text-bold {
-  font-weight: 700;
-}
-
-.text-semi-bold {
-  font-weight: 600;
-}
-
-.text-medium {
-  font-weight: 500;
-}
-
-.text-regular {
-  font-weight: 400;
-}
-
-.text-light {
-  font-weight: 300;
-}
-
-.text-sm {
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.text-xs {
-  font-size: 12px;
-}
 
 /* ========== Buttons css ========== */
 /* buttons base styles */
@@ -3550,6 +3471,7 @@ table {
   border-radius: 10px;
   padding: 8px;
   color: #000000;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 th {
@@ -3573,6 +3495,7 @@ input {
   -o-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   text-align: center;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 select {
@@ -3590,6 +3513,13 @@ select {
   border: 0px;
   color: red;
   font-size: 24px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+}
+
+.custom-button:hover {
+  cursor: pointer;
+  background-color: transparent;
+  color: red;
 }
 
 .button-add {
@@ -3598,11 +3528,11 @@ select {
   display: flex;
   justify-content: end;
   padding: 10px 0px;
-  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .button-add i {
-  font-size: 12px;
+  font-size: 14px;
   padding: 5px;
 }
 
@@ -3612,26 +3542,33 @@ select {
   border-radius: 10px;
   padding: 5px 10px;
   border: 1px solid #e5e5e5;
-  background-color: #7BC24D;
+  background-color: #45B5AA;
   color: #FFFFFF;
   cursor: pointer;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+  margin-left: 5px;
 }
+
+
 
 .custom-td {
   font-weight: bold;
   font-size: 14px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .custom-tr {
   text-align: left;
   padding: 5px;
   font-size: 14px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .custom-input {
   width: 50%;
   text-align: center;
   padding: 8px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .button-save {
@@ -3640,27 +3577,33 @@ select {
   display: flex;
   justify-content: end;
   padding: 10px 0px;
-  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .button-save i {
   padding: 5px;
+  font-size: 14px;
 }
 
 .save-btn {
-  background-color: #7BC24D;
+  background-color: #45B5AA;
   font-size: 16px;
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
   border: 1px solid #e5e5e5;
   color: #FFFFFF;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+  margin-left: 5px;
 }
 
 .title {
   margin-bottom: 20px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
 }
 
 .custom-title h4 {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Saira Semi Condensed', sans-serif;
 }
