@@ -59,7 +59,7 @@ export default function AddReportDialog() {
                     file_link: response.data.link,
                     company_id: user?._id
                 }).then((response) => {
-                    console.log("success")
+                    console.log(response)
                 }).catch((error) => {
                     console.error(error);
                 })
