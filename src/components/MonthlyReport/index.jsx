@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { getReports } from "../../utils/resquests";
 import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
+import AddReportDialog from "../AddReportDialog";
+
 
 export default function MonthlyReport() {
     const [reports, setReports] = useState([]);
@@ -59,13 +61,11 @@ export default function MonthlyReport() {
                 <section className="content-header custom-header">
                   <h3>Oylik hisobot</h3>
                   <ol className="breadcrumb">
-                    <Link to="new-quarterly">
-                      <button className="btn btn-block">
-                        <i className="ti-plus"></i>
-                        Qo'shish
-                      </button>
-                    </Link>
-                  </ol>
+                  {/* <Link to="new-quarterly"> */}
+                    
+                    <AddReportDialog/>
+                  {/* </Link> */}
+                </ol>
                 </section>
                 <form action="#" className="mt-30">
                   <div className="box-body table-responsive no-padding">
