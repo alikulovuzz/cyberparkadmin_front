@@ -27,13 +27,13 @@ export default function Application() {
                                             <th>Status</th>
                                             <th>Fayl</th>
                                         </tr>
-                                        <tr>
+                                        {/* <tr>
                                             <td>1</td>
                                             <td>John Doe</td>
                                             <td>11-7-2014</td>
                                             <td><button className="custom-btn-error">Approved</button></td>
                                             <td><a href="test_file.zip" download>Yuklab olish</a></td>
-                                        </tr>
+                                        </tr> */}
                                     </table>
                                 </div>
                             </form>
