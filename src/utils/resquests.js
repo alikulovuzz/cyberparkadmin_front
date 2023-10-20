@@ -23,9 +23,9 @@ export const postRequest = (url, data) => {
         ).then((response) => {
             resolve(response)
         })
-            .catch((error) => {
-                reject(error)
-            });
+        .catch((error) => {
+            reject(error)
+        });
     })
 }
 

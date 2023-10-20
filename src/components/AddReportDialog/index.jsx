@@ -56,7 +56,7 @@ export default function AddReportDialog(type_of_report) {
                 postRequest(audit_v2, {
                     quarterly,
                     year,
-                    type_of_report:type_of_report.type_of_report,
+                    type_of_report: type_of_report.type_of_report,
                     name_of_report: name,
                     file_link: response.data.link,
                     company_id: user?._id

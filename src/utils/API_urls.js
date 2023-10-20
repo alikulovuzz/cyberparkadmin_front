@@ -13,3 +13,5 @@ export const company_me = "company_form/me"
 export const audit_v2 = "audit/v2"
 
 export const upload = "upload"
+
+export const release_product = "/audit/release_product"

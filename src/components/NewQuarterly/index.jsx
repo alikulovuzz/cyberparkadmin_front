@@ -7,8 +7,11 @@ import PartThree from './PartThree'
 import PartFour from './PartFour'
 import PartFive from './PartFive'
 import year from './../../dictionary/year'
+import { useState } from 'react'
 
 export default function NewQuarterly() {
+
+  const [releaseProduct, setReleaseProduct] = useState([])
 
     const yearList = useMemo(() => {
         return year.map(year => {
@@ -46,11 +49,6 @@ export default function NewQuarterly() {
                                 return <option value={elem.value}>{elem.year_name}</option>
                             })
                         }
-                        <option value="">2020</option>
-                        <option value="">2021</option>
-                        <option value="">2022</option>
-                        <option value="">2023</option>
-                        <option value="">2024</option>
                       </select>
                     </div>
                   </div>
@@ -67,7 +65,7 @@ export default function NewQuarterly() {
                   </div>
                 </div>
               </div>
-              <PartOne/>
+              <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
               <PartTwo/>
               <PartThree/>
               <PartFour/>
