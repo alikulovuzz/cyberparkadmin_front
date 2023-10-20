@@ -11,6 +11,7 @@ export default function Auditing() {
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  
   const { user } = useContext(UserContext);
 
   const formatReports = (data) => {
@@ -51,9 +52,9 @@ export default function Auditing() {
         });
     }
   }, [user]);
-  const handleClick = () => {
-    setUser(user);
-  };
+  // const handleClick = () => {
+  //   setUser(user);
+  // };
   return (
     <>
       <div className="main-panel">
@@ -66,7 +67,6 @@ export default function Auditing() {
                   {/* <Link to="new-quarterly"> */}
 
                   <AddReportDialog
-                    handleClick={handleClick}
                     type_of_report="Audit"
                   />
                   {/* </Link> */}
