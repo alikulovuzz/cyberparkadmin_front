@@ -120,7 +120,6 @@ export default function PartOne({setReleaseProduct}) {
 
 
 const PartOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
-  console.log(disabled)
   return (
     <tr>
       <td>{ind}</td>

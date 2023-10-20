@@ -12,6 +12,7 @@ import { useState } from 'react'
 export default function NewQuarterly() {
 
   const [releaseProduct, setReleaseProduct] = useState([])
+  const [releaseRepublic, setReleaseRepublic] = useState([])
 
     const yearList = useMemo(() => {
         return year.map(year => {
@@ -66,7 +67,7 @@ export default function NewQuarterly() {
                 </div>
               </div>
               <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
-              <PartTwo/>
+              <PartTwo setReleaseRepublic={(val) => {console.log(val); setReleaseRepublic(val)}}/>
               <PartThree/>
               <PartFour/>
               <PartFive/>
