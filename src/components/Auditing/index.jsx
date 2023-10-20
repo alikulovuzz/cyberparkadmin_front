@@ -12,7 +12,7 @@ export default function Auditing() {
   const [auditType, setAuditType] = useState("Audit");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(40);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     if (user) {
@@ -27,6 +27,9 @@ export default function Auditing() {
         });
     }
   }, [user]);
+  const handleClick = () => {
+    setUser(user);
+  };
   return (
     <>
       <div className="main-panel">
@@ -38,7 +41,10 @@ export default function Auditing() {
                 <ol className="breadcrumb">
                   {/* <Link to="new-quarterly"> */}
 
-                  <AddReportDialog type_of_report="Audit" />
+                  <AddReportDialog
+                    handleClick={handleClick}
+                    type_of_report="Audit"
+                  />
                   {/* </Link> */}
                 </ol>
               </section>
@@ -52,6 +58,7 @@ export default function Auditing() {
                         <th>Hisobot davri</th>
                         <th>Yil</th>
                         <th>Berilgan sana</th>
+                        <th>Soat</th>
                         <th>Status</th>
                         <th></th>
                       </tr>
@@ -61,6 +68,7 @@ export default function Auditing() {
                         <td>John Doe1</td>
                         <td>Bacon ipsum doner.</td>
                         <td>11-7-2014</td>
+                        <td>16:43</td>
                         <td>
                           <button className="custom-btn-success">
                             Approved
@@ -83,6 +91,11 @@ export default function Auditing() {
                                 <td>{data.year}</td>
                                 <td>
                                   {new Date(data.createdAt).toLocaleDateString(
+                                    "en-GB"
+                                  )}
+                                </td>
+                                <td>
+                                  {new Date(data.createdAt).toLocaleTimeString(
                                     "en-GB"
                                   )}
                                 </td>

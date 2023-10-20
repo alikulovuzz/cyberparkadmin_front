@@ -3,9 +3,6 @@ import { UserContext } from "../../context/UserContext";
 
 export default function MyCompany() {
   const { user } = useContext(UserContext);
-  useEffect(() => {
-    console.log(user.organization_name);
-  });
 
   return (
     <>
@@ -314,7 +311,7 @@ export default function MyCompany() {
             </div>
           ) : (
             <>
-              <h1>{user.organization_name}</h1>
+              <h2>{user.organization_name}</h2>
               <h4>Ishlab chiqish jarayyonida</h4>
             </>
           )}

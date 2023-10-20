@@ -66,12 +66,15 @@ export default function AddReportDialog(type_of_report) {
                     console.log(response)
                 }).catch((error) => {
                     console.error(error);
+                    handleClose()
                     toast.error("Serverda xatolik.");                    
                 })
             }
         })
         .catch(error => {
-            console.log(error)
+            console.error(error);
+                    handleClose()
+                    toast.error("Serverda xatolik.");
         })
     }
 
@@ -93,7 +96,7 @@ export default function AddReportDialog(type_of_report) {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description" sx={{ p: 1 }}>
                         <TextField id="outlined-basic"
-                            fullWidth label="Hisobot nomi"
+                            fullWidth label="Hisobot uchun izoh!"
                             variant="outlined" sx={{ my: 1 }}
                             onChange={event => { setName(event.target.value) }}
                         />

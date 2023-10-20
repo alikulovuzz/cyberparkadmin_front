@@ -52,6 +52,7 @@ export default function MonthlyReport() {
                         <th>Hisobot davri</th>
                         <th>Yil</th>
                         <th>Berilgan sana</th>
+                        <th>Soat</th>
                         <th>Status</th>
                         <th></th>
                       </tr>
@@ -61,6 +62,7 @@ export default function MonthlyReport() {
                         <td>John Doe1</td>
                         <td>Bacon ipsum doner.</td>
                         <td>11-7-2014</td>
+                        <td>16:43</td>
                         <td>
                           <button className="custom-btn-success">
                             Approved
@@ -83,6 +85,11 @@ export default function MonthlyReport() {
                                 <td>{data.year}</td>
                                 <td>
                                   {new Date(data.createdAt).toLocaleDateString(
+                                    "en-GB"
+                                  )}
+                                </td>
+                                <td>
+                                  {new Date(data.createdAt).toLocaleTimeString(
                                     "en-GB"
                                   )}
                                 </td>

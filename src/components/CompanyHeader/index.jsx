@@ -4,7 +4,6 @@ import { UserContext } from '../../context/UserContext'
 
 
 export default function CompanyHeader() {
-  console.log("CompanyHeader is rendered")
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [companyName, setCompanyName] = useState("");
