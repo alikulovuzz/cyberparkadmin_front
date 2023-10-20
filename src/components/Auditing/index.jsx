@@ -5,6 +5,7 @@ import { getReports } from "../../utils/resquests";
 import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
 import AddReportDialog from "../AddReportDialog";
+import { formatReports, formatStatus } from "../../utils/helper";
 
 export default function Auditing() {
   const [reports, setReports] = useState([]);
@@ -13,33 +14,8 @@ export default function Auditing() {
   const [pageSize, setPageSize] = useState(40);
   const { user } = useContext(UserContext);
 
-  const formatReports = (data) => {
-    switch (data) {
-      case "first":
-        return "Birinchi chorak";
-      case "second":
-        return "Ikkinchi chorak";
-      case "third":
-        return "Uchinchi chorak";
-      case "fourth":
-        return "To'rtinchi chorak";
-    }
-  };
-  const formatStatus = (data) => {
-    switch (data) {
-      case "not_in_progress":
-        return <button className="custom-btn-wait">Yuborilgan</button>;
-      case "disabled":
-        return <button className="custom-btn-error">Bekor qilindi</button>;
-      case "progress":
-        return <button className="custom-btn-accept">Jarayonda</button>;
-      case "finished":
-        return <button className="custom-btn-success">Tasdiqlandi</button>;
-    }
-  };
-
   useEffect(() => {
-    if(user){
+    if (user) {
       getReports(
         `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
       )
@@ -61,8 +37,8 @@ export default function Auditing() {
                 <h3>Auditorlik hisobot</h3>
                 <ol className="breadcrumb">
                   {/* <Link to="new-quarterly"> */}
-                    
-                    <AddReportDialog/>
+
+                  <AddReportDialog type_of_report="Audit" />
                   {/* </Link> */}
                 </ol>
               </section>
@@ -72,6 +48,7 @@ export default function Auditing() {
                     <tbody>
                       <tr>
                         <th>№</th>
+                        <th>Hisobot nomi</th>
                         <th>Hisobot davri</th>
                         <th>Yil</th>
                         <th>Berilgan sana</th>
@@ -80,6 +57,7 @@ export default function Auditing() {
                       </tr>
                       <tr>
                         <td>1</td>
+                        <td>Birinci chorak uchun</td>
                         <td>John Doe1</td>
                         <td>Bacon ipsum doner.</td>
                         <td>11-7-2014</td>
@@ -100,6 +78,7 @@ export default function Auditing() {
                             <>
                               <tr>
                                 <td>{index + 1}</td>
+                                <td>{data.name_of_report}</td>
                                 <td>{formatReports(data.quarterly)}</td>
                                 <td>{data.year}</td>
                                 <td>

@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { MuiFileInput } from 'mui-file-input'
 import { UserContext } from '../../context/UserContext';
+import { Toaster, toast } from "sonner";
 import { postRequest, uploadFile } from '../../utils/resquests';
 import { audit_v2, upload } from '../../utils/API_urls';
 
@@ -16,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddReportDialog() {
+export default function AddReportDialog(type_of_report) {
 
     const { user } = React.useContext(UserContext)
     const [open, setOpen] = React.useState(false);
@@ -55,13 +56,17 @@ export default function AddReportDialog() {
                 postRequest(audit_v2, {
                     quarterly,
                     year,
+                    type_of_report:type_of_report.type_of_report,
                     name_of_report: name,
                     file_link: response.data.link,
                     company_id: user?._id
                 }).then((response) => {
+                    toast.success("Muvaffaqiyatli!");
+                    handleClose()                    
                     console.log(response)
                 }).catch((error) => {
                     console.error(error);
+                    toast.error("Serverda xatolik.");                    
                 })
             }
         })
@@ -76,6 +81,7 @@ export default function AddReportDialog() {
                 <i className="ti-plus"></i>
                 Qo'shish
             </button>
+            <Toaster richColors position="bottom-right" />
             <Dialog
                 open={open}
                 TransitionComponent={Transition}

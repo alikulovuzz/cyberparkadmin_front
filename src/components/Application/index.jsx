@@ -6,7 +6,7 @@ export default function Application() {
         <div className="main-panel">
                 <div className="content-wrapper">
                     <h4>Ishlab chiqish jarayyonida</h4>
-                    {/* <div className="row">
+                    <div className="row">
                         <div className="col-lg-12 grid-margin">
                             <section className="content-header custom-header">
                                 <h3>
@@ -38,7 +38,7 @@ export default function Application() {
                                 </div>
                             </form>
                         </div>
-                        <div className="col-lg-12 grid-margin">
+                        {/* <div className="col-lg-12 grid-margin">
                             <div className="example-modal">
                                 <div className="msodal">
                                     <div className="modal-dialog">
@@ -71,10 +71,10 @@ export default function Application() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                        
                        
-                    </div> */}
+                    </div>
                 </div>
             </div>
     </>
