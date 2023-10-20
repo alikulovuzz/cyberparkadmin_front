@@ -20,18 +20,20 @@ export default function PartOne({setReleaseProduct}) {
   const [disabled, setDisabled] = useState(false)
 
   const addRowHandler = (_) => {
-    setListLength(prev => {
-      return [...prev, {
-        g1: null,
-        g2: null,
-        g3: null,
-        g4: null,
-        g5: null,
-        g6: null,
-        g7: null,
-        f_id: uuidv4()
-      }]
-    })
+    if(!disabled){
+      setListLength(prev => {
+        return [...prev, {
+          g1: null,
+          g2: null,
+          g3: null,
+          g4: null,
+          g5: null,
+          g6: null,
+          g7: null,
+          f_id: uuidv4()
+        }]
+      })
+    }
   }
 
   const removeRowHandler = (f_id) => {
