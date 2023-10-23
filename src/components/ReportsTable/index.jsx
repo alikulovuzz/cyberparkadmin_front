@@ -96,9 +96,9 @@ export default function ReportsTable(auditType) {
               </a>
             </td>
             <td>
-              <a href="test_file.zip" download>
-                O'chirish
-              </a>
+              <p className="custom-btn-delete">
+                <i className="ti-trash"></i>
+              </p>
             </td>
           </tr>
           {reports?.map((data, index) => {
@@ -122,12 +122,12 @@ export default function ReportsTable(auditType) {
                     </a>
                   </td>
                   <td>
-                    <p
+                    <p className="custom-btn-delete"
                       onClick={() => {
                         handelDelete(data._id);
                       }}
                     >
-                      O'chirish
+                      <i className="ti-trash"></i>
                     </p>
                   </td>
                 </tr>
