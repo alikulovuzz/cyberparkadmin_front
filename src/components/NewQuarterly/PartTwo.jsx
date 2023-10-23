@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { postRequest } from '../../utils/resquests';
-import { release_product } from '../../utils/API_urls';
+import { release_product, release_republic } from '../../utils/API_urls';
 
 const oneRowDefaultValue = {
   g1: null,
@@ -57,14 +57,16 @@ export default function PartTwo({setReleaseRepublic}) {
     let savedId = [];
     for (let index = 0; index < listLength.length; index++) {
       const one_row = listLength[index]
-      const saved_one = await postRequest(release_product, {
+      const saved_one = await postRequest(release_republic, {
         kind_of_activity: one_row.g1,
         OKED: one_row.g2,
-        year: one_row.g3,
-        quarter: one_row.g4,
-        month_1: one_row.g5,
-        month_2: one_row.g6,
-        month_3: one_row.g7
+        country: one_row.g3,
+        currency: one_row.g4,
+        year: one_row.g5,
+        quarter: one_row.g6,
+        month_1: one_row.g7,
+        month_2: one_row.g8,
+        month_3: one_row.g9
       })
       if(saved_one?.data?.code == 200)
         savedId.push(saved_one.data.report._id)
@@ -79,22 +81,22 @@ export default function PartTwo({setReleaseRepublic}) {
                 <table border="1">
                   <thead>
                     <tr class="custom-td">
-                      <td rowspan="2" width="5%">П/н</td>
-                      <td rowspan="2" width="20%">Вид деятельности</td>
-                      <td rowspan="2" width="10%">Код ОКЭД</td>
-                      <td rowspan="2" width="10%">Наименнование страны</td>
-                      <td rowspan="2" width="10%">Днежная единица</td>
-                      <td colspan="3">Чистая выручка от реализации работ и услуг</td>
+                      <td rowSpan="2" width="5%">П/н</td>
+                      <td rowSpan="2" width="20%">Вид деятельности</td>
+                      <td rowSpan="2" width="10%">Код ОКЭД</td>
+                      <td rowSpan="2" width="10%">Наименнование страны</td>
+                      <td rowSpan="2" width="10%">Днежная единица</td>
+                      <td colSpan="3">Чистая выручка от реализации работ и услуг</td>
                       <td></td>
                     </tr>
                     <tr class="custom-td">
                       <td>С начала года</td>
                       <td>За квартал</td>
-                      <td rowspan="3">
+                      <td rowSpan="3">
                         <table>
                           <thead>
                             <tr>
-                              <td colspan="3">За квартал</td>
+                              <td colSpan="3">За квартал</td>
                             </tr>
                           </thead>
                           <tbody><tr>
@@ -108,34 +110,6 @@ export default function PartTwo({setReleaseRepublic}) {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>
-                        <div class="select-position">
-                          <select>
-                            <option value="">Select category</option>
-                            <option value="">Category one</option>
-                            <option value="">Category two</option>
-                            <option value="">Category three</option>
-                          </select>
-                        </div>
-                      </td>
-                      <td><input type="number" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td>
-                        <table>
-                          <tbody><tr class="custom-td">
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
-                          </tr>
-                        </tbody></table>
-                      </td>
-                      <td><button class="custom-button"><i class="lni lni-trash-can"></i></button></td>
-                    </tr>
                       {
                         listLength.map((elem,index) => {
                           return <TwoOneRow key={index} row={elem} ind={index} removeRowHandler={removeRowHandler} updateRowElem={updateRowElem} disabled={disabled}/>
@@ -144,8 +118,8 @@ export default function PartTwo({setReleaseRepublic}) {
                   </tbody>
                 </table>
                 <div class="button-add">
-                  <button class="add-btn"><i class="lni lni-plus"></i>Qo'shish</button>
-                  <button class="save-btn"><i class="lni lni-save"></i>Saqlash</button>
+                  <button class="add-btn" onClick={addRowHandler}><i class="lni lni-plus"></i>Qo'shish</button>
+                  <button class="save-btn" onClick={saveRowHandler}><i class="lni lni-save"></i>Saqlash</button>
                 </div>
               </div>
   )
@@ -154,40 +128,112 @@ export default function PartTwo({setReleaseRepublic}) {
 
 const TwoOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
   return (
-    <tbody>
                     <tr>
-                      <td>1</td>
+                      <td>{ind}</td>
                       <td>
                         <div class="select-position">
-                          <select>
-                            <option value="">Select category</option>
-                            <option value="">Category one</option>
-                            <option value="">Category two</option>
-                            <option value="">Category three</option>
-                          </select>
+                        <select
+                          onChange={event => {updateRowElem(row.f_id, "g1", event.target.value)}}
+                          disabled={disabled}
+                        >
+                          <option value="">Select category</option>
+                          <option value="first">Category one</option>
+                          <option value="second">Category two</option>
+                          <option value="third">Category three</option>
+                          <option value="fourth">Category three</option>
+                        </select>
                         </div>
                       </td>
-                      <td><input type="number" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
-                      <td><input type="text" name="column1" id="column1" value=""/></td>
+                      <td>
+                        <input 
+                          type="number" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g2", event.target.value)}}
+                          disabled={disabled}
+                        />
+                      </td>
+                      <td>
+                        <input 
+                          type="text" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g3", event.target.value)}}
+                          disabled={disabled}
+                        />
+                      </td>
+                      <td>
+                        <input 
+                          type="text" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g4", event.target.value)}}
+                          disabled={disabled}
+                        />
+                      </td>
+                      <td>
+                        <input 
+                          type="text" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g5", event.target.value)}}
+                          disabled={disabled}
+                        />
+                      </td>
+                      <td>
+                        <input 
+                          type="text" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g6", event.target.value)}}
+                          disabled={disabled}
+                        />
+                      </td>
                       <td>
                         <table>
                           <tbody><tr class="custom-td">
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
-                            <td><input type="text" name="column1" id="column1" value=""/></td>
+                            <td>
+                              <input 
+                                type="text" 
+                                name="column1" 
+                                id="column1" 
+                                onChange={event => {updateRowElem(row.f_id, "g7", event.target.value)}}
+                                disabled={disabled}
+                              />
+                            </td>
+                            <td>
+                              <input 
+                                type="text" 
+                                name="column1" 
+                                id="column1" 
+                                onChange={event => {updateRowElem(row.f_id, "g8", event.target.value)}}
+                                disabled={disabled}
+                              />
+                            </td>
+                            <td>
+                              <input 
+                                type="text" 
+                                name="column1" 
+                                id="column1" 
+                                onChange={event => {updateRowElem(row.f_id, "g9", event.target.value)}}
+                                disabled={disabled}
+                              />
+                            </td>
                           </tr>
                         </tbody></table>
                       </td>
-                      <td><button class="custom-button"><i class="lni lni-trash-can"></i></button></td>
+                      <td>
+                        <button 
+                          class="custom-button"
+                          onClick={(_) => {
+                            if(disabled == false){
+                              removeRowHandler(row.f_id)
+                            }
+                          }}
+                        >
+                          <i class="lni lni-trash-can"></i>
+                        </button>
+                      </td>
                     </tr>
-                      {/* {
-                        listLength.map((elem,index) => {
-                          return <TwoOneRow key={index} row={elem} ind={index} removeRowHandler={removeRowHandler} updateRowElem={updateRowElem} disabled={disabled}/>
-                        })
-                      } */}
-                  </tbody>
   )
 }

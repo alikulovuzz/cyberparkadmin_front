@@ -13,6 +13,9 @@ export default function NewQuarterly() {
 
   const [releaseProduct, setReleaseProduct] = useState([])
   const [releaseRepublic, setReleaseRepublic] = useState([])
+  const [residentalPpayroll, setResidentalPayroll] = useState('')
+  const [invesment, setInvesment] = useState('')
+  const [importFunds, setImportFunds] = useState([])
 
     const yearList = useMemo(() => {
         return year.map(year => {
@@ -68,9 +71,9 @@ export default function NewQuarterly() {
               </div>
               <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
               <PartTwo setReleaseRepublic={(val) => {console.log(val); setReleaseRepublic(val)}}/>
-              <PartThree/>
-              <PartFour/>
-              <PartFive/>
+              <PartThree setInvesment={val => {console.log(val); setInvesment(val)}} />
+              <PartFour setResidentalPayroll={val => {console.log(val); setResidentalPayroll(val)}}/>
+              <PartFive setImportFunds={val => {console.log(val); setImportFunds(val)}}/>
             </div>
           </div>
         </div>

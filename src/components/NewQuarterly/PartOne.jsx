@@ -14,13 +14,13 @@ const oneRowDefaultValue = {
   f_id: uuidv4()
 }
 
-export default function PartOne({setReleaseProduct}) {
+export default function PartOne({ setReleaseProduct }) {
 
   const [listLength, setListLength] = useState([...[], oneRowDefaultValue])
   const [disabled, setDisabled] = useState(false)
 
   const addRowHandler = (_) => {
-    if(!disabled){
+    if (!disabled) {
       setListLength(prev => {
         return [...prev, {
           g1: null,
@@ -63,7 +63,7 @@ export default function PartOne({setReleaseProduct}) {
         month_2: one_row.g6,
         month_3: one_row.g7
       })
-      if(saved_one?.data?.code == 200)
+      if (saved_one?.data?.code == 200)
         savedId.push(saved_one.data.report._id)
     }
     setDisabled(true)
@@ -76,10 +76,10 @@ export default function PartOne({setReleaseProduct}) {
       <table border="1">
         <thead>
           <tr class="custom-td">
-            <td rowspan="2" width="5%">П/н</td>
-            <td rowspan="2" width="20%">Вид деятельности</td>
-            <td rowspan="2" width="15%">Код ОКЭД</td>
-            <td colspan="3">Оборот от реализации работ и услуг</td>
+            <td rowSpan="2" width="5%">П/н</td>
+            <td rowSpan="2" width="20%">Вид деятельности</td>
+            <td rowSpan="2" width="15%">Код ОКЭД</td>
+            <td colSpan="3">Оборот от реализации работ и услуг</td>
             <td></td>
           </tr>
           <tr class="custom-td">
@@ -89,7 +89,7 @@ export default function PartOne({setReleaseProduct}) {
               <table>
                 <thead>
                   <tr>
-                    <td colspan="3">За квартал</td>
+                    <td colSpan="3">За квартал</td>
                   </tr>
                 </thead>
                 <tbody><tr>
@@ -104,8 +104,8 @@ export default function PartOne({setReleaseProduct}) {
         </thead>
         <tbody>
           {
-            listLength.map((elem,index) => {
-              return <PartOneRow key={index} row={elem} ind={index} removeRowHandler={removeRowHandler} updateRowElem={updateRowElem} disabled={disabled}/>
+            listLength.map((elem, index) => {
+              return <PartOneRow key={index} row={elem} ind={index} removeRowHandler={removeRowHandler} updateRowElem={updateRowElem} disabled={disabled} />
             })
           }
         </tbody>
@@ -119,14 +119,14 @@ export default function PartOne({setReleaseProduct}) {
 }
 
 
-const PartOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
+const PartOneRow = ({ row, ind, removeRowHandler, updateRowElem, disabled }) => {
   return (
     <tr>
       <td>{ind}</td>
       <td>
         <div class="select-position">
           <select
-            onChange={event => {updateRowElem(row.f_id, "g1", event.target.value)}}
+            onChange={event => { updateRowElem(row.f_id, "g1", event.target.value) }}
             disabled={disabled}
           >
             <option value="">Select category</option>
@@ -138,72 +138,72 @@ const PartOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
         </div>
       </td>
       <td>
-        <input 
-          type="number" 
-          name="column1" 
+        <input
+          type="number"
+          name="column1"
           id="column1"
           disabled={disabled}
-          onChange={event => {updateRowElem(row.f_id, "g2", event.target.value)}}
+          onChange={event => { updateRowElem(row.f_id, "g2", event.target.value) }}
         />
       </td>
       <td>
-        <input 
-          type="text" 
-          name="column1" 
+        <input
+          type="text"
+          name="column1"
           id="column1"
           disabled={disabled}
-          onChange={event => {updateRowElem(row.f_id, "g3", event.target.value)}}
+          onChange={event => { updateRowElem(row.f_id, "g3", event.target.value) }}
         />
       </td>
       <td>
-        <input 
-          type="text" 
-          name="column1" 
+        <input
+          type="text"
+          name="column1"
           id="column1"
           disabled={disabled}
-          onChange={event => {updateRowElem(row.f_id, "g4", event.target.value)}}
+          onChange={event => { updateRowElem(row.f_id, "g4", event.target.value) }}
         />
       </td>
       <td>
         <table>
           <tbody><tr class="custom-td">
             <td>
-              <input 
-                type="text" 
-                name="column1" 
-                id="column1"
-                disabled={disabled}
-                onChange={event => {updateRowElem(row.f_id, "g5", event.target.value)}}
-              />
-            </td>
-            <td>
-              <input 
-                type="text" 
-                name="column1" 
-                id="column1"
-                disabled={disabled}
-                onChange={event => {updateRowElem(row.f_id, "g6", event.target.value)}}
-              />
-            </td>
-            <td>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="column1"
                 id="column1"
                 disabled={disabled}
-                onChange={event => {updateRowElem(row.f_id, "g7", event.target.value)}}
+                onChange={event => { updateRowElem(row.f_id, "g5", event.target.value) }}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                name="column1"
+                id="column1"
+                disabled={disabled}
+                onChange={event => { updateRowElem(row.f_id, "g6", event.target.value) }}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                name="column1"
+                id="column1"
+                disabled={disabled}
+                onChange={event => { updateRowElem(row.f_id, "g7", event.target.value) }}
               />
             </td>
           </tr>
           </tbody></table>
       </td>
       <td>
-        <button 
-          class="custom-button" 
+        <button
+          class="custom-button"
           onClick={(_) => {
-          if(disabled == false){
-            removeRowHandler(row.f_id)
-          }
+            if (disabled == false) {
+              removeRowHandler(row.f_id)
+            }
           }}
         >
           <i class="lni lni-trash-can"></i>
