@@ -29,6 +29,7 @@ deploy:
     - ssh -i $MASTER_SSH_KEY -o StrictHostKeyChecking=no $MASTER_SSH_USER@$MASTER_HOST "docker pull $TAG_COMMIT"
     - ssh -i $MASTER_SSH_KEY -o StrictHostKeyChecking=no $MASTER_SSH_USER@$MASTER_HOST "docker container rm -f my-app || true"
     - ssh -i $MASTER_SSH_KEY -o StrictHostKeyChecking=no $MASTER_SSH_USER@$MASTER_HOST "docker run -d -p 3000:3000 --name my-app $TAG_COMMIT"
+    - ssh -i $MASTER_SSH_KEY -o StrictHostKeyChecking=no $MASTER_SSH_USER@$MASTER_HOST "docker sytem prune -a -y"
   environment:
     name: production
     url: http://your_MASTER_HOST
