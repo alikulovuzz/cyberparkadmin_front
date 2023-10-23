@@ -47,18 +47,15 @@ export default function ReportsTable(auditType) {
         return <button className="custom-btn-success">Tasdiqlandi</button>;
     }
   };
-  const handleClick = (data) => {
-    forceUpdate();
-  }
   const handelDelete = (data) => {
     deleteReports(`audit/delete?id=${id}`)
         .then((response) => {
           toast.success("Muvaffaqiyatli o'chrildi!");
-          handleClick()
+          forceUpdate()
         })
         .catch((error) => {
           toast.error("Server xatolik");
-          handleClick()
+          forceUpdate()
         });
     handleClose()
   };
