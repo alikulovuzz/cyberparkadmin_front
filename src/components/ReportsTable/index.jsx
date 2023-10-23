@@ -1,17 +1,28 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { deleteReports, getReports } from "../../utils/resquests";
+import Button from "@mui/material/Button";
 import { UserContext } from "../../context/UserContext";
 import { Toaster, toast } from "sonner";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
+import { useReducer } from "react";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function ReportsTable(auditType) {
   const [reports, setReports] = useState([]);
-  //   const [auditType, setAuditType] = useState("Audit");
+  const [open, setOpen] = React.useState(false);
+  const [id, setID] = React.useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(40);
+  const [a, forceUpdate] = useReducer(x => x + 1, 0);
 
   const { user } = useContext(UserContext);
-
   const formatReports = (data) => {
     switch (data) {
       case "first":
@@ -36,17 +47,26 @@ export default function ReportsTable(auditType) {
         return <button className="custom-btn-success">Tasdiqlandi</button>;
     }
   };
+  const handleClick = (data) => {
+    forceUpdate();
+  }
   const handelDelete = (data) => {
-    console.log(data);
-    if (data) {
-      deleteReports(`audit/delete?id=${data}`)
+    deleteReports(`audit/delete?id=${id}`)
         .then((response) => {
           toast.success("Muvaffaqiyatli o'chrildi!");
+          handleClick()
         })
         .catch((error) => {
           toast.error("Server xatolik");
+          handleClick()
         });
-    }
+    handleClose()
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(!open);
   };
   useEffect(() => {
     if (user) {
@@ -60,10 +80,7 @@ export default function ReportsTable(auditType) {
           console.log(error);
         });
     }
-  }, [user]);
-  // const handleClick = () => {
-  //   setUser(user);
-  // };
+  }, [user,a]);
   return (
     <>
       <Toaster key={123} richColors position="bottom-right" />
@@ -124,7 +141,9 @@ export default function ReportsTable(auditType) {
                   <td>
                     <p
                       onClick={() => {
-                        handelDelete(data._id);
+                        // handelDelete(data._id);
+                        setID(data._id)
+                        handleOpen();
                       }}
                     >
                       O'chirish
@@ -136,6 +155,21 @@ export default function ReportsTable(auditType) {
           })}
         </tbody>
       </table>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          {"Hisobotni o'chirishni tasdiqlaysizmi?"}
+        </DialogTitle>
+        <DialogActions>
+          <Button onClick={handleClose}>Yo'q</Button>
+          <Button onClick={handelDelete}>Ha</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
