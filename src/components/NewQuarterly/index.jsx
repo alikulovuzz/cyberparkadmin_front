@@ -97,14 +97,11 @@ export default function NewQuarterly() {
                   }}
                 />
               </div>
-<<<<<<< HEAD
-=======
               <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
               <PartTwo setReleaseRepublic={(val) => {console.log(val); setReleaseRepublic(val)}}/>
               <PartThree/>
               <PartFour/>
               <PartFive/>
->>>>>>> dd06e40e28c856c880512697f46031703816a4b6
             </div>
           </div>
         </div>
