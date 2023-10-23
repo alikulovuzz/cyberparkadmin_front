@@ -10,16 +10,20 @@ import year from "./../../dictionary/year";
 import { useState } from "react";
 
 export default function NewQuarterly() {
-  const [releaseProduct, setReleaseProduct] = useState([]);
   const [invest, setInvest] = useState([]);
   const [payroll, setPayroll] = useState([]);
   const [importFunds, setImportFunds] = useState([]);
 
-  const yearList = useMemo(() => {
-    return year.map((year) => {
-      return { value: year.value, year_name: year["uz"] };
-    });
-  });
+  const [releaseProduct, setReleaseProduct] = useState([])
+  const [releaseRepublic, setReleaseRepublic] = useState([])
+
+    const yearList = useMemo(() => {
+        return year.map(year => {
+            return {value: year.value,
+                 year_name: year['uz']}
+            }
+        )
+    })
 
   return (
     <div className="main-panel report">
@@ -93,6 +97,14 @@ export default function NewQuarterly() {
                   }}
                 />
               </div>
+<<<<<<< HEAD
+=======
+              <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
+              <PartTwo setReleaseRepublic={(val) => {console.log(val); setReleaseRepublic(val)}}/>
+              <PartThree/>
+              <PartFour/>
+              <PartFive/>
+>>>>>>> dd06e40e28c856c880512697f46031703816a4b6
             </div>
           </div>
         </div>
