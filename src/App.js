@@ -34,6 +34,7 @@ import Auditing from "./components/Auditing";
 import MonthlyReport from "./components/MonthlyReport";
 import NewQuarterly from "./components/NewQuarterly";
 import { ErrorBoundary } from 'react-error-boundary';
+import AboutUs from "./components/AboutUs";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -72,6 +73,7 @@ const App = () => {
                     <Route path="auditing" element={<Auditing />} />
                     <Route path="monthly" element={<MonthlyReport />} />
                   </Route>
+                  <Route path="contact" element={<AboutUs />} />
                 </Route>
               </Route>
               // ):
