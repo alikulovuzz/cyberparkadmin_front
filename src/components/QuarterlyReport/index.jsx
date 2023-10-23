@@ -3,8 +3,9 @@ import "./custom.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getReports } from "../../utils/resquests";
-import { UserContext } from '../../context/UserContext'
+import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
+import ReportsTable from "../ReportsTable";
 
 export default function QuarterlyReport() {
   const [reports, setReports] = useState([]);
@@ -12,7 +13,7 @@ export default function QuarterlyReport() {
   const [auditType, setAuditType] = useState("Choraklik");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   // useEffect(()=>{
   //   setCompanyId(user['_id'])
@@ -44,7 +45,7 @@ export default function QuarterlyReport() {
   };
 
   useEffect(() => {
-    if(user){
+    if (user) {
       getReports(
         `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
       )
@@ -75,60 +76,9 @@ export default function QuarterlyReport() {
               </section>
               <form action="#" className="mt-30">
                 <div className="box-body table-responsive no-padding">
-                  <table className="table table-hover custom-table-report">
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>Hisobot davri</th>
-                        <th>Yil</th>
-                        <th>Berilgan sana</th>
-                        <th>Status</th>
-                        <th></th>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>John Doe1</td>
-                        <td>Bacon ipsum doner.</td>
-                        <td>11-7-2014</td>
-                        <td>
-                          <button className="custom-btn-success">
-                            Approved
-                          </button>
-                        </td>
-                        <td>
-                          <a href="test_file.zip" download>
-                            Yuklab olish
-                          </a>
-                        </td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {reports.map((data, index) => {
-                        return (
-                          <Suspense key={index} fallback={<p>Loading...</p>}>
-                            <>
-                              <tr>
-                                <td>{index + 1}</td>
-                                <td>{formatReports(data.quarterly)}</td>
-                                <td>{data.year}</td>
-                                <td>
-                                  {new Date(data.createdAt).toLocaleDateString(
-                                    "en-GB"
-                                  )}
-                                </td>
-                                <td>{formatStatus(data.status)}</td>
-                                <td>
-                                  <a href={data.file_link} download>
-                                    Yuklab olish
-                                  </a>
-                                </td>
-                              </tr>
-                            </>
-                          </Suspense>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <ReportsTable auditType="Choraklik" />
+                  </Suspense>
                 </div>
               </form>
             </div>

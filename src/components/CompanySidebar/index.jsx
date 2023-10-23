@@ -85,6 +85,18 @@ export default function CompanySidebar() {
                             </li>
                         </ul>
                     </div>
+                    <NavLink
+                        to="contact"
+                        className={({ isActive }) =>
+                            isActive ? "nav-item active" : "nav-item"
+                        }
+                        onClick={closeToggle}
+                    >
+                        <span className="nav-link">
+                            <i className="ti-user menu-icon"></i>
+                            <span className="menu-title">Bog'lanish uchun</span>
+                        </span>
+                    </NavLink>
                 </div>
             </nav>
         </>

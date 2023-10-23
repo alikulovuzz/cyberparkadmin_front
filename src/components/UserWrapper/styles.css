@@ -43,6 +43,17 @@
 
 }
 
+.custom-btn-delete {
+  text-align: center;
+  padding: 0px;
+  margin: 0px
+}
+
+.custom-btn-delete i {
+  color: red;
+  font-size: 20px;
+}
+
 .custom-modal {
   display: flex;
   margin: 2px 20px;
