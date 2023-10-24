@@ -75,12 +75,12 @@ export default function PartTwo({setReleaseRepublic}) {
     setReleaseRepublic(savedId)
   }
   return (
-    <div class="card-style mb-30">
-                <h4 class="mb-25">II. Информация о выполненных работах и оказанных услугах за пределами Республики
+    <div className="card-style mb-30">
+                <h4 className="mb-25">II. Информация о выполненных работах и оказанных услугах за пределами Республики
                   Узбекистан резидентов</h4>
                 <table border="1">
                   <thead>
-                    <tr class="custom-td">
+                    <tr className="custom-td">
                       <td rowSpan="2" width="5%">П/н</td>
                       <td rowSpan="2" width="20%">Вид деятельности</td>
                       <td rowSpan="2" width="10%">Код ОКЭД</td>
@@ -89,7 +89,7 @@ export default function PartTwo({setReleaseRepublic}) {
                       <td colSpan="3">Чистая выручка от реализации работ и услуг</td>
                       <td></td>
                     </tr>
-                    <tr class="custom-td">
+                    <tr className="custom-td">
                       <td>С начала года</td>
                       <td>За квартал</td>
                       <td rowSpan="3">
@@ -117,9 +117,9 @@ export default function PartTwo({setReleaseRepublic}) {
                       }
                   </tbody>
                 </table>
-                <div class="button-add">
-                  <button class="add-btn" onClick={addRowHandler}><i class="lni lni-plus"></i>Qo'shish</button>
-                  <button class="save-btn" onClick={saveRowHandler}><i class="lni lni-save"></i>Saqlash</button>
+                <div className="button-add">
+                  <button className="add-btn" onClick={addRowHandler}><i className="lni lni-plus"></i>Qo'shish</button>
+                  <button className="save-btn" onClick={saveRowHandler}><i className="lni lni-save"></i>Saqlash</button>
                 </div>
               </div>
   )
@@ -188,7 +188,7 @@ const TwoOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
                       </td>
                       <td>
                         <table>
-                          <tbody><tr class="custom-td">
+                          <tbody><tr className="custom-td">
                             <td>
                               <input 
                                 type="text" 
@@ -221,14 +221,14 @@ const TwoOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
                       </td>
                       <td>
                         <button 
-                          class="custom-button"
+                          className="custom-button"
                           onClick={(_) => {
                             if(disabled == false){
                               removeRowHandler(row.f_id)
                             }
                           }}
                         >
-                          <i class="lni lni-trash-can"></i>
+                          <i className="lni lni-trash-can"></i>
                         </button>
                       </td>
                     </tr>

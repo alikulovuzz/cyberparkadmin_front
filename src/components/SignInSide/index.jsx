@@ -42,11 +42,17 @@ export default function SignInSide({ admin }) {
 
   const handleSubmit = () => {
     handleOpenBackdrop();
-    postRequest(company_signin, {
+    const req_url = admin?user_signin:company_signin
+    const req_body = admin?{
+      email: username,
+      password: password,
+    }:{
       pinfl: username,
       password: password,
-    })
+    }
+    postRequest(req_url, req_body)
       .then((response) => {
+        console.log(response)
         if (response.data.token) {
           sessionStorage.setItem("x-access-token", response.data.token);
           // console.log(response.data.token)

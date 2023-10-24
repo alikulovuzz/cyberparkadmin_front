@@ -33,20 +33,6 @@ export default function NewQuarterly() {
   const [yearsd, setYears] = React.useState(2020);
   const { user } = React.useContext(UserContext)
 
-
-  // {
-  //   "name_of_report":"Auditorlik",
-  //   "file_link":"https://my.cyberpark.uz/api/v1/uploads/2023-10-18T13-51-14.647Z676c9580-6dbd-11ee-b10e-39470aaceaf9Soliq.docx",
-  //   "type_of_report":"Choraklik hisobot",
-  //   "company_id":"652d21468cf46aaaae2a6ee1",
-  //   "release_product":["6531160c61767052ed5bfa91","653119b4b826f275a5f391e9","65311a56599929386934c2b6"],
-  //   "release_republic":["6530b3168c6a1772e00b5350"],
-  //   "residental_payroll":"6530b90ccfd838e37134f0de",
-  //   "invesment":"6530b91fcfd838e37134f0e0",
-  //   "import_funds":["6530b93bcfd838e37134f0e2"],
-  //   "year":"2023",
-  //   "quarterly":"third"
-  //   }
   const handleChangeYear = (event) => {
     setYears(event.target.value);
   };
