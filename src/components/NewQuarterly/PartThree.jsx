@@ -29,11 +29,11 @@ export default function PartThree({setInvesment}) {
   }
 
   return (
-    <div class="card-style mb-30">
-      <h4 class="mb-25">III. Информация об инвестиционной деятельности резидента</h4>
+    <div className="card-style mb-30">
+      <h4 className="mb-25">III. Информация об инвестиционной деятельности резидента</h4>
       <table border="1">
         <thead>
-          <tr class="custom-td">
+          <tr className="custom-td">
             <td rowSpan="2" width="2%">П/н</td>
             <td rowSpan="2" width="20%">Наименнование показателей</td>
             <td rowSpan="2" width="20%">За отчетыний период</td>
@@ -41,49 +41,49 @@ export default function PartThree({setInvesment}) {
         </thead>
         <tbody>
           <tr>
-            <td class="custom-td">1</td>
-            <td class="custom-tr custom-td">Обьем инвестиций, всего</td>
+            <td className="custom-td">1</td>
+            <td className="custom-tr custom-td">Обьем инвестиций, всего</td>
             <td></td>
           </tr>
           <tr>
             <td>1.1</td>
-            <td class="custom-tr">В том числе основные средства</td>
-            <td><input class="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setEmployees(event.target.value)}} /></td>
+            <td className="custom-tr">В том числе основные средства</td>
+            <td><input className="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setEmployees(event.target.value)}} /></td>
           </tr>
           <tr>
-            <td class="custom-td">2</td>
-            <td class="custom-tr custom-td">Источники инвестиций</td>
+            <td className="custom-td">2</td>
+            <td className="custom-tr custom-td">Источники инвестиций</td>
             <td></td>
           </tr>
           <tr>
             <td>2.1</td>
-            <td class="custom-tr">Собставенные средства организации(включая учредителей)</td>
-            <td><input class="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setPartTime(event.target.value)}} /></td>
+            <td className="custom-tr">Собставенные средства организации(включая учредителей)</td>
+            <td><input className="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setPartTime(event.target.value)}} /></td>
           </tr>
           <tr>
             <td>2.2</td>
-            <td class="custom-tr">Заемные средства</td>
-            <td><input class="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setCountforeign(event.target.value)}} /></td>
+            <td className="custom-tr">Заемные средства</td>
+            <td><input className="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setCountforeign(event.target.value)}} /></td>
           </tr>
           <tr>
             <td>2.3</td>
-            <td class="custom-tr">Гранты и другие безвозмездно представленные средства</td>
-            <td><input class="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setPerforming(event.target.value)}} /></td>
+            <td className="custom-tr">Гранты и другие безвозмездно представленные средства</td>
+            <td><input className="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setPerforming(event.target.value)}} /></td>
           </tr>
           <tr>
             <td>2.4</td>
-            <td class="custom-tr">Прочие (указать какие)</td>
-            <td><input class="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setFund(event.target.value)}} /></td>
+            <td className="custom-tr">Прочие (указать какие)</td>
+            <td><input className="custom-input" type="text" name="column1" id="column1" disabled={disabled} onChange={event => {setFund(event.target.value)}} /></td>
           </tr>
 
         </tbody>
       </table>
-      <div class="button-save">
+      <div className="button-save">
         <button 
-          class="save-btn"
+          className="save-btn"
           onClick={savePartTree}
         >
-          <i class="lni lni-save"></i> Saqlash
+          <i className="lni lni-save"></i> Saqlash
         </button>
       </div>
     </div>

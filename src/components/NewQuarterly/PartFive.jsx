@@ -68,13 +68,13 @@ export default function PartFive({setImportFunds}) {
   }
 
   return (
-    <div class="card-style mb-30">
-      <h4 class="mb-25">V. Информация по ввезенным для собственных нужд оборудованию, комплектующим частяь,
+    <div className="card-style mb-30">
+      <h4 className="mb-25">V. Информация по ввезенным для собственных нужд оборудованию, комплектующим частяь,
         деталям, узлам, технологической документации, программного обеспечения, не производимых в Республике
         Узбекистан, а также иных товаров, утверждённым по перечням в соответствии с УП-5099 и ПП-4751</h4>
       <table border="1">
         <thead>
-          <tr class="custom-td">
+          <tr className="custom-td">
             <td rowSpan="2" width="4%">П/н</td>
             <td rowSpan="2" width="15%">Наименнование</td>
             <td rowSpan="2" width="10%">Единица измерения</td>
@@ -87,10 +87,10 @@ export default function PartFive({setImportFunds}) {
         </thead>
         <tbody>
           {/* <tr>
-            <td class="custom-td">1</td>
+            <td className="custom-td">1</td>
             <td><input type="text" name="column1" id="column1" value="" /></td>
             <td>
-              <div class="select-position">
+              <div className="select-position">
                 <select>
                   <option value="">Шт</option>
                   <option value="">Комплект</option>
@@ -101,7 +101,7 @@ export default function PartFive({setImportFunds}) {
             <td><input type="text" name="column1" id="column1" value="" /></td>
             <td><input type="text" name="column1" id="column1" value="" /></td>
             <td><input type="text" name="column1" id="column1" value="" /></td>
-            <td><button class="custom-button"><i class="lni lni-trash-can"></i></button></td>
+            <td><button className="custom-button"><i className="lni lni-trash-can"></i></button></td>
           </tr> */}
           {
             listLength.map((elem, index) => {
@@ -110,9 +110,9 @@ export default function PartFive({setImportFunds}) {
           }
         </tbody>
       </table>
-      <div class="button-add">
-        <button class="add-btn" onClick={addRowHandler}><i class="lni lni-plus"></i>Qo'shish</button>
-        <button class="save-btn" onClick={saveRowHandler}><i class="lni lni-save"></i>Saqlash</button>
+      <div className="button-add">
+        <button className="add-btn" onClick={addRowHandler}><i className="lni lni-plus"></i>Qo'shish</button>
+        <button className="save-btn" onClick={saveRowHandler}><i className="lni lni-save"></i>Saqlash</button>
       </div>
     </div>
   )
@@ -122,13 +122,13 @@ export default function PartFive({setImportFunds}) {
 export const PartFiveRow = ({ row, ind, removeRowHandler, updateRowElem, disabled }) => {
   return (
     <tr>
-      <td class="custom-td">{ind}</td>
+      <td className="custom-td">{ind}</td>
       <td><input type="text" name="column1" id="column1"
         disabled={disabled}
         onChange={event => {updateRowElem(row.f_id, "g1", event.target.value)}}
       /></td>
       <td>
-        <div class="select-position">
+        <div className="select-position">
           <select
             disabled={disabled}
             onChange={event => {updateRowElem(row.f_id, "g2", event.target.value)}}
@@ -156,14 +156,14 @@ export const PartFiveRow = ({ row, ind, removeRowHandler, updateRowElem, disable
       /></td>
       <td>
         <button 
-          class="custom-button"
+          className="custom-button"
           onClick={(_) => {
             if(disabled == false){
               removeRowHandler(row.f_id)
             }
           }}
         >
-          <i class="lni lni-trash-can"></i>
+          <i className="lni lni-trash-can"></i>
         </button>
       </td>
     </tr>

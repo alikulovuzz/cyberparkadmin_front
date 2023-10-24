@@ -8,16 +8,24 @@ import PartFour from "./PartFour";
 import PartFive from "./PartFive";
 import year from "./../../dictionary/year";
 import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { postRequest } from "../../utils/resquests";
+import { audit_v2 } from "../../utils/API_urls";
 
 export default function NewQuarterly() {
 
   const [releaseProduct, setReleaseProduct] = useState([])
   const [releaseRepublic, setReleaseRepublic] = useState([])
-  const [residentalPpayroll, setResidentalPayroll] = useState('')
+  const [residentalPayroll, setResidentalPayroll] = useState('')
   const [invesment, setInvesment] = useState('')
   const [importFunds, setImportFunds] = useState([])
+  const [changeYear, setChangeYear] = useState(2020)
+  const [quarterly, setQuarterly] = useState('first')
 
+  const {user} = useContext(UserContext)
 
+  console.log(user)
   // { 
   //   "name_of_report":"Auditorlik", 
   //   "file_link":"https://my.cyberpark.uz/api/v1/uploads/2023-10-18T13-51-14.647Z676c9580-6dbd-11ee-b10e-39470aaceaf9Soliq.docx", 
@@ -32,68 +40,94 @@ export default function NewQuarterly() {
   //   "quarterly":"third"
   //   }
 
-    const yearList = useMemo(() => {
-        return year.map(year => {
-            return {value: year.value,
-                 year_name: year['uz']}
-            }
-        )
+  const yearList = useMemo(() => {
+    return year.map(year => {
+      return {
+        value: year.value,
+        year_name: year['uz']
+      }
+    }
+    )
+  })
+
+  const saveFullRequest = () => {
+    const request = {
+      quarterly,
+      year: changeYear,
+      // import_funds: importFunds,
+      import_funds: "128oldingi234",
+      invesment,
+      residental_payroll: residentalPayroll,
+      release_republic: releaseRepublic,
+      release_product: releaseProduct,
+      company_id: user._id,
+      name_of_report: "modaldan oldingi nom"
+    }
+    console.log(request)
+    postRequest(audit_v2,request).then(response => {
+      console.log(response)
+    }).catch(error => {
+      console.error(error)
     })
+  }
 
   return (
     <div className="main-panel report">
-        <div className="content-wrapper">
+      <div className="content-wrapper">
         <div class="container-fluid">
-        <div class="title-wrapper">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-              <div class="title">
-                <h2>Form Cyber Park</h2>
+          <div class="title-wrapper">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="title">
+                  <h2>Form Cyber Park</h2>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="form-elements-wrapper">
-          <div class="row">
-            <div class="col-lg-12 custom-title">
-              <div class="card-style mb-30">
-                <h4 class="mb-25">Hisobot davri</h4>
-                <div class="select-style-1">
-                  <div class="select-div">
-                    <label>Yil</label>
-                    <div class="select-position">
-                      <select>
-                        {
+          <div class="form-elements-wrapper">
+            <div class="row">
+              <div class="col-lg-12 custom-title">
+                <div class="card-style mb-30">
+                  <h4 class="mb-25">Hisobot davri</h4>
+                  <div class="select-style-1">
+                    <div class="select-div">
+                      <label>Yil</label>
+                      <div class="select-position">
+                        <select onChange={event => {setChangeYear(event.target.value)}}>
+                          {
                             yearList.map(elem => {
-                                return <option value={elem.value}>{elem.year_name}</option>
+                              return <option value={elem.value}>{elem.year_name}</option>
                             })
-                        }
-                      </select>
+                          }
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="select-div">
-                    <label>Chorak</label>
-                    <div class="select-position">
-                      <select>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                      </select>
+                    <div class="select-div">
+                      <label>Chorak</label>
+                      <div class="select-position">
+                        <select onChange={event => {setQuarterly(event.target.value)}}>
+                          <option value="first">Первая четверть</option>
+                          <option value="second">Вторая четверть</option>
+                          <option value="third">Третья четверть</option>
+                          <option value="fourth">Четвертая четверть</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <PartOne setReleaseProduct={(val) => {setReleaseProduct(val)}} />
+                <PartTwo setReleaseRepublic={(val) => {setReleaseRepublic(val)}} />
+                <PartThree setInvesment={val => {setInvesment(val)}} />
+                <PartFour setResidentalPayroll={val => {setResidentalPayroll(val)}} />
+                <PartFive setImportFunds={val => {setImportFunds(val)}} />
               </div>
-              <PartOne setReleaseProduct={(val) => {console.log(val); setReleaseProduct(val)}}/>
-              <PartTwo setReleaseRepublic={(val) => {console.log(val); setReleaseRepublic(val)}}/>
-              <PartThree setInvesment={val => {console.log(val); setInvesment(val)}} />
-              <PartFour setResidentalPayroll={val => {console.log(val); setResidentalPayroll(val)}}/>
-              <PartFive setImportFunds={val => {console.log(val); setImportFunds(val)}}/>
             </div>
           </div>
         </div>
-    </div>
+        <div class="button-add">
+          <button class="save-btn" onClick={saveFullRequest}><i class="lni lni-save"></i>Saqlash</button>
         </div>
+      </div>
     </div>
   )
 }
