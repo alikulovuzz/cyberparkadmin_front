@@ -131,17 +131,14 @@ const TwoOneRow = ({row, ind, removeRowHandler, updateRowElem, disabled}) => {
                     <tr>
                       <td>{ind}</td>
                       <td>
-                        <div className="select-position">
-                        <select
-                          onChange={event => {updateRowElem(row.f_id, "g1", event.target.value)}}
+                        <div class="select-position">
+                        <input 
+                          type="string" 
+                          name="column1" 
+                          id="column1" 
+                          onChange={event => {updateRowElem(row.f_id, "g2", event.target.value)}}
                           disabled={disabled}
-                        >
-                          <option value="">Select category</option>
-                          <option value="first">Category one</option>
-                          <option value="second">Category two</option>
-                          <option value="third">Category three</option>
-                          <option value="fourth">Category three</option>
-                        </select>
+                        />
                         </div>
                       </td>
                       <td>

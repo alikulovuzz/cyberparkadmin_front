@@ -23,8 +23,8 @@ export default function AddReportDialog(type_of_report) {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = React.useState('')
     const [quarterly, setQuarterly] = React.useState('first');
-    const [value, setValue] = React.useState(null)
     const [year, setYear] = React.useState(2023)
+    const [value, setValue] = React.useState(null)
 
     const handleChangeFile = (newValue) => {
         setValue(newValue)
