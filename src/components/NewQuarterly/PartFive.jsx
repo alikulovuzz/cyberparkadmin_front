@@ -134,8 +134,8 @@ export const PartFiveRow = ({ row, ind, removeRowHandler, updateRowElem, disable
             disabled={disabled}
             onChange={event => {updateRowElem(row.f_id, "g2", event.target.value)}}
           >
-            <option value="">Шт</option>
-            <option value="">Комплект</option>
+            <option value="Шт">Шт</option>
+            <option value="Комплект">Комплект</option>
           </select>
         </div>
       </td>
