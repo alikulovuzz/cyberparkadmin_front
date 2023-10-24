@@ -54,12 +54,13 @@ export default function PartFive({setImportFunds}) {
       const one_row = listLength[index]
       const saved_one = await postRequest(import_funds, {
         name: one_row.g1,
-        // select: one_row.g2,
+        cost: one_row.g2,
         unit: one_row.g3,
         qty: one_row.g4,
         acc_description: one_row.g5,
         residual_value: one_row.g6
       })
+      console.log(one_row)
       if (saved_one?.data?.code == 200)
         savedId.push(saved_one.data.report._id)
     }
@@ -122,7 +123,7 @@ export default function PartFive({setImportFunds}) {
 export const PartFiveRow = ({ row, ind, removeRowHandler, updateRowElem, disabled }) => {
   return (
     <tr>
-      <td class="custom-td">{ind}</td>
+      <td class="custom-td">{ind+1}</td>
       <td><input type="text" name="column1" id="column1"
         disabled={disabled}
         onChange={event => {updateRowElem(row.f_id, "g1", event.target.value)}}

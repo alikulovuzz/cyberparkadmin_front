@@ -125,16 +125,13 @@ const PartOneRow = ({ row, ind, removeRowHandler, updateRowElem, disabled }) => 
       <td>{ind}</td>
       <td>
         <div class="select-position">
-          <select
-            onChange={event => { updateRowElem(row.f_id, "g1", event.target.value) }}
-            disabled={disabled}
-          >
-            <option value="">Select category</option>
-            <option value="first">Category one</option>
-            <option value="second">Category two</option>
-            <option value="third">Category three</option>
-            <option value="fourth">Category three</option>
-          </select>
+        <input
+          type="string"
+          name="column1"
+          id="column1"
+          disabled={disabled}
+          onChange={event => { updateRowElem(row.f_id, "g1", event.target.value) }}
+        />
         </div>
       </td>
       <td>
