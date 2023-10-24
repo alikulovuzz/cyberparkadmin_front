@@ -21,8 +21,8 @@ export default function ReportsTable(auditType) {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(40);
   const [a, forceUpdate] = useReducer(x => x + 1, 0);
-
   const { user } = useContext(UserContext);
+  
   const formatReports = (data) => {
     switch (data) {
       case "first":
