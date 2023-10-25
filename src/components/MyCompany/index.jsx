@@ -129,13 +129,13 @@ export default function MyCompany() {
                                   <label>Korxonangiz brendi bormi:</label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q
@@ -150,13 +150,13 @@ export default function MyCompany() {
                                   </label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q
@@ -171,13 +171,13 @@ export default function MyCompany() {
                                   </label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q

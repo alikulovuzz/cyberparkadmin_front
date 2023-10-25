@@ -3524,7 +3524,23 @@ select {
 .custom-button:hover {
   cursor: pointer;
   background-color: transparent;
-  color: red;
+  color: #45B5AA;
+}
+
+.cus-btn {
+  cursor: pointer;
+  background: transparent;
+  border: 0px;
+  color: #45B5AA;
+  font-size: 24px;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+}
+
+.cus-btn:hover {
+  cursor: pointer;
+  background-color: #45B5AA;
+  color: #FFFFFF;
+  border-radius: 5px;
 }
 
 .button-add {
