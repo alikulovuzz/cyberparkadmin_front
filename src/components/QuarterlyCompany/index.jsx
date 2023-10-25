@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Box, Pagination } from '@mui/material';
 import PageSize from '../PageSize';
 import { postRequest } from '../../utils/resquests';
-import { company_list } from '../../utils/API_urls';
+import { getlist_v2 } from '../../utils/API_urls';
 
 export default function QuarterlyCompany() {
 
@@ -17,10 +17,14 @@ export default function QuarterlyCompany() {
   const [compantList, setCompoundList] = useState([])
   const [pageCount, setPageCount] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+  const [audit, setAudit] = useState('Audit')
+  const [progress, setProgress] = useState('')
 
   useEffect(() => {
-    postRequest(company_list,
+    postRequest(getlist_v2,
       {
+        type_of_report: audit,
+        status: progress,
         pageNumber: page,
         pageSize: pageSize
       }).then((response) => {
@@ -45,20 +49,11 @@ export default function QuarterlyCompany() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {compantList.map((row) => (
-            <TableRow
-              key={row._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.organization_name}
-              </TableCell>
-              <TableCell align="right">{row.pinfl}</TableCell>
-              <TableCell align="right">{row.tin}</TableCell>
-              <TableCell align="right">{row.created_at}</TableCell>
-              <TableCell align="right">{row.updated_at}</TableCell>
+            <TableRow>
+                <TableCell>
+                    list
+                </TableCell>
             </TableRow>
-          ))}
           <TableRow>
                 <TableCell component="th" scope="row" colSpan={5}>
                     <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
@@ -72,3 +67,19 @@ export default function QuarterlyCompany() {
     </TableContainer>
   );
 }
+
+
+// {compantList.map((row) => (
+//     <TableRow
+//       key={row._id}
+//       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+//     >
+//       <TableCell component="th" scope="row">
+//         {row.organization_name}
+//       </TableCell>
+//       <TableCell align="right">{row.pinfl}</TableCell>
+//       <TableCell align="right">{row.tin}</TableCell>
+//       <TableCell align="right">{row.created_at}</TableCell>
+//       <TableCell align="right">{row.updated_at}</TableCell>
+//     </TableRow>
+//   ))}

@@ -7,6 +7,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import QuarterlyCompany from "../../components/QuarterlyCompany";
 
 const Team = () => {
   const theme = useTheme();
@@ -61,7 +62,7 @@ const Team = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="TEAM" subtitle="welcome to you Team" />
+        <Header title="Choraklik hisobotlar" subtitle="Choraklik hisobotlar ro'yxati" />
       </Box>
       <Box
         m="8px 0 0 0"
@@ -92,7 +93,7 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid rows={mockDataTeam} columns={columns} />
+        <QuarterlyCompany/>
       </Box>
     </Box>
   );
