@@ -83,7 +83,7 @@ export default function PartThree({setInvesment}) {
           className="save-btn"
           onClick={savePartTree}
         >
-          <i className="lni lni-save"></i> Saqlash
+          <i className="lni lni-save"></i> Сохранять
         </button>
       </div>
     </div>

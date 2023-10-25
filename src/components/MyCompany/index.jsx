@@ -129,13 +129,13 @@ export default function MyCompany() {
                                   <label>Korxonangiz brendi bormi:</label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q
@@ -150,13 +150,13 @@ export default function MyCompany() {
                                   </label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q
@@ -171,13 +171,13 @@ export default function MyCompany() {
                                   </label>
                                   <div className="custom-button-div">
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="yesButton"
                                     >
                                       Ha
                                     </button>
                                     <button
-                                      className="custom-button"
+                                      className="cus-btn"
                                       id="noButton"
                                     >
                                       Yo'q
@@ -187,13 +187,6 @@ export default function MyCompany() {
                                 <div className="line-div"></div>
                                 <div className="info-company">
                                   <label> Korxona turi </label>
-                                  <div className="info-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      className="minimal"
-                                    />
-                                    <span>Minimal skin checkbox</span>
-                                  </div>
                                   <div className="info-checkbox">
                                     <input
                                       type="checkbox"

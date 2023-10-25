@@ -141,7 +141,7 @@ export default function PartFour({setResidentalPayroll}) {
         </tbody>
       </table>
       <div className="button-save">
-        <button className="save-btn" onClick={savePartTree}><i className="lni lni-save"></i>Saqlash</button>
+        <button className="save-btn" onClick={savePartTree}><i className="lni lni-save"></i>Сохранять</button>
       </div>
     </div>
   )

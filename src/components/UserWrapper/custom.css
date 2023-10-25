@@ -101,6 +101,15 @@
     margin-bottom: 10px;
 }
 
+.info-checkbox input {
+    width: 1px !important;
+    font-size: 20px;
+}
+
+.info-checkbox input:hover {
+    cursor: pointer;
+}
+
 .custom-label {
     font-size: 14px !important;
 }
