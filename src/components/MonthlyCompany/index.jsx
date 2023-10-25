@@ -1,76 +1,74 @@
 import React, { useEffect, useReducer, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { Toaster, toast } from "sonner";
-import Paper from "@mui/material/Paper";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import { Box, Pagination } from "@mui/material";
-import PageSize from "../PageSize";
-import { postRequest, deleteReports } from "../../utils/resquests";
-import { getlist_v2 } from "../../utils/API_urls";
+import Paper from '@mui/material/Paper';
+import { Box, Pagination } from '@mui/material';
+import PageSize from '../PageSize';
+import { postRequest,deleteReports } from '../../utils/resquests';
+import { getlist_v2 } from '../../utils/API_urls';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-export default function QuarterlyCompany() {
-  const [page, setPage] = useState(1);
-  const [compantList, setCompoundList] = useState([]);
-  const [pageCount, setPageCount] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [a, forceUpdate] = useReducer((x) => x + 1, 0);
-  const [open, setOpen] = React.useState(false);
-  const [id, setID] = React.useState();
+export default function MonthlyCompany() {
 
-  const [audit, setAudit] = useState("Choraklik");
-  const [progress, setProgress] = useState("");
+    const [page, setPage] = useState(1)
+    const [compantList, setCompoundList] = useState([])
+    const [pageCount, setPageCount] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+    const [audit, setAudit] = useState('Oylik')
+    const [a, forceUpdate] = useReducer((x) => x + 1, 0);
+    const [open, setOpen] = React.useState(false);
+    const [id, setID] = React.useState();
+    const [progress, setProgress] = useState('')
 
-  const handelDelete = (data) => {
-    deleteReports(`audit/delete?id=${id}`)
-      .then((response) => {
-        toast.success("Muvaffaqiyatli o'chrildi!");
-        forceUpdate();
-      })
-      .catch((error) => {
-        toast.error("Server xatolik");
-        forceUpdate();
-      });
-    handleClose();
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(!open);
-  };
+    const handelDelete = (data) => {
+        deleteReports(`audit/delete?id=${id}`)
+          .then((response) => {
+            toast.success("Muvaffaqiyatli o'chrildi!");
+            forceUpdate();
+          })
+          .catch((error) => {
+            toast.error("Server xatolik");
+            forceUpdate();
+          });
+        handleClose();
+      };
+      const handleClose = () => {
+        setOpen(false);
+      };
+      const handleOpen = () => {
+        setOpen(!open);
+      };
+    useEffect(() => {
+        postRequest(getlist_v2,
+            {
+                type_of_report: audit,
+                status: progress,
+                pageNumber: page,
+                pageSize: pageSize
+            }).then((response) => {
+                console.log(response.data.reports)
+                setPageCount(response.data.page)
+                setCompoundList(response.data.reports)
+            }).catch((error) => {
+                console.log(error);
+            })
+    }, [page, pageSize])
 
-  useEffect(() => {
-    postRequest(getlist_v2, {
-      type_of_report: audit,
-      status: progress,
-      pageNumber: page,
-      pageSize: pageSize,
-    })
-      .then((response) => {
-        console.log(response.data.reports);
-        setPageCount(response.data.page);
-        setCompoundList(response.data.reports);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [page, pageSize,a]);
-
-  return (
-    <>
+    return (
+        <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -138,5 +136,5 @@ export default function QuarterlyCompany() {
       </Dialog>
       <Toaster key={123} richColors position="bottom-right" />
     </>
-  );
+    );
 }
