@@ -92,10 +92,10 @@ export default function NewQuarterly() {
             <div class="row">
               <div class="col-lg-12 custom-title">
                 <div class="card-style mb-30">
-                  <h4 class="mb-25">Hisobot davri</h4>
+                  <h4 class="mb-25">Отчетный период</h4>
                   <div class="select-style-1">
                     <div class="select-div">
-                      <label>Yil</label>
+                      <label>Год</label>
                       <div class="select-position">
                         <select onChange={handleChangeYear}>
                           {yearList.map((elem) => {
@@ -109,7 +109,7 @@ export default function NewQuarterly() {
                       </div>
                     </div>
                     <div class="select-div">
-                      <label>Chorak</label>
+                      <label>Квартал</label>
                       <div class="select-position">
                         <select onChange={handleChange}>
                           <option value="first">1</option>
@@ -152,10 +152,10 @@ export default function NewQuarterly() {
                   }}
                 />
                 <div class="card-style mb-30">
-                  <h4 class="mb-25">Hisobotni saqlash</h4>
+                  <h4 class="mb-25">Сохранить отчет</h4>
                   <div class="button-add">
                     <button class="save-btn" onClick={handleOpen}>
-                      <i class="lni lni-save"></i>Saqlash
+                      <i class="lni lni-save"></i>Сохранять
                     </button>
                   </div>
                 </div>
@@ -170,8 +170,8 @@ export default function NewQuarterly() {
                     {"Hisobotni yuborishni tasdiqlaysizmi?"}
                   </DialogTitle>
                   <DialogActions>
-                    <Button onClick={handleClose}>Yo'q</Button>
-                    <Button onClick={commitData}>Ha</Button>
+                    <Button onClick={handleClose}>Нет</Button>
+                    <Button onClick={commitData}>Да</Button>
                   </DialogActions>
                 </Dialog>
                 <Toaster richColors position="bottom-right" />

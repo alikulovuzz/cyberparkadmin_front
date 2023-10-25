@@ -112,8 +112,8 @@ export default function PartFive({setImportFunds}) {
         </tbody>
       </table>
       <div className="button-add">
-        <button className="add-btn" onClick={addRowHandler}><i className="lni lni-plus"></i>Qo'shish</button>
-        <button className="save-btn" onClick={saveRowHandler}><i className="lni lni-save"></i>Saqlash</button>
+        <button className="add-btn" onClick={addRowHandler}><i className="lni lni-plus"></i>Добавлять</button>
+        <button className="save-btn" onClick={saveRowHandler}><i className="lni lni-save"></i>Сохранять</button>
       </div>
     </div>
   )
