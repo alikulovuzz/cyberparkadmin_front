@@ -192,13 +192,6 @@ export default function MyCompany() {
                                       type="checkbox"
                                       className="minimal"
                                     />
-                                    <span>Minimal skin checkbox</span>
-                                  </div>
-                                  <div className="info-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      className="minimal"
-                                    />
                                     <span>O'z mahsulotlariga ega korxona</span>
                                   </div>
                                   <div className="info-checkbox">
