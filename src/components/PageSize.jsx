@@ -4,11 +4,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function PageSize() {
+export default function PageSize({setPageSize}) {
   const [age, setAge] = React.useState(10);
 
   const handleChange = (event) => {
+    // console.log(event.target.value)
     setAge(event.target.value);
+    setPageSize(event.target.value);
   };
 
   return (

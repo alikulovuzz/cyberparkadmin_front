@@ -11,7 +11,7 @@ import PageSize from '../PageSize';
 import { postRequest } from '../../utils/resquests';
 import { company_list } from '../../utils/API_urls';
 
-export default function TableExample() {
+export default function QuarterlyCompany() {
 
   const [page, setPage] = useState(1)
   const [compantList, setCompoundList] = useState([])
@@ -24,6 +24,7 @@ export default function TableExample() {
         pageNumber: page,
         pageSize: pageSize
       }).then((response) => {
+        console.log(response.data)
         setPageCount(response.data.page)
         setCompoundList(response.data.list_of_companies)
     }).catch((error) => {
