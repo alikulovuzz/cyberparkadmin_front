@@ -11,7 +11,7 @@ import PageSize from '../PageSize';
 import { postRequest } from '../../utils/resquests';
 import { getlist_v2 } from '../../utils/API_urls';
 
-export default function QuarterlyCompany() {
+export default function MonthlyCompany() {
 
     const [page, setPage] = useState(1)
     const [compantList, setCompoundList] = useState([])

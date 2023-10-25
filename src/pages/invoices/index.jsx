@@ -5,36 +5,15 @@ import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 
 import Header from "../../components/Header";
+import MonthlyCompany from "../../components/MonthlyCompany";
 
 const Invoices = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  const columns = [
-    { field: "id", headerName: "Id" },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 200,
-      cellClassName: "name-column--cell",
-    },
-    { field: "email", headerName: "Email", width: 200 },
-    { field: "phone", headerName: "Phone Number", width: 100 },
-
-    {
-      field: "cost",
-      headerName: "Cost",
-      width: 100,
-      renderCell: ({ row: { cost } }) => {
-        return <Typography color={colors.greenAccent[500]}>${cost}</Typography>;
-      },
-    },
-    { field: "date", headerName: "Date", width: 100 },
-  ];
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="INVOICES" subtitle="welcome to you Invoices" />
+        <Header title="Oylik daromad" subtitle="Oylik daromad ro'yxati" />
       </Box>
       <Box
         m="8px 0 0 0"
@@ -68,7 +47,7 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <MonthlyCompany/>
       </Box>
     </Box>
   );

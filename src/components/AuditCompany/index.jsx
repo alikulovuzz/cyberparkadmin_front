@@ -11,13 +11,13 @@ import PageSize from '../PageSize';
 import { postRequest } from '../../utils/resquests';
 import { getlist_v2 } from '../../utils/API_urls';
 
-export default function QuarterlyCompany() {
+export default function AuditCompany() {
 
     const [page, setPage] = useState(1)
     const [compantList, setCompoundList] = useState([])
     const [pageCount, setPageCount] = useState(1)
     const [pageSize, setPageSize] = useState(10)
-    const [audit, setAudit] = useState('Choraklik')
+    const [audit, setAudit] = useState('Audit')
     const [progress, setProgress] = useState('')
 
     useEffect(() => {
