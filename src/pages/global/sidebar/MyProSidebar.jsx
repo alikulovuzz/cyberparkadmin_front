@@ -13,6 +13,8 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SwitchRightOutlinedIcon from "@mui/icons-material/SwitchRightOutlined";
 import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
+import "../../../styles/admin.css";
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -106,7 +108,7 @@ const MyProSidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMIN.CP
+                   <h3 style={{color: "#000", padding:""}}>Cyber Admin</h3>
                 </Typography>
                 <IconButton
                   onClick={
@@ -133,26 +135,17 @@ const MyProSidebar = () => {
                 <img
                   className="avater-image"
                   alt="profile user"
-                  width="100px"
-                  height="100px"
-                  src={"../../assets/user.png"}
+                  width="150px"
+                  height="150px"
+                  src={".../../assets/logo.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
-              </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h3"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  Harun Jeylan
-                </Typography>
               </Box>
             </Box>
           )}
           <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Item
+              className="icon-admin"
               title="Companiyalar"
               to="/admin"
               icon={<HomeOutlinedIcon />}

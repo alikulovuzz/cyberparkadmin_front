@@ -20,6 +20,7 @@ import Header from "../../components/Header";
 // import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import TableCompany from "../../components/TableCompany";
+import "../../styles/admin.css"
 // import ProgressCircle from "../../components/ProgressCircle";
 
 const Dashboard = () => {
@@ -40,15 +41,7 @@ const Dashboard = () => {
         <Header title="Kompaniyalar" subtitle="Komaniyalar ro'yxati" />
 
         <Box>
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
+          <Button className="xls-download">
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Xlsx ga yuklab olish
           </Button>
