@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
-import { deleteReports, getReports } from "../../utils/resquests";
+import { deleteReports, getReports, getRequest } from "../../utils/resquests";
 import Button from "@mui/material/Button";
 import { UserContext } from "../../context/UserContext";
 import { Toaster, toast } from "sonner";
@@ -67,7 +67,7 @@ export default function ReportsTable(auditType) {
   };
   useEffect(() => {
     if (user) {
-      getReports(
+      getRequest(
         `audit/getByCompany?id=${user._id}&type=${auditType.auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
       )
         .then((response) => {

@@ -8,7 +8,7 @@ const instance = axios.create({
 export const  headerConfig = () => {
   return {
     // Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-    // "Content-Type": "application/json",
+    "Content-Type": "application/json",
     "x-access-token": sessionStorage.getItem("x-access-token"),
   }
 }

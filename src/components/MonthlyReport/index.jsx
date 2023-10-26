@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { getReports } from "../../utils/resquests";
+import { getReports, getRequest } from "../../utils/resquests";
 import { UserContext } from "../../context/UserContext";
 import { Suspense } from "react";
 import AddReportDialog from "../AddReportDialog";
@@ -17,7 +17,7 @@ export default function MonthlyReport() {
 
   useEffect(() => {
     if (user) {
-      getReports(
+      getRequest(
         `audit/getByCompany?id=${user._id}&type=${auditType}&pageNumber=${pageNumber}&pageSize=${pageSize}`
       )
         .then((response) => {
@@ -28,6 +28,7 @@ export default function MonthlyReport() {
         });
     }
   }, [user]);
+
   return (
     <>
       <div className="main-panel">
@@ -37,10 +38,7 @@ export default function MonthlyReport() {
               <section className="content-header custom-header">
                 <h3>Oylik hisobot</h3>
                 <ol className="breadcrumb">
-                  {/* <Link to="new-quarterly"> */}
-
                   <AddReportDialog type_of_report="Oylik" />
-                  {/* </Link> */}
                 </ol>
               </section>
               <form action="#" className="mt-30">
