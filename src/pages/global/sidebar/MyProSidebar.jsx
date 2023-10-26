@@ -56,16 +56,15 @@ const MyProSidebar = () => {
         "& .menu-icon": {
           backgroundColor: "transparent !important",
         },
+        "& .menu-icon:hover": {
+          color: "#45B5AA !important"
+        },
         "& .menu-item": {
           // padding: "5px 35px 5px 20px !important",
           backgroundColor: "transparent !important",
         },
         "& .menu-anchor": {
           color: "inherit !important",
-          backgroundColor: "transparent !important",
-        },
-        "& .menu-item:hover": {
-          color: `${colors.blueAccent[500]} !important`,
           backgroundColor: "transparent !important",
         },
         "& .menu-item.active": {
