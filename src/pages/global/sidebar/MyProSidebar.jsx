@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import { tokens } from "../../../theme";
 import { useTheme, Box, Typography, IconButton } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SwitchRightOutlinedIcon from "@mui/icons-material/SwitchRightOutlined";
 import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 import "../../../styles/admin.css";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -86,6 +87,7 @@ const MyProSidebar = () => {
                 <MenuOutlinedIcon onClick={() => collapseSidebar()} />
               ) : sidebarRTL ? (
                 <SwitchLeftOutlinedIcon
+                  className="admin-icon"
                   onClick={() => setSidebarRTL(!sidebarRTL)}
                 />
               ) : (
@@ -95,19 +97,20 @@ const MyProSidebar = () => {
               )
             }
             style={{
-              margin: "10px 0 20px 0",
+              margin: "10px 20px 10px 20px",
+              padding: "0px",
               color: colors.grey[100],
             }}
           >
             {!collapsed && (
               <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                   <h3 style={{color: "#000", padding:""}}>Cyber Admin</h3>
+                <Typography variant="h4" color={colors.grey[100]}>
+                  <h3 style={{ color: "#000", padding: "0px", margin: "0px", fontSize: "24px" }}>Cyber Admin</h3>
                 </Typography>
                 <IconButton
                   onClick={
@@ -132,19 +135,17 @@ const MyProSidebar = () => {
                 }}
               >
                 <img
-                  className="avater-image"
                   alt="profile user"
-                  width="150px"
-                  height="150px"
+                  width="180px"
+                  height="50px"
                   src={".../../assets/logo.png"}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                // style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
             </Box>
           )}
           <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Item
-              className="icon-admin"
               title="Companiyalar"
               to="/admin"
               icon={<HomeOutlinedIcon />}
@@ -153,7 +154,7 @@ const MyProSidebar = () => {
             />
 
             <Typography
-              variant="h6"
+              variant="h5"
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
@@ -162,21 +163,21 @@ const MyProSidebar = () => {
             <Item
               title="Choraklik hisobotlar"
               to="team"
-              icon={<PeopleOutlinedIcon />}
+              icon={<PendingActionsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Auditorlik xulosasi"
               to="contacts"
-              icon={<ContactsOutlinedIcon />}
+              icon={<NoteAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Oylik daromad"
               to="invoices"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<AccountBalanceWalletOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
