@@ -78,6 +78,7 @@ export default function MonthlyCompany() {
               <TableCell align="right">PINFL</TableCell>
               <TableCell align="right">Yil</TableCell>
               <TableCell align="right">Status</TableCell>
+              <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
               <TableCell align="right">Ko'rish</TableCell>
               <TableCell align="right">O'chirish</TableCell>
@@ -96,7 +97,8 @@ export default function MonthlyCompany() {
                 <TableCell align="right">{row.company_id.pinfl}</TableCell>
                 <TableCell align="right">{row.year}</TableCell>
                 <TableCell align="right">{row.status}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
+                <TableCell align="right">{new Date(row.createdAt).toLocaleDateString("en-GB")}</TableCell>
+                <TableCell align="right">{new Date(row.createdAt).toLocaleTimeString("en-GB")}</TableCell>
                 <TableCell align="right">
                   <a href={row.file_link} download>
                     Yuklab olish

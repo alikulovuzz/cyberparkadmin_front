@@ -69,72 +69,74 @@ export default function MonthlyCompany() {
 
     return (
         <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Tashkilot nomi</TableCell>
-              <TableCell align="right">Davr</TableCell>
-              <TableCell align="right">PINFL</TableCell>
-              <TableCell align="right">Yil</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Yaratilgan vaqt</TableCell>
-              <TableCell align="right">Ko'rish</TableCell>
-              <TableCell align="right">O'chirish</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {compantList.map((row) => (
-              <TableRow
-                key={row._id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.company_id.organization_name}
-                </TableCell>
-                <TableCell align="right">{row.quarterly}</TableCell>
-                <TableCell align="right">{row.company_id.pinfl}</TableCell>
-                <TableCell align="right">{row.year}</TableCell>
-                <TableCell align="right">{row.status}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
-                <TableCell align="right">
-                  <a href={row.file_link} download>
-                    Yuklab olish
-                  </a>
-                </TableCell>
-                <TableCell align="right">
-                  <p
-                    className="custom-btn-delete"
-                    onClick={() => {
-                      // handelDelete(data._id);
-                      setID(row._id);
-                      handleOpen();
-                    }}
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Tashkilot nomi</TableCell>
+                  <TableCell align="right">Davr</TableCell>
+                  <TableCell align="right">PINFL</TableCell>
+                  <TableCell align="right">Yil</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                  <TableCell align="right">Yaratilgan kun</TableCell>
+                  <TableCell align="right">Yaratilgan vaqt</TableCell>
+                  <TableCell align="right">Ko'rish</TableCell>
+                  <TableCell align="right">O'chirish</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {compantList.map((row) => (
+                  <TableRow
+                    key={row._id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <i className="ti-trash"></i>
-                  </p>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>
-          {"Hisobotni o'chirishni tasdiqlaysizmi?"}
-        </DialogTitle>
-        <DialogActions>
-          <Button onClick={handleClose}>Yo'q</Button>
-          <Button onClick={handelDelete}>Ha</Button>
-        </DialogActions>
-      </Dialog>
-      <Toaster key={123} richColors position="bottom-right" />
-    </>
+                    <TableCell component="th" scope="row">
+                      {row.company_id.organization_name}
+                    </TableCell>
+                    <TableCell align="right">{row.quarterly}</TableCell>
+                    <TableCell align="right">{row.company_id.pinfl}</TableCell>
+                    <TableCell align="right">{row.year}</TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="right">{new Date(row.createdAt).toLocaleDateString("en-GB")}</TableCell>
+                    <TableCell align="right">{new Date(row.createdAt).toLocaleTimeString("en-GB")}</TableCell>
+                    <TableCell align="right">
+                      <a href={row.file_link} download>
+                        Yuklab olish
+                      </a>
+                    </TableCell>
+                    <TableCell align="right">
+                      <p
+                        className="custom-btn-delete"
+                        onClick={() => {
+                          // handelDelete(data._id);
+                          setID(row._id);
+                          handleOpen();
+                        }}
+                      >
+                        <i className="ti-trash"></i>
+                      </p>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>
+              {"Hisobotni o'chirishni tasdiqlaysizmi?"}
+            </DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose}>Yo'q</Button>
+              <Button onClick={handelDelete}>Ha</Button>
+            </DialogActions>
+          </Dialog>
+          <Toaster key={123} richColors position="bottom-right" />
+       </>
     );
 }
