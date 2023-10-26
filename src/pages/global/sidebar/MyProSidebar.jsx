@@ -162,21 +162,21 @@ const MyProSidebar = () => {
             </Typography>
             <Item
               title="Choraklik hisobotlar"
-              to="team"
+              to="choraklik"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Auditorlik xulosasi"
-              to="contacts"
+              to="audit"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Oylik daromad"
-              to="invoices"
+              to="oylik"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

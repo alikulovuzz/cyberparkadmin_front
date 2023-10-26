@@ -36,9 +36,9 @@ export default function TableExample() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>organization_name</TableCell>
-            <TableCell align="right">pinfl</TableCell>
-            <TableCell align="right">tin</TableCell>
+            <TableCell>Tashkilot nomi</TableCell>
+            <TableCell align="right">PINFL</TableCell>
+            <TableCell align="right">TIN</TableCell>
             <TableCell align="right">created_at</TableCell>
             <TableCell align="right">updated_at</TableCell>
           </TableRow>

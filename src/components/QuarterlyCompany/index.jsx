@@ -82,7 +82,7 @@ export default function QuarterlyCompany() {
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
-              <TableCell align="right">Ko'rish</TableCell>
+              {/* <TableCell align="right">Ko'rish</TableCell> */}
               <TableCell align="right">O'chirish</TableCell>
             </TableRow>
           </TableHead>
@@ -101,11 +101,11 @@ export default function QuarterlyCompany() {
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right">{new Date(row.createdAt).toLocaleDateString("en-GB")}</TableCell>
                 <TableCell align="right">{new Date(row.createdAt).toLocaleTimeString("en-GB")}</TableCell>
-                <TableCell align="right">
+                {/* <TableCell align="right">
                   <a href={row.file_link} download>
                     Yuklab olish
                   </a>
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="right">
                   <p
                     className="custom-btn-delete"

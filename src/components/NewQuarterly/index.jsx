@@ -61,9 +61,9 @@ export default function NewQuarterly() {
       }).then((response) => {
           toast.success("Muvaffaqiyatli!");
           handleClose()                    
-          console.log(response)
+          // console.log(response)
       }).catch((error) => {
-          console.log(error);
+          // console.log(error);
           handleClose()
           toast.error("Serverda xatolik.");                    
       })
@@ -123,31 +123,31 @@ export default function NewQuarterly() {
                 </div>
                 <PartOne
                   setReleaseProduct={(val) => {
-                    console.log(val);
+                    // console.log(val);
                     setReleaseProduct(val);
                   }}
                 />
                 <PartTwo
                   setReleaseRepublic={(val) => {
-                    console.log(val);
+                    // console.log(val);
                     setReleaseRepublic(val);
                   }}
                 />
                 <PartThree
                   setInvesment={(val) => {
-                    console.log(val);
+                    // console.log(val);
                     setInvesment(val);
                   }}
                 />
                 <PartFour
                   setResidentalPayroll={(val) => {
-                    console.log(val);
+                    // console.log(val);
                     setResidentalPayroll(val);
                   }}
                 />
                 <PartFive
                   setImportFunds={(val) => {
-                    console.log(val);
+                    // console.log(val);
                     setImportFunds(val);
                   }}
                 />

@@ -49,9 +49,9 @@ const App = () => {
               <Route path="/" element={<MainComponent />}>
                 <Route path="admin" element={<Admin />}>
                   <Route index element={<Dashboard />} />
-                  <Route path="team" element={<Team />} />
-                  <Route path="contacts" element={<Contacts />} />
-                  <Route path="invoices" element={<Invoices />} />
+                  <Route path="choraklik" element={<Team />} />
+                  <Route path="audit" element={<Contacts />} />
+                  <Route path="oylik" element={<Invoices />} />
                   {/* <Route path="form" element={<Form />} />
                   <Route path="bar" element={<Bar />} />
                   <Route path="pie" element={<Pie />} />
