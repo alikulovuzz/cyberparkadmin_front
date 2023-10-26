@@ -65,7 +65,7 @@ export default function MonthlyCompany() {
             }).catch((error) => {
                 console.log(error);
             })
-    }, [page, pageSize])
+    }, [page, pageSize,a])
 
     return (
         <>
