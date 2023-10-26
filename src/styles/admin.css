@@ -11,5 +11,10 @@
 }
 
 .icon-admin {
-    color: rebeccapurple !important;
+    color: #45B5AA !important;
+    font-size: 40px !important;
+}
+
+.admin-icon {
+    color: #45B5AA !important;
 }
