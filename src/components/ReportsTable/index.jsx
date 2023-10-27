@@ -95,27 +95,6 @@ export default function ReportsTable(auditType) {
             <th></th>
             <th></th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Nimadir</td>
-            <td>John Doe1</td>
-            <td>Bacon ipsum doner.</td>
-            <td>11-7-2014</td>
-            <td>16:43</td>
-            <td>
-              <button className="custom-btn-success">Approved</button>
-            </td>
-            <td>
-              <a href="test_file.zip" download>
-                Yuklab olish
-              </a>
-            </td>
-            <td>
-              <p className="custom-btn-delete">
-                <i className="ti-trash"></i>
-              </p>
-            </td>
-          </tr>
           {reports?.map((data, index) => {
             return (
               <>
