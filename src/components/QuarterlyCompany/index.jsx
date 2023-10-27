@@ -56,6 +56,18 @@ export default function QuarterlyCompany() {
       });
     handleClose();
   };
+  const formatStatus = (data) => {
+    switch (data) {
+      case "not_in_progress":
+        return <button className="custom-btn-wait">Yuborilgan</button>;
+      case "disabled":
+        return <button className="custom-btn-error">Bekor qilindi</button>;
+      case "progress":
+        return <button className="custom-btn-accept">Jarayonda</button>;
+      case "finished":
+        return <button className="custom-btn-success">Tasdiqlandi</button>;
+    }
+  };
   const handleChangeStatus = (data) => {
     postRequest(`audit/status_change`, {
         report_id: id,
@@ -143,7 +155,7 @@ export default function QuarterlyCompany() {
                     handleOpenStatus();
                   }}
                 >
-                  {row.status}
+                  {formatStatus(row.status)}
                 </TableCell>
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleDateString("en-GB")}
