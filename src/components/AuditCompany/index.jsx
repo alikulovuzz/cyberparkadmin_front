@@ -1,74 +1,76 @@
 import React, { useEffect, useReducer, useState } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import { Toaster, toast } from "sonner";
 import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import Paper from '@mui/material/Paper';
-import { Box, Pagination } from '@mui/material';
-import PageSize from '../PageSize';
-import { postRequest,deleteReports } from '../../utils/resquests';
-import { getlist_v2 } from '../../utils/API_urls';
+import Paper from "@mui/material/Paper";
+import { Box, Pagination } from "@mui/material";
+import PageSize from "../PageSize";
+import { postRequest, deleteReports } from "../../utils/resquests";
+import { getlist_v2 } from "../../utils/API_urls";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-export default function MonthlyCompany() {
+export default function AuditCompany() {
+  const [page, setPage] = useState(1);
+  const [compantList, setCompoundList] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [a, forceUpdate] = useReducer((x) => x + 1, 0);
+  const [open, setOpen] = React.useState(false);
+  const [id, setID] = React.useState();
 
-    const [page, setPage] = useState(1)
-    const [compantList, setCompoundList] = useState([])
-    const [pageCount, setPageCount] = useState(1)
-    const [pageSize, setPageSize] = useState(10)
-    const [audit, setAudit] = useState('Audit')
-    const [a, forceUpdate] = useReducer((x) => x + 1, 0);
-    const [open, setOpen] = React.useState(false);
-    const [id, setID] = React.useState();
-    const [progress, setProgress] = useState('')
+  const [audit, setAudit] = useState("Audit");
+  const [progress, setProgress] = useState("");
 
-    const handelDelete = (data) => {
-        deleteReports(`audit/delete?id=${id}`)
-          .then((response) => {
-            toast.success("Muvaffaqiyatli o'chrildi!");
-            forceUpdate();
-          })
-          .catch((error) => {
-            toast.error("Server xatolik");
-            forceUpdate();
-          });
-        handleClose();
-      };
-      const handleClose = () => {
-        setOpen(false);
-      };
-      const handleOpen = () => {
-        setOpen(!open);
-      };
-    useEffect(() => {
-        postRequest(getlist_v2,
-            {
-                type_of_report: audit,
-                status: progress,
-                pageNumber: page,
-                pageSize: pageSize
-            }).then((response) => {
-                console.log(response.data.reports)
-                setPageCount(response.data.page)
-                setCompoundList(response.data.reports)
-            }).catch((error) => {
-                console.log(error);
-            })
-    }, [page, pageSize,a])
+  const handelDelete = (data) => {
+    deleteReports(`audit/delete?id=${id}`)
+      .then((response) => {
+        toast.success("Muvaffaqiyatli o'chrildi!");
+        forceUpdate();
+      })
+      .catch((error) => {
+        toast.error("Server xatolik");
+        forceUpdate();
+      });
+    handleClose();
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
-    return (
-        <>
+  useEffect(() => {
+    postRequest(getlist_v2, {
+      type_of_report: audit,
+      status: progress,
+      pageNumber: page,
+      pageSize: pageSize,
+    })
+      .then((response) => {
+        console.log(response.data.reports);
+        setPageCount(response.data.page);
+        setCompoundList(response.data.reports);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [page, pageSize,a]);
+
+  return (
+    <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -80,7 +82,7 @@ export default function MonthlyCompany() {
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
-              <TableCell align="right">Ko'rish</TableCell>
+              {/* <TableCell align="right">Ko'rish</TableCell> */}
               <TableCell align="right">O'chirish</TableCell>
             </TableRow>
           </TableHead>
@@ -91,7 +93,7 @@ export default function MonthlyCompany() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.company_id.organization_name}
+                  {row.company_id.organization_name?row.company_id.organization_name:row.company_id}
                 </TableCell>
                 <TableCell align="right">{row.quarterly}</TableCell>
                 <TableCell align="right">{row.company_id.pinfl}</TableCell>
@@ -99,11 +101,11 @@ export default function MonthlyCompany() {
                 <TableCell align="right">{row.status}</TableCell>
                 <TableCell align="right">{new Date(row.createdAt).toLocaleDateString("en-GB")}</TableCell>
                 <TableCell align="right">{new Date(row.createdAt).toLocaleTimeString("en-GB")}</TableCell>
-                <TableCell align="right">
+                {/* <TableCell align="right">
                   <a href={row.file_link} download>
                     Yuklab olish
                   </a>
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="right">
                   <p
                     className="custom-btn-delete"
@@ -138,5 +140,5 @@ export default function MonthlyCompany() {
       </Dialog>
       <Toaster key={123} richColors position="bottom-right" />
     </>
-    );
+  );
 }

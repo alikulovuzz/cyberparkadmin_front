@@ -53,6 +53,7 @@ export default function SignInSide({ admin }) {
     postRequest(req_url, req_body)
       .then((response) => {
         console.log(response)
+        console.log(response.data.token)
         if (response.data.token) {
           sessionStorage.setItem("x-access-token", response.data.token);
           // console.log(response.data.token)

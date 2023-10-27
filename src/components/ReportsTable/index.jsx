@@ -54,6 +54,7 @@ export default function ReportsTable(auditType) {
           forceUpdate()
         })
         .catch((error) => {
+          console.log(error)
           toast.error("Server xatolik");
           forceUpdate()
         });

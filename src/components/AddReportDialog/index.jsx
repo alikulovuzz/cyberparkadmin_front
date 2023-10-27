@@ -70,7 +70,6 @@ export default function AddReportDialog(type_of_report) {
               toast.success("Muvaffaqiyatli!");
               handleClose();
               console.log(response);
-              type_of_report.setImportFunds()
             })
             .catch((error) => {
               console.error(error);
