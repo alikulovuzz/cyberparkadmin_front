@@ -65,11 +65,12 @@ export const getReports = (url, data) => {
                     });
             })
     }
-    export const deleteReports = (url, data) => {
+
+
+    export const deleteReports = (url) => {
         return new Promise((resolve, reject) => {
             axios.delete(
                 url,
-                data,
                 {
                     headers: headerConfig(),
                 }
