@@ -39,8 +39,8 @@ export default function TableExample() {
             <TableCell>Tashkilot nomi</TableCell>
             <TableCell align="right">PINFL</TableCell>
             <TableCell align="right">TIN</TableCell>
-            <TableCell align="right">created_at</TableCell>
-            <TableCell align="right">updated_at</TableCell>
+            <TableCell align="right">Yaratilgan_sana</TableCell>
+            <TableCell align="right">Oxirgi_yangilanish</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
