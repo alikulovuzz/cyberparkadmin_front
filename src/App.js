@@ -35,6 +35,7 @@ import MonthlyReport from "./components/MonthlyReport";
 import NewQuarterly from "./components/NewQuarterly";
 import { ErrorBoundary } from 'react-error-boundary';
 import AboutUs from "./components/AboutUs";
+import DetailidReport from "./components/QuarterlyDetails/Index";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -49,7 +50,10 @@ const App = () => {
               <Route path="/" element={<MainComponent />}>
                 <Route path="admin" element={<Admin />}>
                   <Route index element={<Dashboard />} />
-                  <Route path="choraklik" element={<Team />} />
+                  <Route path="choraklik" element={<Outlet />} >
+                    <Route index element={<Team />} />
+                  </Route>
+                  <Route path='detail_report' element={<DetailidReport />} />
                   <Route path="audit" element={<Contacts />} />
                   <Route path="oylik" element={<Invoices />} />
                   {/* <Route path="form" element={<Form />} />

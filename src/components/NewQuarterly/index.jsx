@@ -16,6 +16,7 @@ import { postRequest} from '../../utils/resquests';
 import Slide from "@mui/material/Slide";
 import { useState } from "react";
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from "react-router-dom";
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -32,6 +33,8 @@ export default function NewQuarterly() {
   const [quarterly, setQuarterly] = React.useState("first");
   const [yearsd, setYears] = React.useState(2020);
   const { user } = React.useContext(UserContext)
+  const navigate = useNavigate();
+
 
   const handleChangeYear = (event) => {
     setYears(event.target.value);
@@ -60,7 +63,10 @@ export default function NewQuarterly() {
         quarterly:quarterly
       }).then((response) => {
           toast.success("Muvaffaqiyatli!");
-          handleClose()                    
+          handleClose()
+          navigate({
+            pathname: '/user'
+          });
           // console.log(response)
       }).catch((error) => {
           // console.log(error);
