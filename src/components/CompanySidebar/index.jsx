@@ -85,7 +85,7 @@ export default function CompanySidebar() {
                             </li>
                         </ul>
                     </div>
-                    {/* <NavLink
+                    <NavLink
                         to="contact"
                         className={({ isActive }) =>
                             isActive ? "nav-item active" : "nav-item"
@@ -96,7 +96,7 @@ export default function CompanySidebar() {
                             <i className="ti-user menu-icon"></i>
                             <span className="menu-title">Bog'lanish uchun</span>
                         </span>
-                    </NavLink> */}
+                    </NavLink>
                 </div>
             </nav>
         </>
