@@ -38,11 +38,11 @@ export default function ReportsTable(auditType) {
   const formatStatus = (data) => {
     switch (data) {
       case "not_in_progress":
-        return <button className="custom-btn-wait">Yuborilgan</button>;
+        return <button className="custom-btn-wait">Imzolanish jarayonida</button>;
       case "disabled":
-        return <button className="custom-btn-error">Bekor qilindi</button>;
+        return <button className="custom-btn-error">Rad etildi</button>;
       case "progress":
-        return <button className="custom-btn-accept">Jarayonda</button>;
+        return <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>;
       case "finished":
         return <button className="custom-btn-success">Tasdiqlandi</button>;
     }
