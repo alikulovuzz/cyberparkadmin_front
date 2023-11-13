@@ -115,7 +115,7 @@ export default function ReportsTable(auditType) {
                       Yuklab olish
                     </a>
                   </td>
-                  <td>
+                  {/* <td>
                     <p className="custom-btn-delete"
                       onClick={() => {
                         // handelDelete(data._id);
@@ -125,7 +125,7 @@ export default function ReportsTable(auditType) {
                     >
                       <i className="ti-trash"></i>
                     </p>
-                  </td>
+                  </td> */}
                 </tr>
               </>
             );

@@ -69,7 +69,7 @@ export default function AboutUs() {
                                                                 <div className="custom-circle">
                                                                     <div className="custom-circle-mini">
                                                                         <AlternateEmailIcon/>
-                                                                    </div>
+                                                                    </div> 
                                                                 </div>
                                                                 <div className="contact-info-title">
                                                                     <h5>Elektron pochta</h5>
@@ -93,7 +93,7 @@ export default function AboutUs() {
                                                         </a>
                                                         <a href="https://www.instagram.com/cyberpark.uz/">
                                                             <div className="custom-contact">
-                                                                <div className="custom-circle">
+                                                                    <div className="custom-circle">
                                                                     <div className="custom-circle-mini">
                                                                        <InstagramIcon/>
                                                                     </div>
@@ -117,7 +117,7 @@ export default function AboutUs() {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </a>
+                                                        </a>  
                                                     </div>
                                                 </div>
                                             </div>
