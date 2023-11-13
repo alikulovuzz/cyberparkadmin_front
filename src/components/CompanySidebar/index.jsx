@@ -80,7 +80,7 @@ export default function CompanySidebar() {
                                     className={({ isActive }) =>
                                         isActive ? "nav-link active" : "nav-link"}
                                 >
-                                    Oylik daromad
+                                    Soliq hisobotlari
                                 </NavLink>
                             </li>
                         </ul>

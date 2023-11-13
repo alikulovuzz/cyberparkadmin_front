@@ -79,11 +79,11 @@ export default function MonthlyCompany() {
   const formatStatus = (data) => {
     switch (data) {
       case "not_in_progress":
-        return <button className="custom-btn-wait">Yuborilgan</button>;
+        return <button className="custom-btn-wait">Imzolash jarayonida</button>;
       case "disabled":
-        return <button className="custom-btn-error">Bekor qilindi</button>;
+        return <button className="custom-btn-error">Rad etildi</button>;
       case "progress":
-        return <button className="custom-btn-accept">Jarayonda</button>;
+        return <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>;
       case "finished":
         return <button className="custom-btn-success">Tasdiqlandi</button>;
     }
@@ -218,8 +218,8 @@ export default function MonthlyCompany() {
                 // size='small'
                 onChange={handleChange}
               >
-                <MenuItem value={"not_in_progress"}>Yuborildi</MenuItem>
-                <MenuItem value={"progress"}>Ko'rilmoqda</MenuItem>
+                <MenuItem value={"not_in_progress"}>Imzolash jarayonida</MenuItem>
+                <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
                 <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
                 <MenuItem value={"disabled"}>Rad etildi</MenuItem>
               </Select>

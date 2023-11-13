@@ -175,7 +175,7 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Oylik daromad"
+              title="Soliq hisobotlari"
               to="oylik"
               icon={<AccountBalanceWalletOutlinedIcon />}
               selected={selected}
