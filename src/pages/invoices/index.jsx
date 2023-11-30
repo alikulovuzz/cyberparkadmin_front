@@ -13,7 +13,7 @@ const Invoices = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Oylik daromad" subtitle="Oylik daromad ro'yxati" />
+        <Header title="Soliq hisobotlari" subtitle="Soliq hisobotlari ro'yxati" />
       </Box>
       <Box
         m="8px 0 0 0"

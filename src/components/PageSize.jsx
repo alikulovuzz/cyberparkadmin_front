@@ -15,7 +15,7 @@ export default function PageSize({setPageSize}) {
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Page size</InputLabel>
+      <InputLabel id="demo-select-small-label">Sahifa soni</InputLabel>
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"

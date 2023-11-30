@@ -83,6 +83,18 @@ export default function AuditCompany() {
   const handleOpen = () => {
     setOpen(!open);
   };
+  const formatStatus = (data) => {
+    switch (data) {
+      case "not_in_progress":
+        return <button className="custom-btn-wait">Imzolanish jarayonida</button>;
+      case "disabled":
+        return <button className="custom-btn-error">Rad etildi</button>;
+      case "progress":
+        return <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>;
+      case "finished":
+        return <button className="custom-btn-success">Tasdiqlandi</button>;
+    }
+  };
   const handleOpenStatus = () => {
     setOpenstatus(!open);
   };
@@ -117,7 +129,7 @@ export default function AuditCompany() {
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
-              {/* <TableCell align="right">Ko'rish</TableCell> */}
+              <TableCell align="right">Ko'rish</TableCell>
               <TableCell align="right">O'chirish</TableCell>
             </TableRow>
           </TableHead>
@@ -143,7 +155,7 @@ export default function AuditCompany() {
                     handleOpenStatus();
                   }}
                 >
-                  {row.status}
+                  {formatStatus(row.status)}
                 </TableCell>
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleDateString("en-GB")}
@@ -151,11 +163,11 @@ export default function AuditCompany() {
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleTimeString("en-GB")}
                 </TableCell>
-                {/* <TableCell align="right">
+                <TableCell align="right">
                   <a href={row.file_link} download>
                     Yuklab olish
                   </a>
-                </TableCell> */}
+                </TableCell>
                 <TableCell align="right">
                   <p
                     className="custom-btn-delete"
@@ -206,8 +218,8 @@ export default function AuditCompany() {
                 // size='small'
                 onChange={handleChange}
               >
-                <MenuItem value={"not_in_progress"}>Yuborildi</MenuItem>
-                <MenuItem value={"progress"}>Ko'rilmoqda</MenuItem>
+                <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+                <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
                 <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
                 <MenuItem value={"disabled"}>Rad etildi</MenuItem>
               </Select>

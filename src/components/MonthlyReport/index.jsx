@@ -36,7 +36,7 @@ export default function MonthlyReport() {
           <div className="row">
             <div className="col-lg-12 grid-margin">
               <section className="content-header custom-header">
-                <h3>Oylik hisobot</h3>
+                <h3>Soliq hisobotlari</h3>
                 <ol className="breadcrumb">
                   <AddReportDialog type_of_report="Oylik" />
                 </ol>

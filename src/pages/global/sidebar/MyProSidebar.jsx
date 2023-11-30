@@ -146,7 +146,7 @@ const MyProSidebar = () => {
           )}
           <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Item
-              title="Companiyalar"
+              title="Kompaniyalar"
               to="/admin"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -175,7 +175,7 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Oylik daromad"
+              title="Soliq hisobotlari"
               to="oylik"
               icon={<AccountBalanceWalletOutlinedIcon />}
               selected={selected}

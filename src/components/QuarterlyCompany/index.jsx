@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -40,6 +41,7 @@ export default function QuarterlyCompany() {
   const [open, setOpen] = React.useState(false);
   const [openstatus, setOpenstatus] = React.useState(false);
   const [id, setID] = React.useState();
+  const navigate = useNavigate();
 
   const [audit, setAudit] = useState("Choraklik");
   const [progress, setProgress] = useState("");
@@ -55,6 +57,18 @@ export default function QuarterlyCompany() {
         forceUpdate();
       });
     handleClose();
+  };
+  const formatStatus = (data) => {
+    switch (data) {
+      case "not_in_progress":
+        return <button className="custom-btn-wait">Imzolanish jarayonida</button>;
+      case "disabled":
+        return <button className="custom-btn-error">Rad etildi</button>;
+      case "progress":
+        return <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>;
+      case "finished":
+        return <button className="custom-btn-success">Tasdiqlandi</button>;
+    }
   };
   const handleChangeStatus = (data) => {
     postRequest(`audit/status_change`, {
@@ -117,7 +131,7 @@ export default function QuarterlyCompany() {
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
-              {/* <TableCell align="right">Ko'rish</TableCell> */}
+              <TableCell align="right">Ko'rish</TableCell>
               <TableCell align="right">O'chirish</TableCell>
             </TableRow>
           </TableHead>
@@ -143,7 +157,7 @@ export default function QuarterlyCompany() {
                     handleOpenStatus();
                   }}
                 >
-                  {row.status}
+                  {formatStatus(row.status)}
                 </TableCell>
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleDateString("en-GB")}
@@ -151,11 +165,17 @@ export default function QuarterlyCompany() {
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleTimeString("en-GB")}
                 </TableCell>
-                {/* <TableCell align="right">
-                  <a href={row.file_link} download>
-                    Yuklab olish
+                <TableCell align="right">
+                  <a href="#" onClick={() => {
+                      // handelDelete(data._id);
+                      navigate({
+                        pathname: '/admin/detail_report',
+                        search: `?id=${row._id}`,
+                      });
+                    }}>
+                    KO'RISH
                   </a>
-                </TableCell> */}
+                </TableCell>
                 <TableCell align="right">
                   <p
                     className="custom-btn-delete"
@@ -206,8 +226,8 @@ export default function QuarterlyCompany() {
                 // size='small'
                 onChange={handleChange}
               >
-                <MenuItem value={"not_in_progress"}>Yuborildi</MenuItem>
-                <MenuItem value={"progress"}>Ko'rilmoqda</MenuItem>
+                <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+                <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
                 <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
                 <MenuItem value={"disabled"}>Rad etildi</MenuItem>
               </Select>
