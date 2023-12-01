@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { deleteReports, getReports, getRequest } from "../../utils/resquests";
+import { MuiFileInput } from "mui-file-input";
 import { UserContext } from "../../context/UserContext";
 import { useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
@@ -21,14 +22,32 @@ export default function DetailidReport() {
     setQuarterly(event.target.value);
   };
   const formatQuarter = (event) => {
-    if (event=="first") {
-      return "1"
-    }else if (event=="second") {
-      return "2"
-    }else if (event=="third") {
-      return "3"
+    if (event == "first") {
+      return "1";
+    } else if (event == "second") {
+      return "2";
+    } else if (event == "third") {
+      return "3";
+    } else {
+      return "4";
+    }
+  };
+  const formatQQS = (event) => {
+    if (event == "yes") {
+      return "Ha";
+    } else {
+      return "Yo'q";
+    }
+  };
+  const formatQQSLinks = (event) => {
+    if (event == "aylanmaSoliq") {
+      return "Aylanma Soliq";
+    } else if (event == "jisDaromadSoliq"){
+      return "Jismoniy shaxslar daromad soliq";
+    }else if (event == "kksSoliq"){
+      return "QQS soliq";
     }else{
-      return "4"
+      return "Korxona daromad soliq";
     }
   };
   const yearList = useMemo(() => {
@@ -85,6 +104,16 @@ export default function DetailidReport() {
                           <select>
                             <option value="first">
                               {formatQuarter(reports["quarterly"])}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="select-div">
+                        <label>QQS to'lovchi</label>
+                        <div class="select-position">
+                          <select>
+                            <option value={reports["kks_payer"]}>
+                              {formatQQS(reports["kks_payer"])}
                             </option>
                           </select>
                         </div>
@@ -889,6 +918,17 @@ export default function DetailidReport() {
                         })}
                       </tbody>
                     </table>
+                  </div>
+                  <div class="card-style mb-30">
+                    <h4 class="mb-25">Сохранить отчет</h4>
+                    {reports["additional_refs"]?.map((elem, index) => {
+                      return (
+                        <div key={index}>
+                          <p>{formatQQSLinks(elem['name'])}: </p>
+                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem["name"])}}>Yuklab olish</a>
+                        </div>
+                      );
+                    })}
                   </div>
                   <Toaster richColors position="bottom-right" />
                 </div>

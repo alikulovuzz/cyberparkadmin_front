@@ -12,12 +12,15 @@ import { Toaster, toast } from "sonner";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
-import { postRequest} from '../../utils/resquests';
+import { postRequest, uploadFile } from "../../utils/resquests";
 import Slide from "@mui/material/Slide";
 import { useState } from "react";
-import { UserContext } from '../../context/UserContext';
+import { UserContext } from "../../context/UserContext";
+import { MuiFileInput } from "mui-file-input";
 import { useNavigate } from "react-router-dom";
+import FormControl from "@mui/material/FormControl";
 
+import { audit_v2, upload } from "../../utils/API_urls";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,9 +35,38 @@ export default function NewQuarterly() {
   const [open, setOpen] = React.useState(false);
   const [quarterly, setQuarterly] = React.useState("first");
   const [yearsd, setYears] = React.useState(2020);
-  const { user } = React.useContext(UserContext)
+  const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
 
+  const formRef = React.useRef();
+
+  const [addRefs, setAddRefs] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [addRefsList, setAddRefsList] = useState([]);
+  const [validateRefs, setValidateRefs] = useState(true);
+  const [aylanmaSoliq, setAylanmaSoliq] = useState(null);
+  const [jisDaromadSoliq, setJisDaromadSoliq] = useState(null);
+  const [kksSoliq, setKksSoliq] = useState(null);
+  const [daromadSoliq, setDaromadSoliq] = useState(null);
+  const [value, setValue] = React.useState(null);
+
+  const handleChangeAylanmaSoliq = (newValue) => {
+    setAylanmaSoliq(newValue);
+  };
+  const handleChangeJisDaromadSoliq = (newValue) => {
+    setJisDaromadSoliq(newValue);
+  };
+  const handleChangeKksSoliq = (newValue) => {
+    setKksSoliq(newValue);
+  };
+  const handleChangeDaromadSoliq = (newValue) => {
+    setDaromadSoliq(newValue);
+  };
+
+  const handleChangeFile = (newValue) => {
+    // console.log("clicked");
+    // setValue(newValue);
+  };
 
   const handleChangeYear = (event) => {
     setYears(event.target.value);
@@ -42,38 +74,93 @@ export default function NewQuarterly() {
   const handleChange = (event) => {
     setQuarterly(event.target.value);
   };
+  const handleChangeRefs = (event) => {
+    // console.log(event.target.value);
+    if (event.target.value == "Ha") {
+      setAddRefs(true);
+    } else {
+      setAddRefs(false);
+    }
+  };
   const handleClose = () => {
     setOpen(false);
   };
   const handleOpen = () => {
     setOpen(!open);
   };
-  const commitData = () => {
-    if (true) {
-      postRequest('/audit/v2', {
-        name_of_report:"Choraklik hisobot",
-        type_of_report:"Choraklik",
-        company_id: user?._id,
-        release_product: releaseProduct?releaseProduct:null,
-        release_republic: releaseRepublic?releaseRepublic:null,
-        residental_payroll: residentalPpayroll?residentalPpayroll:null,
-        invesment:invesment?invesment:null,
-        import_funds:importFunds?importFunds:null,
-        year:yearsd,
-        quarterly:quarterly
-      }).then((response) => {
-          toast.success("Muvaffaqiyatli!");
-          handleClose()
-          navigate({
-            pathname: '/user'
-          });
-          // console.log(response)
-      }).catch((error) => {
-          // console.log(error);
-          handleClose()
-          toast.error("Serverda xatolik.");                    
+
+  const handleReport = (value, type) => {
+    // uploadFile()
+    const formData = new FormData();
+    formData.append("file", value);
+    uploadFile(upload, formData)
+      .then((response) => {
+        addRefsList.push({ name: type, link: response.data.link });
       })
-  }
+      .catch((error) => {
+        if (error.response.data.message == "Please upload a file") {
+          toast.error("Please upload a file");
+        } else {
+          toast.error("Serverda xatolik.");
+        }
+      });
+  };
+
+  const formRefSend = () => {
+    // console.log(addRefs)
+    if (!addRefs && jisDaromadSoliq && aylanmaSoliq) {
+      handleReport(aylanmaSoliq, "aylanmaSoliq");
+      handleReport(jisDaromadSoliq, "jisDaromadSoliq");
+      setValidateRefs(true);
+      setFormValid(true);
+      toast.success("Muvaffaqiyatli!");
+      // handleReport(jisDaromadSoliq)
+    } else if (addRefs && kksSoliq && daromadSoliq && jisDaromadSoliq) {
+      handleReport(jisDaromadSoliq, "jisDaromadSoliq");
+      handleReport(kksSoliq, "kksSoliq");
+      handleReport(daromadSoliq, "daromadSoliq");
+      setFormValid(true);
+      setValidateRefs(true);
+      toast.success("Muvaffaqiyatli!");
+    } else {
+      setFormValid(false);
+      toast.error("Please upload a file");
+      setValidateRefs(false);
+    }
+  };
+  const commitData = () => {
+    if (addRefsList.length > 0) {
+      postRequest("/audit/v2", {
+        name_of_report: "Choraklik hisobot",
+        type_of_report: "Choraklik",
+        company_id: user?._id,
+        release_product: releaseProduct ? releaseProduct : null,
+        release_republic: releaseRepublic ? releaseRepublic : null,
+        residental_payroll: residentalPpayroll ? residentalPpayroll : null,
+        invesment: invesment ? invesment : null,
+        import_funds: importFunds ? importFunds : null,
+        year: yearsd,
+        kks_payer:addRefs?'yes':'no',
+        quarterly: quarterly,
+        additional_refs:addRefsList
+      })
+        .then((response) => {
+          toast.success("Muvaffaqiyatli!");
+          handleClose();
+          navigate({
+            pathname: "/user",
+          });
+          // console.log(response);
+        })
+        .catch((error) => {
+          // console.log(error);
+          handleClose();
+          toast.error("Serverda xatolik.");
+        });
+    } else {
+      setValidateRefs(false);
+      handleClose();
+    }
   };
   const yearList = useMemo(() => {
     return year.map((year) => {
@@ -125,6 +212,15 @@ export default function NewQuarterly() {
                         </select>
                       </div>
                     </div>
+                    <div class="select-div">
+                      <label>QQS to'lovchi</label>
+                      <div class="select-position">
+                        <select onChange={handleChangeRefs}>
+                          <option value="Yo'q">Yo'q</option>
+                          <option value="Ha">Ha</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <PartOne
@@ -159,12 +255,105 @@ export default function NewQuarterly() {
                 />
                 <div class="card-style mb-30">
                   <h4 class="mb-25">Сохранить отчет</h4>
+                  <form ref={formRef}>
+                    {!addRefs ? (
+                      <div>
+                        <MuiFileInput
+                          sx={{
+                            mx: 1,
+                            my: 1,
+                            display: "inline-grid",
+                            width: "auto",
+                            height: "auto",
+                          }}
+                          value={aylanmaSoliq}
+                          label="Aylanma soliq"
+                          onChange={handleChangeAylanmaSoliq}
+                          placeholder="file"
+                          disabled={formValid}
+                          // required
+                        />
+                        <MuiFileInput
+                          sx={{
+                            mx: 1,
+                            my: 1,
+                            display: "inline-grid",
+                            width: "auto",
+                            height: "auto",
+                          }}
+                          value={jisDaromadSoliq}
+                          label="Jismoniy shaxslardan olinadigan daromad soliq"
+                          onChange={handleChangeJisDaromadSoliq}
+                          placeholder="file"
+                          disabled={formValid}
+                          // required
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <MuiFileInput
+                          sx={{
+                            mx: 1,
+                            my: 1,
+                            display: "inline-grid",
+                            width: "auto",
+                            height: "auto",
+                          }}
+                          label="QQS soliq"
+                          value={kksSoliq}
+                          onChange={handleChangeKksSoliq}
+                          disabled={formValid}
+                          placeholder="file"
+                        />
+                        <MuiFileInput
+                          sx={{
+                            mx: 1,
+                            my: 1,
+                            display: "inline-grid",
+                            width: "auto",
+                            height: "auto",
+                          }}
+                          label="Daromad soliq"
+                          disabled={formValid}
+                          value={daromadSoliq}
+                          onChange={handleChangeDaromadSoliq}
+                          placeholder="file"
+                        />
+                        <MuiFileInput
+                          sx={{
+                            mx: 1,
+                            my: 1,
+                            display: "inline-grid",
+                            width: "auto",
+                            height: "auto",
+                          }}
+                          label="Jismoniy shaxslardan olinadigan daromad soliq"
+                          disabled={formValid}
+                          value={jisDaromadSoliq}
+                          onChange={handleChangeJisDaromadSoliq}
+                          placeholder="file"
+                        />
+                      </div>
+                    )}
+                    {validateRefs ? (
+                      <></>
+                    ) : (
+                      <div>Iltimos yuqoridagi fayllarni toldiring</div>
+                    )}
+                    <Button variant="contained" onClick={formRefSend}>
+                      Сохранить
+                    </Button>
+                  </form>
+                </div>
+                <div class="card-style mb-30">
+                  <h4 class="mb-25">Сохранить отчет</h4>
                   <div class="button-add">
                     <button class="save-btn" onClick={handleOpen}>
                       <i class="lni lni-save"></i>Сохранять
                     </button>
                   </div>
                 </div>
+
                 <Dialog
                   open={open}
                   TransitionComponent={Transition}

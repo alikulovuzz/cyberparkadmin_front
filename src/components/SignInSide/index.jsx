@@ -52,8 +52,8 @@ export default function SignInSide({ admin }) {
     }
     postRequest(req_url, req_body)
       .then((response) => {
-        console.log(response)
-        console.log(response.data.token)
+        // console.log(response)
+        // console.log(response.data.token)
         if (response.data.token) {
           sessionStorage.setItem("x-access-token", response.data.token);
           // console.log(response.data.token)
@@ -64,8 +64,8 @@ export default function SignInSide({ admin }) {
         handleCloseBackdrop();
       })
       .catch((error) => {
-        // console.log(error instanceof Axios)
-        // console.log(error.response.status)
+        console.log(error instanceof Axios)
+        console.log(error.response.status)
         if (error.code == "ERR_NETWORK") {
           handleCloseBackdrop();
           toast.error("Serverda xatolik");
