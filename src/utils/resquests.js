@@ -81,4 +81,4 @@ export const getReports = (url, data) => {
                             reject(error)
                         });
                 })
-        }
+        } 
