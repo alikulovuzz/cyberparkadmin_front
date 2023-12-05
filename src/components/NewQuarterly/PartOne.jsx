@@ -147,7 +147,7 @@ export default function PartOne({ setReleaseProduct }) {
             })}
           </tbody>
         </table>
-        {!error?(<></>):(<>Вид деятельности ni to'ldiring </>)}
+        {!error?(<></>):(<div class="warn-file-second">Пожалуйста, заполните вышеуказанные файлы...</div>)}
         {saveButton ? (
           <div className="button-add">
             <button className="add-btn" onClick={addRowHandler}>
