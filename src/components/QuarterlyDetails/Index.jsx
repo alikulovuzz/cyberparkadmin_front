@@ -43,11 +43,11 @@ export default function DetailidReport() {
     if (event == "aylanmaSoliq") {
       return "НДС";
     } else if (event == "jisDaromadSoliq"){
-      return "Налог на прибыль юридических лиц";
-    }else if (event == "kksSoliq"){
-      return "НДФЛ";
-    }else{
       return "Налог на доходы физических лиц";
+    }else if (event == "kksSoliq"){
+      return "НДС";
+    }else{
+      return "Налог на прибыль юридических лиц";
     }
   };
   const yearList = useMemo(() => {

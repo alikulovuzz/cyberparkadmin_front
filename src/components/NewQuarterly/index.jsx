@@ -270,7 +270,7 @@ export default function NewQuarterly() {
                             height: "auto",
                           }}
                           value={aylanmaSoliq}
-                          label="Налог с оборота"
+                          label="НДС"
                           onChange={handleChangeAylanmaSoliq}
                           placeholder="file"
                           disabled={formValid}
