@@ -92,6 +92,7 @@ export default function ReportsTable(auditType) {
             <th>Berilgan sana</th>
             <th>Soat</th>
             <th>Status</th>
+            <th>Izoh</th>
             <th></th>
             <th></th>
           </tr>
@@ -110,6 +111,7 @@ export default function ReportsTable(auditType) {
                     {new Date(data.createdAt).toLocaleTimeString("en-GB")}
                   </td>
                   <td>{formatStatus(data.status)}</td>
+                  <td title={data.notes_from_company}>{data?.notes_from_company?.substring(0, 20)+"..."}</td>
                   <td>
                     <a href={data.file_link} download>
                       Yuklab olish

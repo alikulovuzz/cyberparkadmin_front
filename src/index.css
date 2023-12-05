@@ -35,3 +35,11 @@ ul, ul li {
 a {
   text-decoration: none;
 }
+.text{
+  text-overflow: ellipsis; 
+  margin-bottom: 12px;
+  cursor: pointer;  
+  word-break: break-all;
+  overflow:visible;        
+  white-space: normal;
+}
