@@ -35,6 +35,7 @@ export default function AuditCompany() {
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [status, setStatus] = React.useState("progress");
+  const [statusSearch, setStatusSearch] = React.useState("progress");
   const [pageSize, setPageSize] = useState(10);
   const [a, forceUpdate] = useReducer((x) => x + 1, 0);
   const [open, setOpen] = React.useState(false);
@@ -43,6 +44,8 @@ export default function AuditCompany() {
 
   const [audit, setAudit] = useState("Audit");
   const [progress, setProgress] = useState("");
+
+  const [note, setNotes] = useState();
 
   const handelDelete = (data) => {
     deleteReports(`audit/delete?id=${id}`)
@@ -56,19 +59,24 @@ export default function AuditCompany() {
       });
     handleClose();
   };
+  const handleChangeStatusSearch = (event) => {
+    setStatusSearch(event.target.value);
+  };
   const handleChangeStatus = (data) => {
     postRequest(`audit/status_change`, {
-        report_id: id,
-        status: status,
-      }
-    )
+      report_id: id,
+      status: status,
+      notes: note,
+    })
       .then((response) => {
         toast.success("Muvaffaqiyatli o'chrildi!");
+        setNotes("");
         forceUpdate();
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         toast.error("Server xatolik");
+        setNotes("");
         forceUpdate();
       });
     handleClose();
@@ -86,11 +94,15 @@ export default function AuditCompany() {
   const formatStatus = (data) => {
     switch (data) {
       case "not_in_progress":
-        return <button className="custom-btn-wait">Imzolanish jarayonida</button>;
+        return (
+          <button className="custom-btn-wait">Imzolanish jarayonida</button>
+        );
       case "disabled":
         return <button className="custom-btn-error">Rad etildi</button>;
       case "progress":
-        return <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>;
+        return (
+          <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>
+        );
       case "finished":
         return <button className="custom-btn-success">Tasdiqlandi</button>;
     }
@@ -102,7 +114,7 @@ export default function AuditCompany() {
   useEffect(() => {
     postRequest(getlist_v2, {
       type_of_report: audit,
-      status: progress,
+      status: statusSearch,
       pageNumber: page,
       pageSize: pageSize,
     })
@@ -112,12 +124,27 @@ export default function AuditCompany() {
         setCompoundList(response.data.reports);
       })
       .catch((error) => {
+        setCompoundList([]);
+        // setNotes()
         console.log(error);
       });
-  }, [page, pageSize, a]);
+  }, [page, pageSize, a,statusSearch]);
 
   return (
     <>
+    <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={statusSearch}
+        label="Chorak"
+        // size='small'
+        onChange={handleChangeStatusSearch}
+      >
+        <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+        <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
+        <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
+        <MenuItem value={"disabled"}>Rad etildi</MenuItem>
+      </Select>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -127,6 +154,7 @@ export default function AuditCompany() {
               <TableCell align="right">PINFL</TableCell>
               <TableCell align="right">Yil</TableCell>
               <TableCell align="right">Status</TableCell>
+              <TableCell align="right">Izoh</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
               <TableCell align="right">Ko'rish</TableCell>
@@ -157,6 +185,7 @@ export default function AuditCompany() {
                 >
                   {formatStatus(row.status)}
                 </TableCell>
+                <TableCell align="right" title={row.notes_from_company} className="text">{row?.notes_from_company?.substring(0, 20)+"..."}</TableCell>
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleDateString("en-GB")}
                 </TableCell>
@@ -218,11 +247,24 @@ export default function AuditCompany() {
                 // size='small'
                 onChange={handleChange}
               >
-                <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+                <MenuItem value={"not_in_progress"}>
+                  Imzolanish jarayonida
+                </MenuItem>
                 <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
                 <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
                 <MenuItem value={"disabled"}>Rad etildi</MenuItem>
               </Select>
+              <TextField
+                id="outlined-basic"
+                fullWidth
+                label="Hisobot uchun izoh!"
+                variant="outlined"
+                sx={{ my: 1 }}
+                value={note}
+                onChange={(event) => {
+                  setNotes(event.target.value);
+                }}
+              />
             </FormControl>
           </DialogContentText>
         </DialogContent>
