@@ -180,9 +180,7 @@ export default function NewQuarterly() {
           <div class="title-wrapper">
             <div class="row align-items-center">
               <div class="col-md-6">
-                <div class="title">
-                  <h2>Form Cyber Park</h2>
-                </div>
+              
               </div>
             </div>
           </div>
@@ -218,7 +216,7 @@ export default function NewQuarterly() {
                       </div>
                     </div>
                     <div class="select-div">
-                      <label>Плательщик НДС</label>
+                      <label>Плательщик НДФЛ</label>
                       <div class="select-position">
                         <select onChange={handleChangeRefs}>
                           <option value="Yo'q">Нет</option>
@@ -318,7 +316,7 @@ export default function NewQuarterly() {
                             width: "auto",
                             height: "auto",
                           }}
-                          label="Подоходный налог"
+                          label="Налог на прибыль юридических лиц"
                           disabled={formValid}
                           value={daromadSoliq}
                           onChange={handleChangeDaromadSoliq}
@@ -332,7 +330,7 @@ export default function NewQuarterly() {
                             width: "auto",
                             height: "auto",
                           }}
-                          label="Налог на прибыль с физических лиц"
+                          label="Налог на доходы физических лиц"
                           disabled={formValid}
                           value={jisDaromadSoliq}
                           onChange={handleChangeJisDaromadSoliq}

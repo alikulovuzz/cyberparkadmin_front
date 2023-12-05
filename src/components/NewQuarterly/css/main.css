@@ -3634,3 +3634,10 @@ select {
   font-family: 'Saira Semi Condensed', sans-serif !important;
   padding-left: 10px;
 }
+
+
+.warn-file-second {
+  color: red;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+  padding-top: 10px;
+}

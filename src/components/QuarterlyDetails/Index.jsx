@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import { useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import year from "./../../dictionary/year";
+import './style.css'
 
 export default function DetailidReport() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,20 +34,20 @@ export default function DetailidReport() {
   };
   const formatQQS = (event) => {
     if (event == "yes") {
-      return "Ha";
+      return "Да";
     } else {
-      return "Yo'q";
+      return "Нет";
     }
   };
   const formatQQSLinks = (event) => {
     if (event == "aylanmaSoliq") {
-      return "Aylanma Soliq";
+      return "НДС";
     } else if (event == "jisDaromadSoliq"){
-      return "Jismoniy shaxslar daromad soliq";
+      return "Налог на прибыль юридических лиц";
     }else if (event == "kksSoliq"){
-      return "QQS soliq";
+      return "НДФЛ";
     }else{
-      return "Korxona daromad soliq";
+      return "Налог на доходы физических лиц";
     }
   };
   const yearList = useMemo(() => {
@@ -75,9 +76,7 @@ export default function DetailidReport() {
             <div class="title-wrapper">
               <div class="row align-items-center">
                 <div class="col-md-6">
-                  <div class="title">
-                    <h2>Form Cyber Park</h2>
-                  </div>
+                 
                 </div>
               </div>
             </div>
@@ -108,7 +107,7 @@ export default function DetailidReport() {
                         </div>
                       </div>
                       <div class="select-div">
-                        <label>QQS to'lovchi</label>
+                        <label>Плательщик НДФЛ</label>
                         <div class="select-position">
                           <select>
                             <option value={reports["kks_payer"]}>
@@ -922,9 +921,9 @@ export default function DetailidReport() {
                     <h4 class="mb-25">Сохранить отчет: </h4>
                     {reports["additional_refs"]?.map((elem, index) => {
                       return (
-                        <div key={index}>
+                        <div className="download-block" key={index}>
                           <p>{formatQQSLinks(elem['name'])}: </p>
-                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem['link'])}}>Yuklab olish</a>
+                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem['link'])}}>Скачать</a>
                         </div>
                       );
                     })}
