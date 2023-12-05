@@ -128,6 +128,7 @@ export default function QuarterlyCompany() {
       })
       .catch((error) => {
         console.log(error);
+        // setNotes()
         setCompoundList([]);
       });
   }, [page, pageSize, a,statusSearch]);

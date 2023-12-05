@@ -125,6 +125,7 @@ export default function AuditCompany() {
       })
       .catch((error) => {
         setCompoundList([]);
+        // setNotes()
         console.log(error);
       });
   }, [page, pageSize, a,statusSearch]);
