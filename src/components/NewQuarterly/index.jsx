@@ -140,9 +140,9 @@ export default function NewQuarterly() {
         invesment: invesment ? invesment : null,
         import_funds: importFunds ? importFunds : null,
         year: yearsd,
-        kks_payer:addRefs?'yes':'no',
+        kks_payer: addRefs ? 'yes' : 'no',
         quarterly: quarterly,
-        additional_refs:addRefsList
+        additional_refs: addRefsList
       })
         .then((response) => {
           toast.success("Muvaffaqiyatli!");
@@ -213,11 +213,11 @@ export default function NewQuarterly() {
                       </div>
                     </div>
                     <div class="select-div">
-                      <label>QQS to'lovchi</label>
+                      <label>Плательщик НДС</label>
                       <div class="select-position">
                         <select onChange={handleChangeRefs}>
-                          <option value="Yo'q">Yo'q</option>
-                          <option value="Ha">Ha</option>
+                          <option value="Yo'q">Нет</option>
+                          <option value="Ha">Да</option>
                         </select>
                       </div>
                     </div>
@@ -254,7 +254,7 @@ export default function NewQuarterly() {
                   }}
                 />
                 <div class="card-style mb-30">
-                  <h4 class="mb-25">Сохранить отчет</h4>
+                  <h4 class="mb-25">Дополнительный отчет</h4>
                   <form ref={formRef}>
                     {!addRefs ? (
                       <div>
@@ -267,11 +267,11 @@ export default function NewQuarterly() {
                             height: "auto",
                           }}
                           value={aylanmaSoliq}
-                          label="Aylanma soliq"
+                          label="Налог с оборота"
                           onChange={handleChangeAylanmaSoliq}
                           placeholder="file"
                           disabled={formValid}
-                          // required
+                        // required
                         />
                         <MuiFileInput
                           sx={{
@@ -282,11 +282,11 @@ export default function NewQuarterly() {
                             height: "auto",
                           }}
                           value={jisDaromadSoliq}
-                          label="Jismoniy shaxslardan olinadigan daromad soliq"
+                          label="Налог на прибыль с физических лиц"
                           onChange={handleChangeJisDaromadSoliq}
                           placeholder="file"
                           disabled={formValid}
-                          // required
+                        // required
                         />
                       </div>
                     ) : (
@@ -299,7 +299,7 @@ export default function NewQuarterly() {
                             width: "auto",
                             height: "auto",
                           }}
-                          label="QQS soliq"
+                          label="НДС"
                           value={kksSoliq}
                           onChange={handleChangeKksSoliq}
                           disabled={formValid}
@@ -313,7 +313,7 @@ export default function NewQuarterly() {
                             width: "auto",
                             height: "auto",
                           }}
-                          label="Daromad soliq"
+                          label="Подоходный налог"
                           disabled={formValid}
                           value={daromadSoliq}
                           onChange={handleChangeDaromadSoliq}
@@ -327,7 +327,7 @@ export default function NewQuarterly() {
                             width: "auto",
                             height: "auto",
                           }}
-                          label="Jismoniy shaxslardan olinadigan daromad soliq"
+                          label="Налог на прибыль с физических лиц"
                           disabled={formValid}
                           value={jisDaromadSoliq}
                           onChange={handleChangeJisDaromadSoliq}
@@ -338,18 +338,21 @@ export default function NewQuarterly() {
                     {validateRefs ? (
                       <></>
                     ) : (
-                      <div>Iltimos yuqoridagi fayllarni toldiring</div>
+                      <div class="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div>
                     )}
-                    <Button variant="contained" onClick={formRefSend}>
-                      Сохранить
-                    </Button>
+
+                    <div class="button-add">
+                      <Button class="save-btn" variant="contained" onClick={formRefSend}>
+                      <i class="lni lni-save"></i>Сохранять
+                      </Button>
+                    </div>
                   </form>
                 </div>
                 <div class="card-style mb-30">
-                  <h4 class="mb-25">Сохранить отчет</h4>
+                  <h4 class="mb-25">Отправить отчет</h4>
                   <div class="button-add">
                     <button class="save-btn" onClick={handleOpen}>
-                      <i class="lni lni-save"></i>Сохранять
+                      <i class="lni lni-upload"></i>Отправить
                     </button>
                   </div>
                 </div>

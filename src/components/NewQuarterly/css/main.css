@@ -3628,3 +3628,9 @@ select {
   font-weight: 600;
   font-family: 'Saira Semi Condensed', sans-serif;
 }
+
+.warn-file {
+  color: red;
+  font-family: 'Saira Semi Condensed', sans-serif !important;
+  padding-left: 10px;
+}

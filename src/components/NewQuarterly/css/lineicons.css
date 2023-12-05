@@ -63,3 +63,7 @@
 .lni-save::before {
   content: "\ea19";
 }
+
+.lni-upload::before {
+  content: "\ea09";
+}
