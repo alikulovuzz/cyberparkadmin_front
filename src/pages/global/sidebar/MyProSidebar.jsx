@@ -174,13 +174,13 @@ const MyProSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Soliq hisobotlari"
               to="oylik"
               icon={<AccountBalanceWalletOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </Sidebar>
