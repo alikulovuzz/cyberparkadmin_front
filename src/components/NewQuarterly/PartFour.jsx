@@ -56,7 +56,7 @@ export default function PartFour({ setResidentalPayroll }) {
     <>
       <div className="card-style mb-30">
         <h4 className="mb-25">
-          IV. Информация о численности работников, а также ФОТ резидента
+          IV. Информация о численности работников, а также ФОТ резидента *
         </h4>
         <table border="1">
           <thead>
@@ -217,7 +217,7 @@ export default function PartFour({ setResidentalPayroll }) {
             <tr>
               <td className="custom-td">5</td>
               <td className="custom-tr">
-                Фонд оплаты труда за отчетыний период
+                Фонд оплаты труда за отчетыний период *
               </td>
               <td>
                 <input
@@ -250,7 +250,7 @@ export default function PartFour({ setResidentalPayroll }) {
             </tr>
           </tbody>
         </table>
-        {!error ? <></> : <>Вид деятельности ni to'ldiring </>}
+        {!error ? <></> :  <div class="warn-file-second">Пожалуйста, заполните вышеуказанные файлы...</div>}
         {saveButton ? (
           <div className="button-save">
             <button className="save-btn" onClick={savePartTree}>

@@ -257,7 +257,7 @@ export default function NewQuarterly() {
                   }}
                 />
                 <div class="card-style mb-30">
-                  <h4 class="mb-25">Дополнительный отчет</h4>
+                  <h4 class="mb-25">Дополнительный отчет *</h4>
                   <form ref={formRef}>
                     {!addRefs ? (
                       <div>
@@ -272,7 +272,7 @@ export default function NewQuarterly() {
                           value={aylanmaSoliq}
                           label="НДС"
                           onChange={handleChangeAylanmaSoliq}
-                          placeholder="file"
+                          placeholder="Файл *"
                           disabled={formValid}
                         // required
                         />
@@ -287,7 +287,7 @@ export default function NewQuarterly() {
                           value={jisDaromadSoliq}
                           label="Налог на прибыль с физических лиц"
                           onChange={handleChangeJisDaromadSoliq}
-                          placeholder="file"
+                          placeholder="Файл *"
                           disabled={formValid}
                         // required
                         />
@@ -306,7 +306,7 @@ export default function NewQuarterly() {
                           value={kksSoliq}
                           onChange={handleChangeKksSoliq}
                           disabled={formValid}
-                          placeholder="file"
+                          placeholder="Файл *"
                         />
                         <MuiFileInput
                           sx={{
@@ -320,7 +320,7 @@ export default function NewQuarterly() {
                           disabled={formValid}
                           value={daromadSoliq}
                           onChange={handleChangeDaromadSoliq}
-                          placeholder="file"
+                          placeholder="Файл *"
                         />
                         <MuiFileInput
                           sx={{
@@ -334,7 +334,7 @@ export default function NewQuarterly() {
                           disabled={formValid}
                           value={jisDaromadSoliq}
                           onChange={handleChangeJisDaromadSoliq}
-                          placeholder="file"
+                          placeholder="Файл *"
                         />
                       </div>
                     )}

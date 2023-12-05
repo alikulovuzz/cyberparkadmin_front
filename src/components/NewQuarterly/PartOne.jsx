@@ -93,7 +93,7 @@ export default function PartOne({ setReleaseProduct }) {
     <>
       <div className="card-style mb-30">
         <h4 className="mb-25">
-          I. Оборот от реализации продукции (товаров, работ и услуг)
+          I. Оборот от реализации продукции (товаров, работ и услуг)*
         </h4>
         <table border="1">
           <thead>
@@ -102,10 +102,10 @@ export default function PartOne({ setReleaseProduct }) {
                 П/н
               </td>
               <td rowSpan="2" width="20%">
-                Вид деятельности
+                Вид деятельности *
               </td>
               <td rowSpan="2" width="15%">
-                Код ОКЭД
+                Код ОКЭД *
               </td>
               <td colSpan="3">Оборот от реализации работ и услуг</td>
               <td></td>
