@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { postRequest } from "../../utils/resquests";
 import { residental_payroll } from "../../utils/API_urls";
 import { Toaster, toast } from "sonner";
 import { useState } from "react";
 
-export default function PartFour({ setResidentalPayroll }) {
+export default function PartFour({ setResidentalPayroll,validateResidentalPayroll }) {
+  console.log("rendered4")
+
   const [employees, setEmployees] = useState({ Unit: "", period: "" });
   const [part_time, setPartTime] = useState({ Unit: "", period: "" });
   const [countforeign, setCountforeign] = useState({ Unit: "", period: "" });
   const [performing, setPerforming] = useState({ Unit: "", period: "" });
   const [fund, setFund] = useState({ Unit: "", period: "" });
   const [saveButton, setSaveButton] = useState(true);
-  const [error, setState] = useState(false);
+  const [error, setState] = useState(true);
   const [disabled, setDisabled] = useState(false);
 
   // Unit period
-
+  useEffect(()=>{
+    setState(validateResidentalPayroll)
+  },[validateResidentalPayroll])
   const savePartTree = () => {
     let checkValue = !(
       employees.Unit != "" &&

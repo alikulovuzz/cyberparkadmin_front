@@ -1,4 +1,4 @@
-export const host = process.env.NODE_ENV=="production"?"https://my.cyberpark.uz":"https://my.cyberpark.uz";
+export const host = process.env.NODE_ENV=="production"?"http://localhost:8081":"http://localhost:8081";
 // admin 
 export const user_signin = "/user/signin"
 export const admin_me = "/user/me"

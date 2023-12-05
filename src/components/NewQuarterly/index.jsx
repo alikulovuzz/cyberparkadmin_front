@@ -48,7 +48,12 @@ export default function NewQuarterly() {
   const [kksSoliq, setKksSoliq] = useState(null);
   const [daromadSoliq, setDaromadSoliq] = useState(null);
   const [value, setValue] = React.useState(null);
+  
+  
+  const [validateProduct, setValidateProduct] = useState(false);
+  const [residentalPayroll, setResidentalPayrollV] = useState(false);
 
+  
   const handleChangeAylanmaSoliq = (newValue) => {
     setAylanmaSoliq(newValue);
   };
@@ -128,11 +133,23 @@ export default function NewQuarterly() {
     }
   };
   const commitData = () => {
-    if(releaseProduct.length<=0||residentalPpayroll.length<=0){
+    if(releaseProduct.length<=0){
+      toast.error("Iltimos yuqoridagi fayllarni to'g'irlang");
+      setValidateProduct(true);
+      // handleClose();
+      // return
+    }
+    if(residentalPpayroll.length<=0){
+      toast.error("Iltimos yuqoridagi fayllarni to'g'irlang");
+      setResidentalPayrollV(true);
+      // handleClose();
+      // return
+    }
+    if(addRefsList.length <= 0){
       toast.error("Iltimos yuqoridagi fayllarni to'g'irlang");
       setValidateRefs(false);
-      handleClose();
-      return
+      // handleClose();
+      // return
     }
     if (addRefsList.length > 0) {
       postRequest("/audit/v2", {
@@ -163,7 +180,6 @@ export default function NewQuarterly() {
           toast.error("Serverda xatolik.");
         });
     } else {
-      setValidateRefs(false);
       handleClose();
     }
   };
@@ -231,6 +247,7 @@ export default function NewQuarterly() {
                     // console.log(val);
                     setReleaseProduct(val);
                   }}
+                  validateProduct={validateProduct}
                 />
                 <PartTwo
                   setReleaseRepublic={(val) => {
@@ -249,6 +266,7 @@ export default function NewQuarterly() {
                     // console.log(val);
                     setResidentalPayroll(val);
                   }}
+                  validateResidentalPayroll={residentalPayroll}
                 />
                 <PartFive
                   setImportFunds={(val) => {
