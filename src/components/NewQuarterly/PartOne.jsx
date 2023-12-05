@@ -18,6 +18,7 @@ const oneRowDefaultValue = {
 export default function PartOne({ setReleaseProduct }) {
   const [listLength, setListLength] = useState([...[], oneRowDefaultValue]);
   const [disabled, setDisabled] = useState(false);
+  const [error, setState] = useState(false);
   const [saveButton, setSaveButton] = useState(true);
 
   const addRowHandler = (_) => {
@@ -56,9 +57,17 @@ export default function PartOne({ setReleaseProduct }) {
 
   const saveRowHandler = async () => {
     let savedId = [];
+    
     try {
       for (let index = 0; index < listLength.length; index++) {
         const one_row = listLength[index];
+        if(!one_row.g1||!one_row.g2){
+          toast.error("Serverda xatolik!");
+          setState(true)
+          return
+        }else{
+          setState(false)
+        }
         const saved_one = await postRequest(release_product, {
           kind_of_activity: one_row.g1,
           OKED: one_row.g2,
@@ -138,6 +147,7 @@ export default function PartOne({ setReleaseProduct }) {
             })}
           </tbody>
         </table>
+        {!error?(<></>):(<>Вид деятельности ni to'ldiring </>)}
         {saveButton ? (
           <div className="button-add">
             <button className="add-btn" onClick={addRowHandler}>

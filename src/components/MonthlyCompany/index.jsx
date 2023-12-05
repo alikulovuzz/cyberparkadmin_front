@@ -107,7 +107,7 @@ export default function MonthlyCompany() {
       pageSize: pageSize,
     })
       .then((response) => {
-        console.log(response.data.reports);
+        // console.log(response.data.reports);
         setPageCount(response.data.page);
         setCompoundList(response.data.reports);
       })

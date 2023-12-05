@@ -18,7 +18,6 @@ import { useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { MuiFileInput } from "mui-file-input";
 import { useNavigate } from "react-router-dom";
-import FormControl from "@mui/material/FormControl";
 
 import { audit_v2, upload } from "../../utils/API_urls";
 
@@ -129,6 +128,12 @@ export default function NewQuarterly() {
     }
   };
   const commitData = () => {
+    if(releaseProduct.length<=0||residentalPpayroll.length<=0){
+      toast.error("Iltimos yuqoridagi fayllarni to'g'irlang");
+      setValidateRefs(false);
+      handleClose();
+      return
+    }
     if (addRefsList.length > 0) {
       postRequest("/audit/v2", {
         name_of_report: "Choraklik hisobot",

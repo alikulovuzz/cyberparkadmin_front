@@ -14,7 +14,6 @@ export default function DetailidReport() {
   const [quarterly, setQuarterly] = React.useState("first");
   const [yearsd, setYears] = React.useState(2020);
   const { user } = useContext(UserContext);
-  // console.log(searchParams.get('id'))
   const handleChangeYear = (event) => {
     setYears(event.target.value);
   };
@@ -920,12 +919,12 @@ export default function DetailidReport() {
                     </table>
                   </div>
                   <div class="card-style mb-30">
-                    <h4 class="mb-25">Сохранить отчет</h4>
+                    <h4 class="mb-25">Сохранить отчет: </h4>
                     {reports["additional_refs"]?.map((elem, index) => {
                       return (
                         <div key={index}>
                           <p>{formatQQSLinks(elem['name'])}: </p>
-                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem["name"])}}>Yuklab olish</a>
+                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem['link'])}}>Yuklab olish</a>
                         </div>
                       );
                     })}

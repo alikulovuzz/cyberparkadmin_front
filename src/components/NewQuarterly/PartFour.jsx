@@ -11,11 +11,26 @@ export default function PartFour({ setResidentalPayroll }) {
   const [performing, setPerforming] = useState({ Unit: "", period: "" });
   const [fund, setFund] = useState({ Unit: "", period: "" });
   const [saveButton, setSaveButton] = useState(true);
+  const [error, setState] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   // Unit period
 
   const savePartTree = () => {
+    let checkValue = !(
+      employees.Unit != "" &&
+      fund.Unit != "" &&
+      employees.period != "" &&
+      fund.period != ""
+    );
+    if (checkValue) {
+      console.log(employees);
+      toast.error("Serverda xatolik!");
+      setState(true);
+      return;
+    } else {
+      setState(false);
+    }
     postRequest(residental_payroll, {
       employees,
       part_time,
@@ -24,7 +39,7 @@ export default function PartFour({ setResidentalPayroll }) {
       fund,
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
           setResidentalPayroll(response.data.report._id);
           setDisabled(true);
@@ -235,6 +250,7 @@ export default function PartFour({ setResidentalPayroll }) {
             </tr>
           </tbody>
         </table>
+        {!error ? <></> : <>Вид деятельности ni to'ldiring </>}
         {saveButton ? (
           <div className="button-save">
             <button className="save-btn" onClick={savePartTree}>

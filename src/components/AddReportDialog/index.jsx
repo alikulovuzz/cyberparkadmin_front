@@ -69,10 +69,10 @@ export default function AddReportDialog(type_of_report) {
             .then((response) => {
               toast.success("Muvaffaqiyatli!");
               handleClose();
-              console.log(response);
+              // console.log(response);
             })
             .catch((error) => {
-              console.error(error);
+              // console.error(error);
               handleClose();
               toast.error("Serverda xatolik.");
             });
