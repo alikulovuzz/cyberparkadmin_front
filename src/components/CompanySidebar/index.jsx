@@ -74,7 +74,7 @@ export default function CompanySidebar() {
                                     Auditorlik xulosasi
                                 </NavLink>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <NavLink
                                     to="reports/monthly"
                                     className={({ isActive }) =>
@@ -82,7 +82,7 @@ export default function CompanySidebar() {
                                 >
                                     Soliq hisobotlari
                                 </NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <NavLink

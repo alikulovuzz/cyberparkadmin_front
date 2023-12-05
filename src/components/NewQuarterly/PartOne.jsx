@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { postRequest } from "../../utils/resquests";
 import { release_product } from "../../utils/API_urls";
@@ -15,12 +15,16 @@ const oneRowDefaultValue = {
   f_id: uuidv4(),
 };
 
-export default function PartOne({ setReleaseProduct }) {
+export default function PartOne({ setReleaseProduct,validateProduct }) {
+  console.log("rendered")
   const [listLength, setListLength] = useState([...[], oneRowDefaultValue]);
   const [disabled, setDisabled] = useState(false);
-  const [error, setState] = useState(false);
+  const [error, setState] = useState(true);
   const [saveButton, setSaveButton] = useState(true);
-
+  
+  useEffect(()=>{
+    setState(validateProduct)
+  },[validateProduct])
   const addRowHandler = (_) => {
     if (!disabled) {
       setListLength((prev) => {
@@ -54,7 +58,6 @@ export default function PartOne({ setReleaseProduct }) {
       return prev;
     });
   };
-
   const saveRowHandler = async () => {
     let savedId = [];
     
