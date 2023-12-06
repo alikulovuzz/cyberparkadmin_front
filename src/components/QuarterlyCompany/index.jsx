@@ -36,7 +36,7 @@ export default function QuarterlyCompany() {
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [status, setStatus] = React.useState("progress");
-  const [statusSearch, setStatusSearch] = React.useState("progress");
+  const [statusSearch, setStatusSearch] = React.useState("all");
   const [pageSize, setPageSize] = useState(10);
   const [a, forceUpdate] = useReducer((x) => x + 1, 0);
   const [open, setOpen] = React.useState(false);
@@ -117,7 +117,7 @@ export default function QuarterlyCompany() {
   useEffect(() => {
     postRequest(getlist_v2, {
       type_of_report: audit,
-      status: statusSearch,
+      status: statusSearch=="all"?null:statusSearch,
       pageNumber: page,
       pageSize: pageSize,
     })
@@ -143,6 +143,7 @@ export default function QuarterlyCompany() {
         // size='small'
         onChange={handleChangeStatusSearch}
       >
+        <MenuItem value={"all"}>Hammasi</MenuItem>
         <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
         <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
         <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
