@@ -49,6 +49,9 @@ export default function QuarterlyCompany() {
   const [audit, setAudit] = useState("Choraklik");
   const [progress, setProgress] = useState("");
 
+  const [pinflSearch, setPinflSearch] = useState("");
+
+
   const handelDelete = (data) => {
     deleteReports(`audit/delete?id=${id}`)
       .then((response) => {
@@ -117,7 +120,8 @@ export default function QuarterlyCompany() {
   useEffect(() => {
     postRequest(getlist_v2, {
       type_of_report: audit,
-      status: statusSearch=="all"?null:statusSearch,
+      status: statusSearch == "all" ? null : statusSearch,
+      pinfl: pinflSearch == "" ? null : pinflSearch,
       pageNumber: page,
       pageSize: pageSize,
     })
@@ -131,24 +135,40 @@ export default function QuarterlyCompany() {
         // setNotes()
         setCompoundList([]);
       });
-  }, [page, pageSize, a,statusSearch]);
+  }, [page, pageSize, a,statusSearch,pinflSearch]);
 
   return (
     <>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={statusSearch}
-        label="Chorak"
-        // size='small'
-        onChange={handleChangeStatusSearch}
-      >
-        <MenuItem value={"all"}>Hammasi</MenuItem>
-        <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
-        <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
-        <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
-        <MenuItem value={"disabled"}>Rad etildi</MenuItem>
-      </Select>
+      <FormControl>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={statusSearch}
+          label="Chorak"
+          // size='small'
+          onChange={handleChangeStatusSearch}
+          style={{ display: 'flex' }}
+        >
+          <MenuItem value={"all"}>Hammasi</MenuItem>
+          <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+          <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
+          <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
+          <MenuItem value={"disabled"}>Rad etildi</MenuItem>
+        </Select>
+        <TextField
+          id="outlined-basic"
+          // fullWidth
+          label="PINFL"
+          variant="outlined"
+          sx={{ my: 1 }}
+          value={note}
+          onChange={(event) => {
+            // setNotes(event.target.value);
+            setPinflSearch(event.target.value);
+          }}
+          style={{ display: 'flex' }}
+        />
+      </FormControl>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
