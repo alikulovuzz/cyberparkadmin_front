@@ -1,0 +1,8 @@
+.sidebar-left {
+    border-bottom-right-radius: 20px;
+    background-color: red;
+}
+
+.menu-label {
+    display: flex !important;
+}

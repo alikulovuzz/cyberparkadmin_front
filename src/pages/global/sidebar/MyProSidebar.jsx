@@ -14,7 +14,9 @@ import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import "../../../styles/admin.css";
+import './style.css'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -27,6 +29,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
       routerLink={<Link to={to} />}
+      className="sidebar-left"
     >
       <Typography>{title}</Typography>
     </MenuItem>
@@ -44,7 +47,6 @@ const MyProSidebar = () => {
       sx={{
         position: "sticky",
         display: "flex",
-        height: "100vh",
         top: 0,
         bottom: 0,
         zIndex: 10000,
@@ -52,7 +54,8 @@ const MyProSidebar = () => {
         "& .sidebar": {
           border: "none",
           height: "100%",
-          margin: 0
+          margin: 0,
+          marginBottom: "20px"
         },
         "& .menu-icon": {
           backgroundColor: "transparent !important",
@@ -79,6 +82,7 @@ const MyProSidebar = () => {
         rtl={sidebarRTL}
         backgroundColor={colors.primary[400]}
         image={sidebarImage}
+        className="sidebar-left"
       >
         <Menu iconshape="square">
           <MenuItem
@@ -182,6 +186,19 @@ const MyProSidebar = () => {
               setSelected={setSelected}
             /> */}
           </Box>
+          <MenuItem
+            style={{
+              margin: "10px 20px 10px 20px",
+              padding: "0px",
+              color: colors.grey[100],
+            }}
+            onClick={() => {
+              // Handle the functionality for the new button here
+            }}
+          >
+            <LogoutIcon style={{ marginRight: '8px' }}></LogoutIcon>
+            <Typography>Chiqish</Typography>
+          </MenuItem>
         </Menu>
       </Sidebar>
     </Box>
