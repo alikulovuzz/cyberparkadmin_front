@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, Sidebar, MenuItem } from "react-pro-sidebar";
 import { useProSidebar } from "react-pro-sidebar";
 import { useSidebarContext } from "./sidebarContext";
@@ -17,12 +17,12 @@ import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import "../../../styles/admin.css";
 import './style.css'
+import { UserContext } from "../../../context/UserContext";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  return (
+    return (
     <MenuItem
       active={selected === title}
       style={{ color: colors.grey[100] }}
@@ -42,6 +42,12 @@ const MyProSidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const { sidebarRTL, setSidebarRTL, sidebarImage } = useSidebarContext();
   const { collapseSidebar, toggleSidebar, collapsed, broken } = useProSidebar();
+  const { setUser } = useContext(UserContext);
+  const handleOpenBackdrop = () => {
+    sessionStorage.clear();
+    setUser("")
+    window.location.reload(false);
+  };
   return (
     <Box
       sx={{
@@ -192,12 +198,10 @@ const MyProSidebar = () => {
               padding: "0px",
               color: colors.grey[100],
             }}
-            onClick={() => {
-              // Handle the functionality for the new button here
-            }}
+            onClick={()=>{handleOpenBackdrop()}}
           >
             <LogoutIcon style={{ marginRight: '8px' }}></LogoutIcon>
-            <Typography>Chiqish</Typography>
+            <Typography >Chiqish</Typography>
           </MenuItem>
         </Menu>
       </Sidebar>

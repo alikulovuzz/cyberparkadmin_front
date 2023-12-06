@@ -17,7 +17,6 @@ export default function CompanyHeader() {
     setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
   };
 
-
   const handleOpenBackdrop = () => {
     sessionStorage.clear();
     setUser("")
