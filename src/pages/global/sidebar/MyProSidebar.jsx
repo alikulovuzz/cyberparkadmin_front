@@ -193,10 +193,14 @@ const MyProSidebar = () => {
             /> */}
           </Box>
           <MenuItem
+            className="custom-logout"
             style={{
-              margin: "10px 20px 10px 20px",
-              padding: "0px",
-              color: colors.grey[100],
+              margin: "0px 50px 0px 0px",
+              padding: "10px",
+              // color: colors.grey[100],
+              border: "1px solid",
+              borderColor: "#45B5AD",
+              background: "#45B5AD"
             }}
             onClick={()=>{handleOpenBackdrop()}}
           >

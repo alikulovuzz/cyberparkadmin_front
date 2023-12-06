@@ -1,0 +1,9 @@
+.custom-search {
+    display: flex; 
+    flex-direction: row !important;
+    margin-bottom: 10px;
+}
+
+.search-text {
+    margin-left: 10px;
+}
