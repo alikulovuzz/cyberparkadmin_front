@@ -37,7 +37,7 @@ export default function TableExample() {
         <TableHead>
           <TableRow>
             <TableCell>Tashkilot nomi</TableCell>
-            <TableCell align="right">PINFL</TableCell>
+            <TableCell align="right">INN</TableCell>
             <TableCell align="right">TIN</TableCell>
             <TableCell align="right">Yaratilgan_sana</TableCell>
             <TableCell align="right">Oxirgi_yangilanish</TableCell>

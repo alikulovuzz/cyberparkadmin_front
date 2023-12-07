@@ -174,7 +174,7 @@ export default function AuditCompany() {
             <TableRow>
               <TableCell>Tashkilot nomi</TableCell>
               <TableCell align="right">Davr</TableCell>
-              <TableCell align="right">PINFL</TableCell>
+              <TableCell align="right">INN</TableCell>
               <TableCell align="right">Yil</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Izoh</TableCell>
