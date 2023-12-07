@@ -159,7 +159,7 @@ export default function QuarterlyCompany() {
           <TextField
             className="search-text"
             id="outlined-basic"
-            label="PINFL"
+            label="INN"
             variant="outlined"
             value={note}
             onChange={(event) => {

@@ -200,7 +200,8 @@ const MyProSidebar = () => {
               // color: colors.grey[100],
               border: "1px solid",
               borderColor: "#45B5AD",
-              background: "#45B5AD"
+              background: "#45B5AD",
+              backgroundColor: "#45B5AD",
             }}
             onClick={()=>{handleOpenBackdrop()}}
           >
