@@ -158,18 +158,7 @@ export default function SignInSideAdmin() {
                     className="btn btn-block btn-primary"
                     onClick={handleSubmit}
                   />
-                  <div className="submit-message">
-                    <span>
-                      Sizda shaxsiy kabinetingiz yo'qmi?{" "}
-                      <a href="#">Ro'yhatdan o'tish</a>
-                    </span>
-                  </div>
-                  <div className="notification-msg">
-                    <span>
-                      Eslatma: Ushbu sahifadan Cyber Park joriy rezidentlari
-                      foydalanishlari mumkin
-                    </span>
-                  </div>
+                  
                 </div>
               </div>
             </div>
