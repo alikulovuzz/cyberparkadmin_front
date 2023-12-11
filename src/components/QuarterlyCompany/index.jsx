@@ -9,13 +9,14 @@ import TableRow from "@mui/material/TableRow";
 import { Toaster, toast } from "sonner";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
-import { Box, Pagination } from "@mui/material";
+import { Box, Pagination, colors } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
+import './style.css'
 import {
   FormControl,
   InputLabel,
@@ -135,39 +136,40 @@ export default function QuarterlyCompany() {
         // setNotes()
         setCompoundList([]);
       });
-  }, [page, pageSize, a,statusSearch,pinflSearch]);
+  }, [page, pageSize, a, statusSearch, pinflSearch]);
 
   return (
     <>
       <FormControl>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={statusSearch}
-          label="Chorak"
-          // size='small'
-          onChange={handleChangeStatusSearch}
-          style={{ display: 'flex' }}
-        >
-          <MenuItem value={"all"}>Hammasi</MenuItem>
-          <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
-          <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
-          <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
-          <MenuItem value={"disabled"}>Rad etildi</MenuItem>
-        </Select>
-        <TextField
-          id="outlined-basic"
-          // fullWidth
-          label="PINFL"
-          variant="outlined"
-          sx={{ my: 1 }}
-          value={note}
-          onChange={(event) => {
-            // setNotes(event.target.value);
-            setPinflSearch(event.target.value);
-          }}
-          style={{ display: 'flex' }}
-        />
+        <div className="custom-search">
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={statusSearch}
+            label="Chorak"
+            onChange={handleChangeStatusSearch}
+            style={{ marginRight: "10px" }}
+          >
+            <MenuItem value={"all"}>Hammasi</MenuItem>
+            <MenuItem value={"not_in_progress"}>Imzolanish jarayonida</MenuItem>
+            <MenuItem value={"progress"}>Ko'rib chiqilmoqda</MenuItem>
+            <MenuItem value={"finished"}>Tasdiqlandi</MenuItem>
+            <MenuItem value={"disabled"}>Rad etildi</MenuItem>
+          </Select>
+          <TextField
+            className="search-text"
+            id="outlined-basic"
+            label="INN"
+            variant="outlined"
+            value={note}
+            onChange={(event) => {
+              setPinflSearch(event.target.value);
+            }}
+            InputLabelProps={{
+              style: { color: 'black' } // Change 'red' to the color you want
+            }}
+          />
+        </div>
       </FormControl>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -175,7 +177,7 @@ export default function QuarterlyCompany() {
             <TableRow>
               <TableCell>Tashkilot nomi</TableCell>
               <TableCell align="right">Davr</TableCell>
-              <TableCell align="right">PINFL</TableCell>
+              <TableCell align="right">INN</TableCell>
               <TableCell align="right">Yil</TableCell>
               <TableCell align="right">Status</TableCell>
               <TableCell align="right">Izoh</TableCell>

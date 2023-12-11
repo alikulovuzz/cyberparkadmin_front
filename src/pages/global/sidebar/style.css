@@ -6,3 +6,9 @@
 .menu-label {
     display: flex !important;
 }
+
+.custom-logout {
+    margin-top: 50px;
+    padding-left: 50px;
+    background-color: aqua !important;
+}
