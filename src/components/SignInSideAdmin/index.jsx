@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { Axios } from "axios";
 
-export default function SignInSide({ admin }) {
+export default function SignInSideAdmin() {
   const [openLanguages, setOpenLanguages] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,16 +42,11 @@ export default function SignInSide({ admin }) {
 
   const handleSubmit = () => {
     handleOpenBackdrop();
-    const req_url = admin ? user_signin : company_signin;
-    const req_body = admin
-      ? {
-          email: username,
-          password: password,
-        }
-      : {
-          pinfl: username,
-          password: password,
-        };
+    const req_url =user_signin
+    const req_body = {
+      email: username,
+      password: password,
+    }
     postRequest(req_url, req_body)
       .then((response) => {
         // console.log(response)
@@ -66,8 +61,8 @@ export default function SignInSide({ admin }) {
         handleCloseBackdrop();
       })
       .catch((error) => {
-        console.log(error instanceof Axios);
-        console.log(error.response.status);
+        console.log(error instanceof Axios)
+        console.log(error.response.status)
         if (error.code == "ERR_NETWORK") {
           handleCloseBackdrop();
           toast.error("Serverda xatolik");
@@ -85,7 +80,7 @@ export default function SignInSide({ admin }) {
         if (error.response.status == "400") {
           handleCloseBackdrop();
           toast.error("Xato so'rov");
-        } else {
+        }else{
           handleCloseBackdrop();
           toast.error("Serverda xatolik");
         }
@@ -103,72 +98,23 @@ export default function SignInSide({ admin }) {
   return (
     <div className="d-lg-flex half" onClick={closeOpenDropDown}>
       <div className="right-top col-md-12">
-        <button onClick={gotoAdmin}>
-          <i className="fas fa-user-circle"></i>
-          <span>Adminlar uchun</span>
-        </button>
-        <div className="dropdown">
-          <button onClick={handleOpenDropDown} className="dropbtn">
-            Uz
-          </button>
-          <div
-            id="myDropdown"
-            className={`dropdown-content ${openLanguages ? "show" : ""}`}
-          >
-            <a>Uz</a>
-            <a>Ru</a>
-            <a>En</a>
-          </div>
-        </div>
-      </div>
-      <div className="bg cl-md-12">
-        <div className="left-side">
-          <div className="image-container">
-            <img src={require("./images/logo2.png")} alt="" />
-          </div>
-          <div className="left-title">
-            <h3>CYBER PARK BILAN BIZNESINGIZNI RIVOJLANTIRING</h3>
-          </div>
-          <div className="info-left">
-            <h5>
-              CYBER PARK rezidenti maqomiga ega bo'ling va kompaniya rivojlanish
-              uchun imtiyozlar va afzalliklardan foydalaning!
-            </h5>
-            <br />
-            <h5>
-              CYBER PARK rezidentligi maqomini olish bo'yicha talab qilinuvchi
-              hujjatlar:
-            </h5>
-            <br />
-            <img
-              className="send-img"
-              src={require("./images/smartparcel-mail.gif")}
-              alt=""
-            />
-            <div className="left-span">
-              <img src={require("./images/office-building.png")} alt="" />
-              <p>O'zbekistonda kompaniya ochish</p>
-            </div>
-            <div className="left-span">
-              <img src={require("./images/clipboard.png")} alt="" />
-              <p>Shaxsiy kabinet orqali biznes-reja bilan ariza yuborish</p>
+          <div className="dropdown">
+            <button onClick={handleOpenDropDown} className="dropbtn">
+              Uz
+            </button>
+            <div
+              id="myDropdown"
+              className={`dropdown-content ${openLanguages ? "show" : ""}`}
+            >
+              <a>Uz</a>
+              <a>Ru</a>
+              <a>En</a>
             </div>
           </div>
-          <div
-            className="phone-block pointer"
-            onClick={() => (window.location.href = "tel:900288902")}
-          >
-            <img
-              className="phone-img"
-              src={require("./images/icon-call.png")}
-              alt=""
-            />
-            <span>(90) 028-89-02</span>
-          </div>
         </div>
-      </div>
       <div className="contents custom-res">
-        <div className="container custom-res">
+        
+        <div className="container custom-res" style={{width:"600px !important"}}>
           <div className="right-block custom-res">
             <div className="align-items-center justify-content-center col-md-12 right-form">
               <div className="col-md-12">
@@ -181,7 +127,7 @@ export default function SignInSide({ admin }) {
                       username ? "field--not-empty" : ""
                     }`}
                   >
-                    <label htmlFor="username">PINFL</label>
+                    <label htmlFor="username">Email</label>
                     <input
                       type="text"
                       className="form-control"

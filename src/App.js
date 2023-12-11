@@ -36,6 +36,7 @@ import NewQuarterly from "./components/NewQuarterly";
 import { ErrorBoundary } from 'react-error-boundary';
 import AboutUs from "./components/AboutUs";
 import DetailidReport from "./components/QuarterlyDetails/Index";
+import SignInSideAdmin from "./components/SignInSideAdmin";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -84,7 +85,7 @@ const App = () => {
               // <></>
             }
             <Route path="login" element={<SignInSide admin={false} />} />
-            <Route path="admin-login" element={<SignInSide admin={true} />} />
+            <Route path="admin-login" element={<SignInSideAdmin />} />
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>
         </UserProvider>
