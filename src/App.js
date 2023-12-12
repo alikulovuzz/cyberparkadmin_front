@@ -37,6 +37,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import AboutUs from "./components/AboutUs";
 import DetailidReport from "./components/QuarterlyDetails/Index";
 import SignInSideAdmin from "./components/SignInSideAdmin";
+import ApplyResidents from "./components/ApplyResidents";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -87,7 +88,7 @@ const App = () => {
             }
             <Route path="login" element={<SignInSide admin={false} />} />
             <Route path="admin-login" element={<SignInSideAdmin />} />
-            <Route path="apply_resident" element={<NewQuarterly />} />
+            <Route path="apply_resident" element={<ApplyResidents />} />
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>
         </UserProvider>

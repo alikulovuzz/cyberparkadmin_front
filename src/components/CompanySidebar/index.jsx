@@ -98,7 +98,7 @@ export default function CompanySidebar() {
                         </span>
                     </NavLink>
                     <NavLink
-                        to="apply_resident"
+                        to="/apply_resident"
                         className={({ isActive }) =>
                             isActive ? "nav-item active" : "nav-item"
                         }
