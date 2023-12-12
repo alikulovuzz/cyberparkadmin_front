@@ -87,7 +87,6 @@ const App = () => {
             }
             <Route path="login" element={<SignInSide admin={false} />} />
             <Route path="admin-login" element={<SignInSideAdmin />} />
-            <Route path="apply_resident" element={<NewQuarterly />} />
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>
         </UserProvider>
