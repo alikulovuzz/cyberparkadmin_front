@@ -97,18 +97,6 @@ export default function CompanySidebar() {
                             <span className="menu-title">Bog'lanish uchun</span>
                         </span>
                     </NavLink>
-                    <NavLink
-                        to="apply_resident"
-                        className={({ isActive }) =>
-                            isActive ? "nav-item active" : "nav-item"
-                        }
-                        onClick={closeToggle}
-                    >
-                        <span className="nav-link">
-                            <i className="ti-user menu-icon"></i>
-                            <span className="menu-title">Resident</span>
-                        </span>
-                    </NavLink>
                 </div>
             </nav>
         </>
