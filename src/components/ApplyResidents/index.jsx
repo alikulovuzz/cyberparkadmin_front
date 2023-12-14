@@ -71,7 +71,7 @@ export default function ApplyResidents() {
                 <TextField
                   label="Электронная почта"
                   variant="outlined"
-                  placeholder="Файл *"
+                  placeholder="Электронная почта *"
                   // value={email}
                   className='apply-block'
                   onChange={handleEmailChange}
