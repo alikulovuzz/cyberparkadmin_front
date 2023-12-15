@@ -146,6 +146,7 @@ export default function ApplyResidents() {
               <FormControl onSubmit={handleSubmit}>
                 <div className="apply-resident">
                   <TextField
+                    key="input_app"
                     label="Электронная почта"
                     variant="outlined"
                     placeholder="Электронная почта *"
