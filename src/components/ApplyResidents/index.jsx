@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MuiFileInput } from "mui-file-input";
 import Button from "@mui/material/Button";
 import "./main.css";
@@ -92,6 +92,11 @@ export default function ApplyResidents() {
     setEmail(event.target.value);
   };
 
+  useEffect(() => {
+    localStorage.removeItem('savedEmail'); 
+    setEmail(''); 
+  }, []);
+  
   const uploadFiles =  async () => {
     body["email"]=email
     handleReport(requirements,"requirements")
@@ -239,9 +244,8 @@ export default function ApplyResidents() {
                       (УП-5099-сон 30.06.2017. О мерах по коренному улучшению
                       условий для развития отрасли информационных технологий в
                       республике)
-                      <a href="https://lex.uz/docs/3249654">
-                        {" "}
-                        https://lex.uz/docs/3249654
+                      <a href="https://lex.uz/docs/3249654"> <br></br>
+                      Ссылка 1
                       </a>
                     </p>
                   </div>
@@ -250,8 +254,7 @@ export default function ApplyResidents() {
                       Закон о кибербезопасности, который был подписан недавно{" "}
                       <br></br>
                       <a href="https://lex.uz/ru/docs/5960609?query=%D0%BA%D0%B8%D0%B1%D0%B5%D1%80%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C#sr-1 ">
-                        {" "}
-                        https://lex.uz/ru/docs/5960609?query=%D0%BA%D0%B8%D0%B1%D0%B5%D1%80%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C#sr-1{" "}
+                      Ссылка 2
                       </a>
                     </p>
                   </div>

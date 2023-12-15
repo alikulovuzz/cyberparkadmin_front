@@ -3664,13 +3664,14 @@ select {
   color: red;
   font-family: 'Saira Semi Condensed', sans-serif !important;
   padding-left: 0px;
+  padding-bottom: 5px;
 }
 
 
 .warn-file-second {
   color: red;
   font-family: 'Saira Semi Condensed', sans-serif !important;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .apply-resident {
@@ -3679,7 +3680,7 @@ select {
 }
 
 .apply-block {
-  margin-bottom: 20px !important;
+  margin-top: 20px !important;
 }
 
 .css-1nrlq1o-MuiFormControl-root {
@@ -3688,6 +3689,7 @@ select {
 
 .apply-div {
   color: #000000;
+  margin-top: 20px;
 }
 
 .apply-div p {

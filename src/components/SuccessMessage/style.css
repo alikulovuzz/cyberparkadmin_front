@@ -1,0 +1,41 @@
+.container-success {
+    margin: 200px 500px;
+}
+
+.checkmark {
+    color: #45B5AA;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+    padding: 10px;
+}
+
+.card-success {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.card-success-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-check {
+    border: 1px solid #45B5AA;
+    padding: 10px;
+    border-radius: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block-check i {
+    text-align: center;
+}
