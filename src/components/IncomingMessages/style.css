@@ -20,9 +20,10 @@
 
 .apply-message p {
     font-size: 16px;
+    color: #45B5AA;
 }
 .apply-message button {
-    width: 150px;
+    width: 180px;
     outline: none;
     border: 1px solid #45B5AA;
     background-color: white;
