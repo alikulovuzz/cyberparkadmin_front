@@ -184,6 +184,7 @@ export default function SignInSide({ admin }) {
                     <label htmlFor="username">PINFL</label>
                     <input
                       type="text"
+                      key="input_singin"
                       className="form-control"
                       id="username"
                       onChange={(event) => {

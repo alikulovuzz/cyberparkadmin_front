@@ -152,6 +152,11 @@ export default function ApplyResidents() {
                 <div className="apply-resident">
                   <p>Электронная почта</p>
                   <TextField
+<<<<<<< HEAD
+=======
+                    key="input_app"
+                    label="Электронная почта"
+>>>>>>> 432170c2544af4c82bd80ec636823ef306af4204
                     variant="outlined"
                     placeholder="Электронная почта *"
                     className="apply-block"
