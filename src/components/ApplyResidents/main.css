@@ -3679,9 +3679,14 @@ select {
   flex-direction: column;
 }
 
-.apply-block {
-  margin-top: 20px !important;
+.apply-resident p {
+  margin: 0px;
+  margin-top: 10px;
 }
+
+/* .apply-block {
+  margin-bottom: 20px !important;
+} */
 
 .css-1nrlq1o-MuiFormControl-root {
   width: 50%;

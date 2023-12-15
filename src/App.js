@@ -39,6 +39,7 @@ import DetailidReport from "./components/QuarterlyDetails/Index";
 import SignInSideAdmin from "./components/SignInSideAdmin";
 import ApplyResidents from "./components/ApplyResidents";
 import SuccessMessage from "./components/SuccessMessage";
+import IncomingMessages from "./components/IncomingMessages";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -91,6 +92,7 @@ const App = () => {
             <Route path="admin-login" element={<SignInSideAdmin />} />
             <Route path="apply_resident" element={<ApplyResidents />} />
             <Route path="success_message" element={<SuccessMessage />} />
+            <Route path="income_message" element={<IncomingMessages />} />
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>
         </UserProvider>

@@ -150,8 +150,8 @@ export default function ApplyResidents() {
               </div>
               <FormControl onSubmit={handleSubmit}>
                 <div className="apply-resident">
+                  <p>Электронная почта</p>
                   <TextField
-                    label="Электронная почта"
                     variant="outlined"
                     placeholder="Электронная почта *"
                     className="apply-block"
@@ -159,24 +159,24 @@ export default function ApplyResidents() {
                     onChange={handleEmailChange}
                   />
                   {!(validate&&!email)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Основные требования для получения статуса резидента (Файл для ознакомления №1)</p>
                   <MuiFileInput
-                    label="Основные требования для получения статуса резидента (Файл для ознакомления №1)"
                     placeholder="Файл *"
                     className="apply-block"
                     value={requirements}
                     onChange={(file) => handleChangeFile("requirements", file)}
                   />
                   {!(validate&&!requirements)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Заявление о регистрации в качестве резидента (Файл №2)</p>
                   <MuiFileInput
-                    label="Заявление о регистрации в качестве резидента (Файл №2)"
                     placeholder="Файл *"
                     className="apply-block"
                     value={application}
                     onChange={(file) => handleChangeFile("application", file)}
                   />
                   {!(validate&&!application)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Копии учредительных документов: Устав, Учредительный договор (если учредителей больше одного), Гувохнома.</p>
                   <MuiFileInput
-                    label="Копии учредительных документов: Устав, Учредительный договор (если учредителей больше одного), Гувохнома."
                     placeholder="Файл *"
                     className="apply-block"
                     value={constituent_documents}
@@ -185,32 +185,32 @@ export default function ApplyResidents() {
                     }
                   />
                   {!(validate&&!constituent_documents)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Описание проекта, предлагаемого для реализации в качестве резидента IТ-парка инноваций в кибернетике (оригинал с живой подписью и печатью)</p>
                   <MuiFileInput
-                    label="Описание проекта, предлагаемого для реализации в качестве резидента IТ-парка инноваций в кибернетике (оригинал с живой подписью и печатью)"
                     placeholder="Файл *"
                     className="apply-block"
                     value={description}
                     onChange={(file) => handleChangeFile("description", file)}
                   />
                   {!(validate&&!description)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Копия лицензии или разрешительного документа (при наличии).</p>
                   <MuiFileInput
-                    label="Копия лицензии или разрешительного документа (при наличии)."
                     placeholder="Файл *"
                     className="apply-block"
                     value={license}
                     onChange={(file) => handleChangeFile("license", file)}
                   />
                   {!(validate&&!license)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Копия приказа на директора и его паспорта</p>
                   <MuiFileInput
-                    label="Копия приказа на директора и его паспорта"
                     placeholder="Файл *"
                     className="apply-block"
                     value={copy_passport}
                     onChange={(file) => handleChangeFile("copy_passport", file)}
                   />
                   {!(validate&&!copy_passport)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Примерная форма описания проекта (Файл №3)</p>
                   <MuiFileInput
-                    label="Примерная форма описания проекта (Файл №3)"
                     placeholder="Файл *"
                     value={project_description}
                     className="apply-block"
@@ -219,8 +219,8 @@ export default function ApplyResidents() {
                     }
                   />
                   {!(validate&&!project_description)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Анкета кандидата (Файл №4)</p>
                   <MuiFileInput
-                    label="Анкета кандидата (Файл №4)"
                     placeholder="Файл *"
                     className="apply-block"
                     value={candidate_application}
@@ -229,8 +229,8 @@ export default function ApplyResidents() {
                     }
                   />
                   {!(validate&&!candidate_application)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                  <p>Структура бизнес план (Файл №5)</p>
                   <MuiFileInput
-                    label="Структура бизнес план (Файл №5)"
                     placeholder="Файл *"
                     className="apply-block"
                     value={business_plan}
