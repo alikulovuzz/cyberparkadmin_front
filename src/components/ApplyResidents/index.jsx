@@ -115,7 +115,7 @@ export default function ApplyResidents() {
     event.preventDefault();
     setValidate(true)
     await uploadFiles()
-    console.log("body")
+    console.log(body)
     console.log(body)
     postRequest("/application_form/create", body)
       .then((response) => {
