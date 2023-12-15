@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MuiFileInput } from "mui-file-input";
 import Button from "@mui/material/Button";
 import "./main.css";
@@ -92,6 +92,11 @@ export default function ApplyResidents() {
     setEmail(event.target.value);
   };
 
+  useEffect(() => {
+    localStorage.removeItem('savedEmail'); 
+    setEmail(''); 
+  }, []);
+  
   const uploadFiles =  async () => {
     body["email"]=email
     handleReport(requirements,"requirements")
