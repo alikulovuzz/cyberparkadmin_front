@@ -110,29 +110,34 @@ export default function ApplyResidents() {
     handleReport(candidate_application,"candidate_application")
     handleReport(business_plan,"business_plan")
   };
-
+  async function delay(ms) {
+    // return await for better async stack trace support in case of errors.
+    return await new Promise(resolve => setTimeout(resolve, ms));
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValidate(true)
-    await uploadFiles()
-    console.log(body)
-    console.log(body)
-    postRequest("/application_form/create", body)
-      .then((response) => {
-        toast.success("Muvaffaqiyatli!");
-        // handleClose();
-        clearInputs()
-        setValidate(false)
-        setStatusResult(false)
-        // navigate({
-        //   pathname: "/user",
-        // });
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Serverda xatolik.");
-      });  
+    await Promise.all([uploadFiles()])
+    // await setInterval(uploadFiles(), 1000);
+    // await uploadFiles()
+    await delay(2000);
+    await Promise.all([postRequest("/application_form/create", body)
+    .then((response) => {
+      toast.success("Muvaffaqiyatli!");
+      // handleClose();
+      clearInputs()
+      setValidate(false)
+      setStatusResult(false)
+      // navigate({
+      //   pathname: "/user",
+      // });
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      toast.error("Serverda xatolik.");
+    })])
+      
   };
 
   return (statusResult?(<>

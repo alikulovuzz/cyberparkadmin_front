@@ -5,9 +5,9 @@ import { tokens } from "../../theme";
 import { mockDataInvoices } from "../../data/mockData";
 
 import Header from "../../components/Header";
-import MonthlyCompany from "../../components/MonthlyCompany";
+import ApplicationsCompany from "../../components/MonthlyCompany";
 
-const Invoices = () => {
+const ApplicationsLayout = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -47,10 +47,10 @@ const Invoices = () => {
           },
         }}
       >
-        <MonthlyCompany/>
+        <ApplicationsCompany/>
       </Box>
     </Box>
   );
 };
 
-export default Invoices;
+export default ApplicationsLayout;

@@ -6,7 +6,7 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 // import Topbar from "./pages/global/Topbar";
 import Dashboard from "./pages/dashboard";
 import Team from "./pages/team";
-import Invoices from "./pages/invoices";
+import ApplicationsLayout from "./pages/invoices";
 import Contacts from "./pages/contacts";
 import Form from "./pages/form";
 import Calendar from "./pages/calendar";
@@ -59,7 +59,7 @@ const App = () => {
                   </Route>
                   <Route path='detail_report' element={<DetailidReport />} />
                   <Route path="audit" element={<Contacts />} />
-                  <Route path="oylik" element={<Invoices />} />
+                  <Route path="ariza" element={<ApplicationsLayout />} />
                   {/* <Route path="form" element={<Form />} />
                   <Route path="bar" element={<Bar />} />
                   <Route path="pie" element={<Pie />} />
@@ -91,7 +91,7 @@ const App = () => {
             <Route path="login" element={<SignInSide admin={false} />} />
             <Route path="admin-login" element={<SignInSideAdmin />} />
             <Route path="apply_resident" element={<ApplyResidents />} />
-            <Route path="success_message" element={<SuccessMessage />} />
+            {/* <Route path="success_message" element={<SuccessMessage />} /> */}
             <Route path="income_message" element={<IncomingMessages />} />
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>

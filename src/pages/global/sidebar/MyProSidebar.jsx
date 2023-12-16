@@ -184,13 +184,13 @@ const MyProSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Soliq hisobotlari"
-              to="oylik"
+            <Item
+              title="Rezidentlik uchun Arizalar"
+              to="ariza"
               icon={<AccountBalanceWalletOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
           </Box>
           <MenuItem
             className="custom-logout"

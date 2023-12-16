@@ -30,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-export default function MonthlyCompany() {
+export default function ApplicationsCompany() {
   const [page, setPage] = useState(1);
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
