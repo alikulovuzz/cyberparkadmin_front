@@ -8,7 +8,6 @@ import { useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 export default function Admin() {
-  console.log("Admin comoponent rendered");
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
