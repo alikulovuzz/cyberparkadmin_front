@@ -3663,7 +3663,7 @@ select {
 .warn-file {
   color: red;
   font-family: 'Saira Semi Condensed', sans-serif !important;
-  padding-left: 10px;
+  padding-left: 0px;
   padding-bottom: 5px;
 }
 
