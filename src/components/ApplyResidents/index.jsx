@@ -13,11 +13,11 @@ export default function ApplyResidents() {
   const [statusResult, setStatusResult] = useState(true);
   const [value, setValue] = React.useState(null);
 
-
   //validate
   const [validate, setValidate] = useState(false);
 
   // this states used for stroring files
+  const [company, setCompany] = useState(null);
   const [email, setEmail] = useState(null);
   const [requirements, setRequirements] = useState(null);
   const [application, setApplication] = useState(null);
@@ -40,23 +40,23 @@ export default function ApplyResidents() {
   //   setTextInput(event.target.value);
   // };
   const handleChangeFile = (type, value) => {
-    if ((type == "requirements")) {
+    if (type == "requirements") {
       setRequirements(value);
-    } else if ((type == "application")) {
+    } else if (type == "application") {
       setApplication(value);
-    } else if ((type == "constituent_documents")) {
+    } else if (type == "constituent_documents") {
       setConstituentDocuments(value);
-    } else if ((type == "description")) {
+    } else if (type == "description") {
       setDescription(value);
-    } else if ((type == "license")) {
+    } else if (type == "license") {
       setLicense(value);
-    } else if ((type == "copy_passport")) {
+    } else if (type == "copy_passport") {
       setCopyPassport(value);
-    } else if ((type == "project_description")) {
+    } else if (type == "project_description") {
       setProjectDescription(value);
-    } else if ((type == "candidate_application")) {
+    } else if (type == "candidate_application") {
       setCandidateApplication(value);
-    } else if ((type == "business_plan")) {
+    } else if (type == "business_plan") {
       setBusinessPlan(value);
     }
   };
@@ -66,10 +66,10 @@ export default function ApplyResidents() {
     uploadFile(upload, formData)
       .then((response) => {
         // body.push({ type:response.data.link });
-        body[type]=response.data.link
+        body[type] = response.data.link;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         if (error.response.data.message == "Please upload a file") {
           toast.error("Please upload a file");
         } else {
@@ -78,6 +78,7 @@ export default function ApplyResidents() {
       });
   };
   const clearInputs = () => {
+    setCompany(null);
     setEmail(null);
     setRequirements(null);
     setApplication(null);
@@ -92,52 +93,57 @@ export default function ApplyResidents() {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+  const handleCompanyChange = (event) => {
+    setCompany(event.target.value);
+  };
 
   useEffect(() => {
-    localStorage.removeItem('savedEmail'); 
-    setEmail(''); 
+    localStorage.removeItem("savedEmail");
+    setEmail("");
   }, []);
-  
-  const uploadFiles =  async () => {
-    body["email"]=email
-    handleReport(requirements,"requirements")
-    handleReport(application,"application")
-    handleReport(constituent_documents,"constituent_documents")
-    handleReport(description,"description")
-    handleReport(license,"license")
-    handleReport(copy_passport,"copy_passport")
-    handleReport(project_description,"project_description")
-    handleReport(candidate_application,"candidate_application")
-    handleReport(business_plan,"business_plan")
+
+  const uploadFiles = async () => {
+    body["company"] = company;
+    body["email"] = email;
+    handleReport(requirements, "requirements");
+    handleReport(application, "application");
+    handleReport(constituent_documents, "constituent_documents");
+    handleReport(description, "description");
+    handleReport(license, "license");
+    handleReport(copy_passport, "copy_passport");
+    handleReport(project_description, "project_description");
+    handleReport(candidate_application, "candidate_application");
+    handleReport(business_plan, "business_plan");
   };
   async function delay(ms) {
     // return await for better async stack trace support in case of errors.
-    return await new Promise(resolve => setTimeout(resolve, ms));
+    return await new Promise((resolve) => setTimeout(resolve, ms));
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setValidate(true)
-    await Promise.all([uploadFiles()])
+    setValidate(true);
+    await Promise.all([uploadFiles()]);
     // await setInterval(uploadFiles(), 1000);
     // await uploadFiles()
     await delay(2000);
-    await Promise.all([postRequest("/application_form/create", body)
-    .then((response) => {
-      toast.success("Muvaffaqiyatli!");
-      // handleClose();
-      clearInputs()
-      setValidate(false)
-      setStatusResult(false)
-      // navigate({
-      //   pathname: "/user",
-      // });
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-      toast.error("Serverda xatolik.");
-    })])
-      
+    await Promise.all([
+      postRequest("/application_form/create", body)
+        .then((response) => {
+          toast.success("Muvaffaqiyatli!");
+          // handleClose();
+          clearInputs();
+          setValidate(false);
+          setStatusResult(false);
+          // navigate({
+          //   pathname: "/user",
+          // });
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Serverda xatolik.");
+        }),
+    ]);
   };
 
   return (statusResult?(<>
@@ -158,8 +164,18 @@ export default function ApplyResidents() {
               </h5>
             </div>
             <FormControl onSubmit={handleSubmit}>
-              <p style={{margin:"0px"}}>Электронная почта</p>
+              <p style={{margin:"0px"}}>Название организации?</p>
               <div className="apply-resident">
+              <TextField
+                  key="input_app"
+                  variant="outlined"
+                  placeholder="Название организации? *"
+                  className="apply-block"
+                  value={company}
+                  onChange={handleCompanyChange}
+                />
+                {!(validate&&!company)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                <p>Электронная почта</p>
                 <TextField
                   key="input_app"
                   variant="outlined"
