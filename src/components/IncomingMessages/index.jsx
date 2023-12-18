@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { MuiFileInput } from "mui-file-input";
-import Button from "@mui/material/Button";
 import "./style.css";
 import { FormControl, TextField } from "@mui/material";
 import { getRequest, postRequest, uploadFile } from "../../utils/resquests";
@@ -13,8 +11,6 @@ import { useSearchParams } from "react-router-dom";
 export default function IncomingMessages() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [id, setId] = useState(searchParams.get("id"));
-  const [data, setData] = useState({});
-  const [value, setValue] = React.useState(null);
   const [applications, setApplications] = useState([]);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -55,27 +51,6 @@ export default function IncomingMessages() {
   // const handleTextChange = (event) => {
   //   setTextInput(event.target.value);
   // };
-  const handleChangeFile = (type, value) => {
-    if (type == "requirements") {
-      setRequirements(value);
-    } else if (type == "application") {
-      setApplication(value);
-    } else if (type == "constituent_documents") {
-      setConstituentDocuments(value);
-    } else if (type == "description") {
-      setDescription(value);
-    } else if (type == "license") {
-      setLicense(value);
-    } else if (type == "copy_passport") {
-      setCopyPassport(value);
-    } else if (type == "project_description") {
-      setProjectDescription(value);
-    } else if (type == "candidate_application") {
-      setCandidateApplication(value);
-    } else if (type == "business_plan") {
-      setBusinessPlan(value);
-    }
-  };
   const handleReport = (value, type) => {
     const formData = new FormData();
     formData.append("file", value);
@@ -236,7 +211,7 @@ export default function IncomingMessages() {
                   </a>
                 </div>
                 <div className="apply-message">
-                  <h5>Время поступления заявки</h5>
+                  <h5 onClick={console.log(applications)}>Время поступления заявки</h5>
                   <p>
                     {applications.created_at}
                   </p>

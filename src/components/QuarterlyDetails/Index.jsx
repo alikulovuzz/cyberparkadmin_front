@@ -923,7 +923,7 @@ export default function DetailidReport() {
                       return (
                         <div className="download-block" key={index}>
                           <p>{formatQQSLinks(elem['name'])}: </p>
-                          <a href={elem['link']} key={index} onClick={()=>{console.log(elem['link'])}}>Скачать</a>
+                          <a href={elem['link']} key={index} onClick={()=>{}} download>Скачать</a>
                         </div>
                       );
                     })}
