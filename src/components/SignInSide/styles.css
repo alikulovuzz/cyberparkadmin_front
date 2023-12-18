@@ -74,7 +74,7 @@ h2 {
 
   .half .contents,
   .half .bg {
-    width: 100%;
+    width: 100% !important;
   }
 }
 
@@ -1547,3 +1547,42 @@ hr {
 .phone-block span:hover {
   cursor: pointer;
 }
+
+
+/* Responsive for device */
+
+@media (max-width: 1244px) {
+  .half .bg {
+    padding-left: 30px !important;
+  }
+  .right-block{
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+
+}
+
+
+@media (max-width: 1092px) {
+  .custom-res {
+    width: 450px !important;
+  }
+
+}
+
+@media (max-width: 996px) {
+  .half .bg {
+    display: none !important;
+  }
+
+  .right-top {
+    justify-content: center !important;
+  }
+
+  .custom-res {
+    width: 530px !important;
+  }
+}
+
+
+
