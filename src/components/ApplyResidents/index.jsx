@@ -149,7 +149,7 @@ export default function ApplyResidents() {
               ЗАЯВКА НА РЕЗИДЕНТСВО В IT-PARK ИННОВАЦИЙ В КИБЕРНЕТИКЕ
             </h4>
           </div>
-          <div className="card-style mb-30">
+          <div className="card-style-apply mb-30">
             <div className="title-apply">
               <h5 className="mb-25">
                 В данной форме представлен полный перечень документов для
