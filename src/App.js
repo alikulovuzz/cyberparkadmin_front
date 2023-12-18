@@ -60,6 +60,7 @@ const App = () => {
                   <Route path='detail_report' element={<DetailidReport />} />
                   <Route path="audit" element={<Contacts />} />
                   <Route path="ariza" element={<ApplicationsLayout />} />
+                  <Route path="ariza_detail" element={<IncomingMessages />} />
                   {/* <Route path="form" element={<Form />} />
                   <Route path="bar" element={<Bar />} />
                   <Route path="pie" element={<Pie />} />
@@ -92,7 +93,7 @@ const App = () => {
             <Route path="admin-login" element={<SignInSideAdmin />} />
             <Route path="apply_resident" element={<ApplyResidents />} />
             {/* <Route path="success_message" element={<SuccessMessage />} /> */}
-            <Route path="income_message" element={<IncomingMessages />} />
+            {/* <Route path="income_message" element={<IncomingMessages />} /> */}
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
           </Routes>
         </UserProvider>

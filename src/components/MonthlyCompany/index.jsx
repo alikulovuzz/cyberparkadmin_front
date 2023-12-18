@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -42,6 +43,7 @@ export default function ApplicationsCompany() {
   const [id, setID] = React.useState();
 
   const [audit, setAudit] = useState("Oylik");
+  const navigate = useNavigate();
   const [progress, setProgress] = useState("");
 
   const handelDelete = (data) => {
@@ -162,9 +164,17 @@ export default function ApplicationsCompany() {
                   {new Date(row.createdAt).toLocaleTimeString("en-GB")}
                 </TableCell>
                 <TableCell align="right">
-                  <a href={row.email} download>
-                    Yuklab olish
-                  </a>
+                  <p
+                    onClick={() => {
+                      // handelDelete(data._id);
+                      navigate({
+                        pathname: "/admin/ariza_detail",
+                        search: `?id=${row._id}`,
+                      });
+                    }}
+                  >
+                    Ko'rish
+                  </p>
                 </TableCell>
                 <TableCell align="right">
                   <p
