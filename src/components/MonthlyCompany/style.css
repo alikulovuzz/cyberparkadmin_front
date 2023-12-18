@@ -1,0 +1,9 @@
+.apply-delBtn {
+    margin: 0px;
+    color: #45B5AA;
+    cursor: pointer;
+}
+
+.custom-btn-delete {
+    text-align: right !important;
+}

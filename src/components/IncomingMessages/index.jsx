@@ -173,7 +173,7 @@ export default function IncomingMessages() {
                     для ознакомления №1):
                   </h5>
                   <a href={applications.requirements} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
@@ -181,7 +181,7 @@ export default function IncomingMessages() {
                     Заявление о регистрации в качестве резидента (Файл №2):
                   </h5>
                   <a href={applications.application} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
@@ -190,7 +190,7 @@ export default function IncomingMessages() {
                     (если учредителей больше одного), Гувохнома:
                   </h5>
                   <a href={applications.constituent_documents} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
@@ -200,7 +200,7 @@ export default function IncomingMessages() {
                     подписью и печатью):
                   </h5>
                   <a href={applications.description} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
@@ -208,37 +208,37 @@ export default function IncomingMessages() {
                     Копия лицензии или разрешительного документа (при наличии):
                   </h5>
                   <a href={applications.license} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
                   <h5>Копия приказа на директора и его паспорта:</h5>
                   <a href={applications.copy_passport} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
                   <h5>Примерная форма описания проекта (Файл №3):</h5>
                   <a href={applications.project_description} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
                   <h5>Анкета кандидата (Файл №4):</h5>
                   <a href={applications.candidate_application} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
                   <h5>Структура бизнес план (Файл №5):</h5>
                   <a href={applications.business_plan} download>
-                    Yuklab olish
+                    Скачать
                   </a>
                 </div>
                 <div className="apply-message">
-                  <h5>Структура бизнес план (Файл №5):</h5>
+                  <h5>Время поступления заявки</h5>
                   <p>
-                  {applications.created_at}
+                    {applications.created_at}
                   </p>
                 </div>
               </FormControl>

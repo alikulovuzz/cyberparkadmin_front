@@ -16,11 +16,12 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    align-items: center;
 }
 
 .apply-message p {
     font-size: 16px;
-    color: #45B5AA;
+    color: black;
 }
 .apply-message button {
     width: 180px;
@@ -31,8 +32,22 @@
     margin-left: 10px;
 }
 
+.apply-message a {
+    border: 1px solid #45B5AA;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.apply-message a:hover {
+    background-color: #45B5AA;
+    color: white;
+    border: 1px solid white;
+}
+
 .apply-message h5 {
     font-size: 16px;
+    margin-right: 10px;
 }
 
 .css-1nrlq1o-MuiFormControl-root {

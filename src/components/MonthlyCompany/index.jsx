@@ -16,6 +16,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
+import './style.css'
 import {
   FormControl,
   InputLabel,
@@ -126,12 +127,9 @@ export default function ApplicationsCompany() {
             <TableRow>
               <TableCell>Tashkilot nomi</TableCell>
               <TableCell align="right">email</TableCell>
-              <TableCell align="right">INN</TableCell>
-              <TableCell align="right">Yil</TableCell>
-              <TableCell align="right">Status</TableCell>
               <TableCell align="right">Yaratilgan kun</TableCell>
               <TableCell align="right">Yaratilgan vaqt</TableCell>
-              <TableCell align="right">Ko'rish</TableCell>
+              <TableCell align="right" className="">Ko'rish</TableCell>
               <TableCell align="right">O'chirish</TableCell>
             </TableRow>
           </TableHead>
@@ -145,18 +143,6 @@ export default function ApplicationsCompany() {
                   {row.company}
                 </TableCell>
                 <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell
-                  align="right"
-                  onClick={() => {
-                    // handelDelete(data._id);
-                    setID(row._id);
-                    handleOpenStatus();
-                  }}
-                >
-                  {formatStatus(row.email)}
-                </TableCell>
                 <TableCell align="right">
                   {new Date(row.createdAt).toLocaleDateString("en-GB")}
                 </TableCell>
@@ -172,6 +158,7 @@ export default function ApplicationsCompany() {
                         search: `?id=${row._id}`,
                       });
                     }}
+                    className="apply-delBtn"
                   >
                     Ko'rish
                   </p>
