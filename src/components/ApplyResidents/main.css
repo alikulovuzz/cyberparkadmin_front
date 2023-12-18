@@ -141,7 +141,6 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .card-style-form {
@@ -3663,7 +3662,7 @@ select {
 .warn-file {
   color: red;
   font-family: 'Saira Semi Condensed', sans-serif !important;
-  padding-left: 0px;
+  padding-left: 10px;
   padding-bottom: 5px;
 }
 
