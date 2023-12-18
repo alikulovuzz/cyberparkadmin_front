@@ -32,7 +32,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function ApplicationsCompany() {
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(20);
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
   const [status, setStatus] = React.useState("progress");
@@ -140,7 +140,7 @@ export default function ApplicationsCompany() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.email}
+                  {row.company}
                 </TableCell>
                 <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
