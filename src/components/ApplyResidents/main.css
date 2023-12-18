@@ -3701,3 +3701,7 @@ select {
   color: #000000;
   overflow: hidden;
 }
+
+.title-apply {
+  width: 60%;
+}
