@@ -44,18 +44,18 @@ export default function ApplicationsCompany() {
   const [audit, setAudit] = useState("Oylik");
   const [progress, setProgress] = useState("");
 
-  // const handelDelete = (data) => {
-  //   deleteReports(`audit/delete?id=${id}`)
-  //     .then((response) => {
-  //       toast.success("Muvaffaqiyatli o'chrildi!");
-  //       forceUpdate();
-  //     })
-  //     .catch((error) => {
-  //       toast.error("Server xatolik");
-  //       forceUpdate();
-  //     });
-  //   handleClose();
-  // };
+  const handelDelete = (data) => {
+    deleteReports(`application_form/delete?id=${id}`)
+      .then((response) => {
+        toast.success("Muvaffaqiyatli o'chrildi!");
+        forceUpdate();
+      })
+      .catch((error) => {
+        toast.error("Server xatolik");
+        forceUpdate();
+      });
+    handleClose();
+  };
   // const handleChangeStatus = (data) => {
   //   postRequest(`audit/status_change`, {
   //       report_id: id,
@@ -171,6 +171,7 @@ export default function ApplicationsCompany() {
                     className="custom-btn-delete"
                     onClick={() => {
                       // handelDelete(data._id);
+
                       setID(row._id);
                       handleOpen();
                     }}
@@ -193,7 +194,7 @@ export default function ApplicationsCompany() {
         <DialogTitle>{"Hisobotni o'chirishni tasdiqlaysizmi?"}</DialogTitle>
         <DialogActions>
           <Button>Yo'q</Button>
-          <Button>Ha</Button>
+          <Button onClick={handelDelete}>Ha</Button>
         </DialogActions>
       </Dialog>
       <Toaster key={123} richColors position="bottom-right" />
