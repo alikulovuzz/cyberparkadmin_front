@@ -155,7 +155,7 @@ export default function ApplyResidents() {
               ЗАЯВКА НА РЕЗИДЕНТСВО В IT-PARK ИННОВАЦИЙ В КИБЕРНЕТИКЕ
             </h4>
           </div>
-          <div className="card-style mb-30">
+          <div className="card-style-apply mb-30">
             <div className="title-apply">
               <h5 className="mb-25">
                 В данной форме представлен полный перечень документов для
@@ -164,8 +164,18 @@ export default function ApplyResidents() {
               </h5>
             </div>
             <FormControl onSubmit={handleSubmit}>
-              <p style={{margin:"0px"}}>Электронная почта</p>
+              <p style={{margin:"0px"}}>Название организации?</p>
               <div className="apply-resident">
+              <TextField
+                  key="input_app"
+                  variant="outlined"
+                  placeholder="Название организации? *"
+                  className="apply-block"
+                  value={company}
+                  onChange={handleCompanyChange}
+                />
+                {!(validate&&!company)?(<></>):(<><div className="warn-file">Пожалуйста, заполните вышеуказанные файлы...</div></>)}
+                <p>Электронная почта</p>
                 <TextField
                   key="input_app"
                   variant="outlined"
