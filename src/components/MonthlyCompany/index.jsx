@@ -59,49 +59,12 @@ export default function ApplicationsCompany() {
       });
     handleClose();
   };
-  // const handleChangeStatus = (data) => {
-  //   postRequest(`audit/status_change`, {
-  //       report_id: id,
-  //       status: status,
-  //     }
-  //   )
-  //     .then((response) => {
-  //       toast.success("Muvaffaqiyatli o'chrildi!");
-  //       forceUpdate();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //       toast.error("Server xatolik");
-  //       forceUpdate();
-  //     });
-  //   handleClose();
-  // };
-  const handleChange = (event) => {
-    setStatus(event.target.value);
-  };
-  const formatStatus = (data) => {
-    switch (data) {
-      case "not_in_progress":
-        return <button className="custom-btn-wait">Imzolash jarayonida</button>;
-      case "disabled":
-        return <button className="custom-btn-error">Rad etildi</button>;
-      case "progress":
-        return (
-          <button className="custom-btn-accept">Ko'rib chiqilmoqda</button>
-        );
-      case "finished":
-        return <button className="custom-btn-success">Tasdiqlandi</button>;
-    }
-  };
   const handleClose = () => {
     setOpen(false);
     setOpenstatus(false);
   };
   const handleOpen = () => {
     setOpen(!open);
-  };
-  const handleOpenStatus = () => {
-    setOpenstatus(!open);
   };
 
   useEffect(() => {
