@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MuiFileInput } from "mui-file-input";
 import Button from "@mui/material/Button";
 import "./main.css";
@@ -17,9 +17,13 @@ export default function ApplyResidents() {
   //validate
   const [validate, setValidate] = useState(false);
 
+  //captcha validation
+  const [captVal, setCaptVal] = useState(null);
+
   // this states used for stroring files
   const [company, setCompany] = useState(null);
   const [email, setEmail] = useState(null);
+  const [emailValidation, setEmailValidation] = useState(true);
   const [requirements, setRequirements] = useState(null);
   const [application, setApplication] = useState(null);
   const [constituent_documents, setConstituentDocuments] = useState(null);
@@ -33,6 +37,8 @@ export default function ApplyResidents() {
   // this use state is used for createing body json from abouse state files
   const [body, setBody] = useState({});
 
+  const recaptcha = useRef();
+
   // const handleFileInputChange = (fieldName, file) => {
   //   setFileInputs({ ...fileInputs, [fieldName]: file });
   // };
@@ -40,6 +46,12 @@ export default function ApplyResidents() {
   // const handleTextChange = (event) => {
   //   setTextInput(event.target.value);
   // };
+  
+  
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
   const handleChangeFile = (type, value) => {
     if (type == "requirements") {
       setRequirements(value);
@@ -91,9 +103,6 @@ export default function ApplyResidents() {
     setCandidateApplication(null);
     setBusinessPlan(null);
   };
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
   const handleCompanyChange = (event) => {
     setCompany(event.target.value);
   };
@@ -105,6 +114,12 @@ export default function ApplyResidents() {
 
   const uploadFiles = async () => {
     body["company"] = company;
+    if(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)){
+      body["company"] = company;
+    }else{
+      setEmailValidation()
+      return
+    }
     body["email"] = email;
     handleReport(requirements, "requirements");
     handleReport(application, "application");
@@ -123,28 +138,37 @@ export default function ApplyResidents() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setValidate(true);
-    await Promise.all([uploadFiles()]);
+    const captchaValue = recaptcha.current.getValue();
+    if (!captchaValue) {
+      alert("Please verify the reCAPTCHA!");
+      return;
+    }
+    if (captchaValue) {
+      await Promise.all([uploadFiles()]);
+    }
     // await setInterval(uploadFiles(), 1000);
     // await uploadFiles()
     await delay(2000);
-    await Promise.all([
-      postRequest("/application_form/create", body)
-        .then((response) => {
-          toast.success("Muvaffaqiyatli!");
-          // handleClose();
-          clearInputs();
-          setValidate(false);
-          setStatusResult(false);
-          // navigate({
-          //   pathname: "/user",
-          // });
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Serverda xatolik.");
-        }),
-    ]);
+    if (body.description) {
+      await Promise.all([
+        postRequest("/application_form/create", body)
+          .then((response) => {
+            toast.success("Muvaffaqiyatli!");
+            // handleClose();
+            clearInputs();
+            setValidate(false);
+            setStatusResult(false);
+            // navigate({
+            //   pathname: "/user",
+            // });
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Serverda xatolik.");
+          }),
+      ]);
+    }
   };
 
   return statusResult ? (
@@ -200,6 +224,15 @@ export default function ApplyResidents() {
                     <>
                       <div className="warn-file">
                         Пожалуйста, заполните вышеуказанные файлы...
+                      </div>
+                    </>
+                  )}
+                  {emailValidation ? (
+                    <></>
+                  ) : (
+                    <>
+                      <div className="warn-file">
+                        Emiiiil
                       </div>
                     </>
                   )}
@@ -396,7 +429,14 @@ export default function ApplyResidents() {
                     </p>
                   </div>
                 </div>
-                {/* <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} /> */}
+                <ReCAPTCHA
+                  // sitekey="6Lezhz0pAAAAAOLSOua8Fq9AFJgJgdQbq2q1Vz29"
+                  ref={recaptcha}
+                  sitekey={process.env.REACT_APP_SECRET_KEY}
+                  onChange={(val) => {
+                    setCaptVal(val);
+                  }}
+                />
                 <div className="button-add">
                   <Button
                     type="submit"
