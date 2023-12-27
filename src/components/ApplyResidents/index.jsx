@@ -396,7 +396,7 @@ export default function ApplyResidents() {
                     </p>
                   </div>
                 </div>
-                <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} />
+                {/* <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} /> */}
                 <div className="button-add">
                   <Button
                     type="submit"
