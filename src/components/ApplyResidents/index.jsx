@@ -11,7 +11,7 @@ import SuccessMessage from "../SuccessMessage";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ApplyResidents() {
-  const [statusResult, setStatusResult] = useState(true);
+  const [statusResult, setStatusResult] = useState(false);
   const [value, setValue] = React.useState(null);
 
   //validate
@@ -190,12 +190,12 @@ export default function ApplyResidents() {
                 </h5>
               </div>
               <FormControl onSubmit={handleSubmit}>
-                <p style={{ margin: "0px" }}>Название организации?</p>
+                <p style={{ margin: "0px" }}>Название организации</p>
                 <div className="apply-resident">
                   <TextField
                     key="input_app"
                     variant="outlined"
-                    placeholder="Название организации? *"
+                    placeholder="Название организации *"
                     className="apply-block"
                     value={company}
                     onChange={handleCompanyChange}

@@ -22,7 +22,7 @@ export default function SuccessMessage() {
                         <div className='block-check'>
                             <i className="checkmark">✓</i>
                         </div>
-                        <h1>Ваша заявка принята.</h1>
+                        <h1 className='success-h1'>Ваша заявка принята.</h1>
                         <p>Мы скоро свяжемся с вами!</p>
                     </div>
                 </div>

@@ -3704,4 +3704,13 @@ select {
 
 .title-apply {
   width: 60%;
+  text-align: center;
+}
+
+h5, p {
+  color: #000000;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+  color: #000000 !important;
 }
