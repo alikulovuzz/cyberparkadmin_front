@@ -60,7 +60,7 @@ export default function IncomingMessages() {
         body[type] = response.data.link;
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         if (error.response.data.message == "Please upload a file") {
           toast.error("Please upload a file");
         } else {
@@ -114,10 +114,10 @@ export default function IncomingMessages() {
         // navigate({
         //   pathname: "/user",
         // });
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error("Serverda xatolik.");
       });
   };
@@ -211,7 +211,7 @@ export default function IncomingMessages() {
                   </a>
                 </div>
                 <div className="apply-message">
-                  <h5 onClick={console.log(applications)}>Время поступления заявки</h5>
+                  <h5>Время поступления заявки</h5>
                   <p>
                     {applications.created_at}
                   </p>
