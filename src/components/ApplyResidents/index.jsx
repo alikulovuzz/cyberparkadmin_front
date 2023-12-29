@@ -11,7 +11,7 @@ import SuccessMessage from "../SuccessMessage";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ApplyResidents() {
-  const [statusResult, setStatusResult] = useState(false);
+  const [statusResult, setStatusResult] = useState(true);
   const [value, setValue] = React.useState(null);
 
   //validate
