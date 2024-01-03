@@ -1,5 +1,8 @@
 .container-success {
-    margin: 200px 500px;
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .checkmark {
@@ -36,6 +39,12 @@
     align-items: center;
 }
 
-.block-check i {
+.block-check i, h1 {
     text-align: center;
 }
+
+@media (max-width: 1244px) {
+    .success-h1 {
+        font-size: 24px !important;
+    }
+  }
