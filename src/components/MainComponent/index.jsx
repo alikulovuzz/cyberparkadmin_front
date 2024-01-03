@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getRequest } from '../../utils/resquests'
 import { company_me } from '../../utils/API_urls'

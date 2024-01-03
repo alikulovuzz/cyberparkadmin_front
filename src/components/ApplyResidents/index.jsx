@@ -223,7 +223,7 @@ export default function ApplyResidents() {
                   ) : (
                     <>
                       <div className="warn-file">
-                        Пожалуйста, заполните вышеуказанные файлы...
+                        Пожалуйста, заполните вышеуказанные email...
                       </div>
                     </>
                   )}
@@ -232,7 +232,7 @@ export default function ApplyResidents() {
                   ) : (
                     <>
                       <div className="warn-file">
-                        Emiiiil
+                        Пожалуйста, заполните вышеуказанные email...
                       </div>
                     </>
                   )}
