@@ -181,7 +181,7 @@ export default function SignInSide({ admin }) {
                       username ? "field--not-empty" : ""
                     }`}
                   >
-                    <label htmlFor="username">PINFL</label>
+                    <label htmlFor="username">INN</label>
                     <input
                       type="text"
                       key="input_singin"
