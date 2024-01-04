@@ -40,6 +40,7 @@ import SignInSideAdmin from "./components/SignInSideAdmin";
 import ApplyResidents from "./components/ApplyResidents";
 import SuccessMessage from "./components/SuccessMessage";
 import IncomingMessages from "./components/IncomingMessages";
+import PasswordUpdate from "./components/PasswordUpdate";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -73,6 +74,7 @@ const App = () => {
                   <Route index element={<Navigate to="company" replace={true} />} />
                   <Route path="company" element={<MyCompany />} />
                   <Route path="application" element={<Application />} />
+                  <Route path="logout" element={<PasswordUpdate />} />
                   <Route path="reports" element={<Reports />} >
                     <Route index element={<Navigate to="quarterly" replace={true} />} />
                     <Route path="quarterly" element={<Outlet />} >

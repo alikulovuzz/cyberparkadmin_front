@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext'
-
+import PasswordUpdate from '../PasswordUpdate';
+import { NavLink } from 'react-router-dom';
+import "./style.css";
 
 
 export default function CompanyHeader() {
@@ -9,15 +11,15 @@ export default function CompanyHeader() {
   const [companyName, setCompanyName] = useState("");
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(()=>{
+  useEffect(() => {
     setCompanyName(user['organization_name'])
-  },[])
-  
+  }, [])
+
   const toggleNotificationDropdown = () => {
     setIsNotificationDropdownOpen(!isNotificationDropdownOpen);
   };
 
-  const handleOpenBackdrop = () => {
+  const handleExitButton = () => {
     sessionStorage.clear();
     setUser("")
     window.location.reload(false);
@@ -39,12 +41,12 @@ export default function CompanyHeader() {
             <li className={`nav-item dropdown ${isNotificationDropdownOpen ? 'show' : ''}`}>
               <a className={`nav-link count-indicator dropdown-toggle`} onClick={toggleNotificationDropdown} id="notificationDropdown" href="#">
                 <i className="ti-bell mx-0"></i>
-                
+
                 <span className="count"></span>
               </a>
               {isNotificationDropdownOpen && (
                 <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isNotificationDropdownOpen ? 'show' : ''}`} aria-labelledby="notificationDropdown">
-                  
+
                   {/* Add more notification items here */}
                 </div>
               )}
@@ -54,9 +56,18 @@ export default function CompanyHeader() {
                 <span>{companyName}</span>
               </a>
               {isProfileDropdownOpen && (
-                <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} onClick={handleOpenBackdrop} aria-labelledby="profileDropdown">
-                  <p className="dropdown-item"  >
-                    <i className="ti-power-off text-primary"></i>
+                <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} aria-labelledby="profileDropdown">
+                  <NavLink
+                     to="logout"
+                  >
+                    <p className="dropdown-item" onClick={PasswordUpdate} >
+                      <i className="ti-loop text-primary"></i>
+                      Parol o'zgartirish
+                    </p>
+                  </NavLink>
+                  <div className='custum-line'></div>
+                  <p className="dropdown-item" onClick={handleExitButton} >
+                    <i className="ti-user text-primary"></i>
                     Chiqish
                   </p>
                 </div>

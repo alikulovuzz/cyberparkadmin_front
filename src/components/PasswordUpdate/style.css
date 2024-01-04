@@ -1,0 +1,28 @@
+.custom-pasUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: start !important;
+    margin-top: 10px;
+    width: 100% !important;
+    background-color:white;
+    border-radius: 10px;
+    align-items: start !important;
+  }
+  
+  .right-pasUp {
+    background-color: white;
+    border-radius: 10px;
+    width: 60% !important;
+    padding-left: 10px !important;
+  }
+
+  .right-pasUp h3 {
+    padding-top: 10px;
+  }
+
+  .btn-pasUp {
+    margin-bottom: 15px;
+  }
+  .right-blockpasUp {
+    padding-left: 20px;
+  }
