@@ -22,6 +22,8 @@ export default function MainComponent() {
               navigator('user')
             } else if(response.data.user[0].role == 'admin'){
               navigator('admin')
+            }else if(response.data.user[0].role == 'crm'){
+              navigator('admin')
             } else {
               navigator('login') 
             }

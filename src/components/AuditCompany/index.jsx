@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,7 +15,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import './style.css'
+import "./style.css";
 import {
   FormControl,
   InputLabel,
@@ -26,12 +26,14 @@ import {
 import PageSize from "../PageSize";
 import { postRequest, deleteReports } from "../../utils/resquests";
 import { getlist_v2 } from "../../utils/API_urls";
+import { UserContext } from "../../context/UserContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AuditCompany() {
+  const { user } = useContext(UserContext);
   const [page, setPage] = useState(1);
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
@@ -115,7 +117,8 @@ export default function AuditCompany() {
   };
 
   useEffect(() => {
-    postRequest(getlist_v2, {
+    if (user?.role.filter((e) => e === "admin").length > 0) {
+      postRequest(getlist_v2, {
       type_of_report: audit,
       status: statusSearch == "all" ? null : statusSearch,
       pinfl: pinflSearch == "" ? null : pinflSearch,
@@ -132,8 +135,11 @@ export default function AuditCompany() {
         // setNotes()
         console.log(error);
       });
+    }    
   }, [page, pageSize, a, statusSearch, pinflSearch]);
-
+  if (!(user?.role.filter((e) => e === "admin").length > 0)) {
+    return <>Xizmatga ruxsat yop'qquarterdsdsdsly</>;
+  }
   return (
     <>
       <FormControl>
@@ -162,7 +168,7 @@ export default function AuditCompany() {
               setPinflSearch(event.target.value);
             }}
             InputLabelProps={{
-              style: { color: 'black' } // Change 'red' to the color you want
+              style: { color: "black" }, // Change 'red' to the color you want
             }}
           />
         </div>

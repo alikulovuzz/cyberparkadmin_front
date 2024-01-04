@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -27,12 +27,14 @@ import {
 import PageSize from "../PageSize";
 import { postRequest, deleteReports } from "../../utils/resquests";
 import { getlist_v2 } from "../../utils/API_urls";
+import { UserContext } from "../../context/UserContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function QuarterlyCompany() {
+  const { user } = useContext(UserContext);
   const [page, setPage] = useState(1);
   const [compantList, setCompoundList] = useState([]);
   const [pageCount, setPageCount] = useState(1);
@@ -119,25 +121,30 @@ export default function QuarterlyCompany() {
   };
 
   useEffect(() => {
-    postRequest(getlist_v2, {
-      type_of_report: audit,
-      status: statusSearch == "all" ? null : statusSearch,
-      pinfl: pinflSearch == "" ? null : pinflSearch,
-      pageNumber: page,
-      pageSize: pageSize,
-    })
-      .then((response) => {
-        // console.log(response.data.reports);
-        setPageCount(response.data.page);
-        setCompoundList(response.data.reports);
+    if (user?.role.filter((e) => e === "admin").length > 0) {
+      postRequest(getlist_v2, {
+        type_of_report: audit,
+        status: statusSearch == "all" ? null : statusSearch,
+        pinfl: pinflSearch == "" ? null : pinflSearch,
+        pageNumber: page,
+        pageSize: pageSize,
       })
-      .catch((error) => {
-        console.log(error);
-        // setNotes()
-        setCompoundList([]);
-      });
+        .then((response) => {
+          // console.log(response.data.reports);
+          setPageCount(response.data.page);
+          setCompoundList(response.data.reports);
+        })
+        .catch((error) => {
+          console.log(error);
+          // setNotes()
+          setCompoundList([]);
+        });
+    }
+    
   }, [page, pageSize, a, statusSearch, pinflSearch]);
-
+  if (!(user?.role.filter((e) => e === "admin").length > 0)) {
+    return <>Xizmatga ruxsat yop'qquarterdsdsdsly</>;
+  }
   return (
     <>
       <FormControl>

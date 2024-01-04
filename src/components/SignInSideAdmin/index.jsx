@@ -55,7 +55,7 @@ export default function SignInSideAdmin() {
           sessionStorage.setItem("x-access-token", response.data.token);
           // console.log(response.data.token)
           setUser(response.data.data);
-          navigate("/user");
+          navigate("/admin");
         }
 
         handleCloseBackdrop();

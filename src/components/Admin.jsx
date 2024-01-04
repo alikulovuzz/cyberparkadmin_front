@@ -11,7 +11,10 @@ export default function Admin() {
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (!user?.role.includes("admin")) {
+    const contains = user?.role.some(element => {
+      return ['admin','crm'].indexOf(element) !== -1;
+    });
+    if (!contains) {
       sessionStorage.clear();
       setUser("");
       window.location.reload(false);
