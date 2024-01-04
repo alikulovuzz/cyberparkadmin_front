@@ -16,6 +16,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
+import AccessDeny from "../AccessDeny";
 import './style.css'
 import {
   FormControl,
@@ -143,7 +144,7 @@ export default function QuarterlyCompany() {
     
   }, [page, pageSize, a, statusSearch, pinflSearch]);
   if (!(user?.role.filter((e) => e === "admin").length > 0)) {
-    return <>Xizmatga ruxsat yop'qquarterdsdsdsly</>;
+    return <AccessDeny/>;
   }
   return (
     <>

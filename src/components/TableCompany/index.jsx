@@ -11,7 +11,7 @@ import PageSize from "../PageSize";
 import { postRequest } from "../../utils/resquests";
 import { company_list } from "../../utils/API_urls";
 import { UserContext } from "../../context/UserContext";
-
+import AccessDeny from "../AccessDeny";
 export default function TableExample() {
   const { user } = useContext(UserContext);
   const [page, setPage] = useState(1);
@@ -35,7 +35,7 @@ export default function TableExample() {
     }
   }, [page, pageSize]);
   if (!(user?.role.filter((e) => e === "admin").length > 0)) {
-    return <>Xizmatga ruxsat yop'qcompany</>;
+    return <AccessDeny/>;
   }
   return (
     <TableContainer component={Paper}>

@@ -13,7 +13,7 @@ const ApplicationsLayout = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Soliq hisobotlari" subtitle="Soliq hisobotlari ro'yxati" />
+        <Header title="Rezidentlik uchun ariza" subtitle="Kelib tushgan arizalar" />
       </Box>
       <Box
         m="8px 0 0 0"

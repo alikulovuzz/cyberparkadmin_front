@@ -16,6 +16,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import "./style.css";
+import AccessDeny from "../AccessDeny";
 import {
   FormControl,
   InputLabel,
@@ -138,7 +139,7 @@ export default function AuditCompany() {
     }    
   }, [page, pageSize, a, statusSearch, pinflSearch]);
   if (!(user?.role.filter((e) => e === "admin").length > 0)) {
-    return <>Xizmatga ruxsat yop'qquarterdsdsdsly</>;
+    return <AccessDeny/>;
   }
   return (
     <>
