@@ -41,6 +41,11 @@ import ApplyResidents from "./components/ApplyResidents";
 import SuccessMessage from "./components/SuccessMessage";
 import IncomingMessages from "./components/IncomingMessages";
 import PasswordUpdate from "./components/PasswordUpdate";
+import ReactGA from "react-ga";
+
+
+ReactGA.initialize('G-CC6GCNCYTT');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
   const [theme, colorMode] = useMode();

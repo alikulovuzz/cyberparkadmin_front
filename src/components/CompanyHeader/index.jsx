@@ -60,7 +60,7 @@ export default function CompanyHeader() {
                   <NavLink
                      to="logout"
                   >
-                    <p className="dropdown-item" onClick={PasswordUpdate} >
+                    <p className="dropdown-item" onClick={()=>{toggleProfileDropdown();PasswordUpdate();}} >
                       <i className="ti-loop text-primary"></i>
                       Parol o'zgartirish
                     </p>
