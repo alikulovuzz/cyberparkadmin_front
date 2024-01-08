@@ -57,15 +57,15 @@ export default function CompanyHeader() {
               </a>
               {isProfileDropdownOpen && (
                 <div className={`dropdown-menu dropdown-menu-right navbar-dropdown ${isProfileDropdownOpen ? 'show' : ''}`} aria-labelledby="profileDropdown">
-                  <NavLink
-                     to="logout"
+                  {/* <NavLink
+                     to="update_password"
                   >
                     <p className="dropdown-item" onClick={()=>{toggleProfileDropdown();PasswordUpdate();}} >
                       <i className="ti-loop text-primary"></i>
                       Parol o'zgartirish
                     </p>
                   </NavLink>
-                  <div className='custum-line'></div>
+                  <div className='custum-line'></div> */}
                   <p className="dropdown-item" onClick={handleExitButton} >
                     <i className="ti-user text-primary"></i>
                     Chiqish
