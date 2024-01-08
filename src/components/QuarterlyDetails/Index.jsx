@@ -41,7 +41,7 @@ export default function DetailidReport() {
   };
   const formatQQSLinks = (event) => {
     if (event == "aylanmaSoliq") {
-      return "НДС";
+      return "Налог с оборота";
     } else if (event == "jisDaromadSoliq"){
       return "Налог на доходы физических лиц";
     }else if (event == "kksSoliq"){

@@ -228,7 +228,7 @@ export default function NewQuarterly() {
                       </div>
                     </div>
                     <div class="select-div">
-                      <label>Плательщик НДФЛ</label>
+                      <label>Плательщик НДС</label>
                       <div class="select-position">
                         <select onChange={handleChangeRefs}>
                           <option value="Yo'q">Нет</option>
@@ -284,7 +284,7 @@ export default function NewQuarterly() {
                             height: "auto",
                           }}
                           value={aylanmaSoliq}
-                          label="НДС"
+                          label="Налог с оборота"
                           onChange={handleChangeAylanmaSoliq}
                           placeholder="Файл *"
                           disabled={formValid}
