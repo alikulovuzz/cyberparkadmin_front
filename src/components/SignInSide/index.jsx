@@ -216,7 +216,7 @@ export default function SignInSide({ admin }) {
                   <div className="submit-message">
                     <span>
                       Sizda shaxsiy kabinetingiz yo'qmi?{" "}
-                      <a href="#">Ro'yhatdan o'tish</a>
+                      <a href="https://my.cyberpark.uz/apply_resident">Ro'yhatdan o'tish</a>
                     </span>
                   </div>
                   <div className="notification-msg">
