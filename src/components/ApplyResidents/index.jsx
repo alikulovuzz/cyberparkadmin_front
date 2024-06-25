@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MuiFileInput } from "mui-file-input";
 import Button from "@mui/material/Button";
-import "./main.css";
-import "./lineicons.css";
+// import "./main.css";
+// import "./lineicons.css";
+import "./apply-custom.css"
 import { FormControl, TextField } from "@mui/material";
 import { postRequest, uploadFile } from "../../utils/resquests";
 import { Toaster, toast } from "sonner";
@@ -173,15 +174,15 @@ export default function ApplyResidents() {
 
   return statusResult ? (
     <>
-      <div className="container-scroller">
+      <div>
         <div className="custom-title-form">
-          <div className="card-style-form mb-30">
+          <div className="card-style-form style-apply mb-30">
             <div>
-              <h4 className="mb-25 pt-50">
+              <h4 className="mb-25 title-apply pt-50">
                 ЗАЯВКА НА РЕЗИДЕНТСВО В IT-PARK ИННОВАЦИЙ В КИБЕРНЕТИКЕ
               </h4>
             </div>
-            <div className="card-style-apply mb-30">
+            <div className="style-apply mb-30">
               <div className="title-apply">
                 <h5 className="mb-25">
                   В данной форме представлен полный перечень документов для
