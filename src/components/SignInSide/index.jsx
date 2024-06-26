@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./styles.css";
 // import './custom.css'
 import { company_signin, user_signin } from "../../utils/API_urls";
@@ -40,18 +40,37 @@ export default function SignInSide({ admin }) {
     setLoading(true);
   };
 
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isMobile = /iphone|ipod|android.*mobile|windows.*phone/.test(userAgent);
+    const handleResize = () => {
+      if (window.innerWidth < 700) {
+        navigate("/error"); // Redirect to index.html if width is less than 700px
+      }
+    };
+
+    // Check on component mount
+    handleResize();
+
+    // Check on window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, [navigate]);
+
   const handleSubmit = () => {
     handleOpenBackdrop();
     const req_url = admin ? user_signin : company_signin;
     const req_body = admin
       ? {
-          email: username,
-          password: password,
-        }
+        email: username,
+        password: password,
+      }
       : {
-          pinfl: username,
-          password: password,
-        };
+        pinfl: username,
+        password: password,
+      };
     postRequest(req_url, req_body)
       .then((response) => {
         // console.log(response)
@@ -177,9 +196,8 @@ export default function SignInSide({ admin }) {
                 </div>
                 <div>
                   <div
-                    className={`form-group first mb-10 ${
-                      username ? "field--not-empty" : ""
-                    }`}
+                    className={`form-group first mb-10 ${username ? "field--not-empty" : ""
+                      }`}
                   >
                     <label htmlFor="username">INN</label>
                     <input
@@ -193,9 +211,8 @@ export default function SignInSide({ admin }) {
                     />
                   </div>
                   <div
-                    className={`form-group last mb-3 ${
-                      password ? "field--not-empty" : ""
-                    }`}
+                    className={`form-group last mb-3 ${password ? "field--not-empty" : ""
+                      }`}
                   >
                     <label htmlFor="password">Parol</label>
                     <input

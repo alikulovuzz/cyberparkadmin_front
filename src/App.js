@@ -42,6 +42,7 @@ import SuccessMessage from "./components/SuccessMessage";
 import IncomingMessages from "./components/IncomingMessages";
 import PasswordUpdate from "./components/PasswordUpdate";
 import ReactGA from "react-ga";
+import Error from "./components/SignInSide/error";
 
 
 ReactGA.initialize('G-CC6GCNCYTT');
@@ -99,6 +100,7 @@ const App = () => {
             <Route path="login" element={<SignInSide admin={false} />} />
             <Route path="admin-login" element={<SignInSideAdmin />} />
             <Route path="apply_resident" element={<ApplyResidents />} />
+            <Route path="error" element={<Error />} />
             {/* <Route path="success_message" element={<SuccessMessage />} /> */}
             {/* <Route path="income_message" element={<IncomingMessages />} /> */}
             {/* <Route path="*" element={<Navigate to={sessionStorage.getItem("access_token") ? "/" : "login"} />} /> */}
