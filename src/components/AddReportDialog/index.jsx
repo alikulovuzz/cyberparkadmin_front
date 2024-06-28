@@ -109,7 +109,7 @@ export default function AddReportDialog(type_of_report) {
             <TextField
               id="outlined-basic"
               fullWidth
-              label="Hisobot uchun izoh!"
+              label="Hisobot uchun izoh! (*)"
               variant="outlined"
               sx={{ my: 1 }}
               onChange={(event) => {

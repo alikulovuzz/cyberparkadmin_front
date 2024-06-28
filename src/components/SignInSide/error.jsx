@@ -17,9 +17,9 @@ export default function Error() {
           <div className="notfound-404">
             <h1>Oops!</h1>
           </div>
-          <h2>Something is wrong!</h2>
-          <p>Please open the site on desktop version</p>
-          <button onClick={redirectToDesktop}>Go To Desktop</button>
+          <h2>Nimadur xatolik bor!</h2>
+          <p>Ushbu tizimga kompyuter orqali kirish tavfsiya qilinadi! </p>
+          <button onClick={redirectToDesktop}>Kompyuter versiyaga o'tish</button>
         </div>
       </div>
     </div>
